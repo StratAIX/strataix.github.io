@@ -107,7 +107,7 @@ nav.scrolled {
   border-bottom: 1px solid var(--line);
 }
 .nav-logo { display:flex; align-items:center; }
-.nav-logo img { height:28px; width:auto; }
+.nav-logo img { height:104px; width:auto; }
 .nav-menu {
   display: flex; align-items:center; gap:48px;
 }
@@ -720,7 +720,7 @@ footer {
   display:flex; align-items:center;
   justify-content:space-between; gap:24px; flex-wrap:wrap;
 }
-.footer-logo img { height:22px; opacity:.5; }
+.footer-logo img { height:104px; opacity:.7; }
 .footer-links {
   display:flex; gap:32px;
 }
@@ -751,6 +751,98 @@ footer {
 .reveal-delay-1 { transition-delay:.1s; }
 .reveal-delay-2 { transition-delay:.2s; }
 .reveal-delay-3 { transition-delay:.3s; }
+
+/* =============================================
+   HERO — BIG LOGO + NOISE
+============================================= */
+.hero-logo-bg {
+  position: absolute;
+  top: 13%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  pointer-events: none;
+  width: min(780px, 84vw);
+}
+.hero-logo-bg img {
+  width: 100%;
+  opacity: 1.0;
+  display: block;
+  filter: brightness(2.2) saturate(1.3);
+  -webkit-mask-image: radial-gradient(ellipse 72% 58% at 50% 50%, black 35%, transparent 72%);
+  mask-image: radial-gradient(ellipse 72% 58% at 50% 50%, black 35%, transparent 72%);
+}
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  background-repeat: repeat;
+}
+@media(max-width:768px){
+  .hero-logo-bg { top: 10%; width: min(320px, 86vw); }
+}
+
+/* =============================================
+   STORE BADGES
+============================================= */
+.store-badges {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 28px;
+}
+.store-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border: 1px solid var(--line-bright);
+  border-radius: 8px;
+  background: rgba(255,255,255,.03);
+  opacity: 0.5;
+  cursor: not-allowed;
+  user-select: none;
+}
+.store-badge-icon {
+  width: 20px; height: 20px;
+  flex-shrink: 0;
+  color: var(--text-dim);
+}
+.store-badge-text {
+  display: flex;
+  flex-direction: column;
+}
+.store-badge-soon {
+  font-family: var(--font-display);
+  font-size: .55rem; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--text-muted);
+}
+.store-badge-name {
+  font-family: var(--font-display);
+  font-size: .8rem; font-weight: 700;
+  color: var(--text-dim); letter-spacing: -.01em;
+}
+
+/* =============================================
+   TRADEMARK NOTE
+============================================= */
+.trademark-note {
+  font-size: .68rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  padding: 24px 64px 40px;
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+}
+@media(max-width:768px){
+  .trademark-note { padding: 20px 24px 32px; }
+}
 </style>
 </head>
 <body>
@@ -764,7 +856,7 @@ footer {
 <!-- NAV -->
 <nav id="mainNav">
   <a class="nav-logo" href="#top">
-    <img src="images/StratAIX_logo.png" alt="StratAIX">
+    <img src="images/StratAIX_logo_transparent.png" alt="StratAIX">
   </a>
   <div class="nav-menu">
     <a href="#philosophy">Philosophy</a>
@@ -779,6 +871,10 @@ footer {
   <div class="hero-grid"></div>
   <div class="hero-glow hero-glow-1"></div>
   <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-noise" aria-hidden="true"></div>
+  <div class="hero-logo-bg" aria-hidden="true">
+    <img src="images/StratAIX_logo_transparent.png" alt="">
+  </div>
 
   <div class="hero-content">
     <div class="hero-label">AI × Human Studio — Tokyo</div>
@@ -864,6 +960,10 @@ footer {
 
       <div class="about-body">
         <p class="reveal">
+          17歳のころ、自分の顔を客観的に評価してもらえるサービスを作りたかった。
+          ザッカーバーグがFacebookを生み出した衝動と同じものだったと気づいたのは、ずっとあとのことだ。
+        </p>
+        <p class="reveal">
           本棚にはアプリ制作の本が並んでいた。
           アイデアはあった。市場を見る目もあった。
           ただ、<strong>「自分で作る」にはあまりにもハードルが高すぎた。</strong>
@@ -871,13 +971,13 @@ footer {
         <p class="reveal reveal-delay-1">
           AIが話題になるたびにいち早く試してきた。
           そしてClaude Codeと出会った瞬間、それが変わった。
-          <strong>噂以上のすごさに圧倒され、本当に素晴らしい相棒を得た気持ちだった。</strong>
+          <strong>噂を遥かに超えていた。その瞬間、本物の相棒を得たと確信した。</strong>
         </p>
         <p class="reveal reveal-delay-2">
           最初のサービス「Sinc」は、自分自身の生きづらさから生まれた。
           空気を読むより本質を語りたい。間違ったことを正しいように振る舞わなければならない場所で、
           それでも数人だけ、本当に話が合う人間がいた。
-          <strong>その人たちの存在は、人生においてかけがないものだった。</strong>
+          <strong>その人たちの存在は、人生においてかけがえのないものだった。</strong>
         </p>
         <p class="reveal reveal-delay-3">
           世界は広い。同じように感じている仲間が、必ずどこかにいる。
@@ -977,6 +1077,20 @@ footer {
         <a href="https://sinc.strataix.net/" class="pc-link" target="_blank" rel="noopener">
           Visit Service <span class="pc-link-icon">→</span>
         </a>
+        <div class="store-badges">
+          <div class="store-badge">
+            <div class="store-badge-text">
+              <span class="store-badge-soon">Coming Soon</span>
+              <span class="store-badge-name">App Store</span>
+            </div>
+          </div>
+          <div class="store-badge">
+            <div class="store-badge-text">
+              <span class="store-badge-soon">Coming Soon</span>
+              <span class="store-badge-name">Google Play</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="portfolio-card coming reveal reveal-delay-1">
@@ -1068,7 +1182,7 @@ footer {
       <p class="contact-body reveal">
         プロダクト開発の相談、コラボレーション、取材など、お気軽にご連絡ください。
         「こういうサービスがあればいいのに」という話は大歓迎です。
-        まだ誰も解決していない問いほど、面白いと思っています。
+        誰も解いていない問い——そこに、一番面白い仕事があります。
       </p>
       <div class="contact-row reveal">
         <a href="mailto:info@strataix.net" class="contact-mail">info@strataix.net</a>
@@ -1086,16 +1200,15 @@ footer {
 <footer>
   <div class="footer-inner">
     <a class="footer-logo" href="#top">
-      <img src="images/StratAIX_logo.png" alt="StratAIX">
+      <img src="images/StratAIX_logo_transparent.png" alt="StratAIX">
     </a>
     <div class="footer-links">
       <a href="https://x.com/StratAIX_AI" target="_blank" rel="noopener">X / @StratAIX_AI</a>
-      <a href="https://sinc.strataix.net/legal/privacy.html">Privacy Policy</a>
-      <a href="https://sinc.strataix.net/legal/terms.html">Terms of Service</a>
     </div>
     <span class="footer-copy">© 2026 StratAIX</span>
   </div>
 </footer>
+<p class="trademark-note">Apple and the Apple logo are trademarks of Apple Inc. App Store is a service mark of Apple Inc., registered in the U.S. and other countries. Google Play and the Google Play logo are trademarks of Google LLC.</p>
 
 <script>
 // カスタムカーソル
