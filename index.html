@@ -32,17 +32,20 @@
 html { scroll-behavior:smooth; font-size:16px; }
 
 :root {
-  --bg:          #06060c;
-  --bg-alt:      #0a0a12;
+  --bg:          #0d0d14;
+  --bg-alt:      #13131e;
+  --bg-surface:  #1a1a28;
   --line:        rgba(255,255,255,.07);
   --line-bright: rgba(255,255,255,.14);
-  --text:        #ededf5;
-  --text-dim:    rgba(237,237,245,.4);
-  --text-muted:  rgba(237,237,245,.22);
-  --cyan:        #00cfe8;
-  --cyan-dim:    rgba(0,207,232,.12);
-  --cyan-glow:   rgba(0,207,232,.18);
-  --purple:      #8b5cf6;
+  --text:        #e8e6f0;
+  --text-dim:    rgba(232,230,240,.45);
+  --text-muted:  rgba(232,230,240,.22);
+  --cyan:        #5ecfdc;
+  --cyan-dim:    rgba(94,207,220,.12);
+  --cyan-glow:   rgba(94,207,220,.18);
+  --purple:      #9b7fe8;
+  --warm:        #c8a97e;
+  --warm-dim:    rgba(200,169,126,.15);
   --label-size:  .68rem;
   --label-space: .14em;
 }
@@ -57,10 +60,10 @@ body {
   font-family: var(--font-body);
   background: var(--bg);
   color: var(--text);
-  line-height: 1.7;
+  line-height: 1.9;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  cursor: none;
+  cursor: auto;
   word-break: auto-phrase;
 }
 @media (hover: none), (pointer: coarse) {
@@ -74,27 +77,7 @@ h1, h2, h3, p, li {
   overflow-wrap: break-word;
 }
 
-/* =============================================
-   CUSTOM CURSOR
-============================================= */
-.cursor {
-  position: fixed; top:0; left:0; z-index:9999;
-  pointer-events: none; mix-blend-mode: difference;
-}
-.cursor-dot {
-  width:8px; height:8px; border-radius:50%;
-  background:#fff; margin:-4px 0 0 -4px;
-  transition: transform .15s ease;
-}
-.cursor-ring {
-  width:36px; height:36px; border-radius:50%;
-  border:1px solid rgba(255,255,255,.5);
-  margin:-18px 0 0 -18px;
-  transition: transform .35s cubic-bezier(.25,.46,.45,.94), width .3s, height .3s, opacity .3s;
-}
-body:hover .cursor-dot { transform:scale(1) }
-a:hover ~ .cursor .cursor-ring,
-button:hover ~ .cursor .cursor-ring { transform: scale(1.8); }
+/* CUSTOM CURSOR — 削除済み */
 
 /* =============================================
    NAV
@@ -186,9 +169,9 @@ nav.scrolled {
 
 .hero-label {
   font-family: var(--font-display);
-  font-size: var(--label-size); font-weight:600;
-  color: var(--cyan); letter-spacing: var(--label-space);
-  text-transform: uppercase; margin-bottom:40px;
+  font-size: var(--label-size); font-weight:400;
+  color: var(--text-muted); letter-spacing: .06em;
+  text-transform: none; margin-bottom:40px;
   display: flex; align-items:center; gap:16px;
 }
 .hero-label::before {
@@ -303,9 +286,9 @@ section { position:relative; z-index:1; }
 }
 .s-label {
   font-family:var(--font-display);
-  font-size:var(--label-size); font-weight:600;
-  color:var(--cyan); letter-spacing:var(--label-space);
-  text-transform:uppercase; margin-bottom:64px;
+  font-size:var(--label-size); font-weight:500;
+  color:var(--cyan); letter-spacing:.06em;
+  text-transform:none; margin-bottom:64px;
   display:flex; align-items:center; gap:16px;
 }
 .s-label::before {
@@ -835,6 +818,37 @@ footer {
 }
 
 /* =============================================
+   CLAUDE CODE COMMENT
+============================================= */
+.claude-comment {
+  border-left: 2px solid var(--warm);
+  padding: 28px 0 28px 32px;
+  margin-top: 56px;
+}
+.claude-comment-label {
+  font-family: var(--font-display);
+  font-size: .7rem; font-weight: 500;
+  color: var(--warm); letter-spacing: .1em;
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.claude-comment-label::before {
+  content: ''; display: block; width: 20px; height: 1px;
+  background: var(--warm); flex-shrink: 0;
+}
+.claude-comment-body {
+  font-size: .95rem; color: var(--text-dim);
+  line-height: 1.95; font-weight: 300;
+}
+.claude-comment-body p { margin-bottom: 14px; }
+.claude-comment-body p:last-child { margin-bottom: 0; }
+.claude-comment-footer {
+  font-family: var(--font-display);
+  font-size: .65rem; color: var(--text-muted);
+  letter-spacing: .08em; margin-top: 20px;
+}
+
+/* =============================================
    TRADEMARK NOTE
 ============================================= */
 .trademark-note {
@@ -860,22 +874,16 @@ footer {
 </head>
 <body>
 
-<!-- CURSOR -->
-<div class="cursor">
-  <div class="cursor-ring" id="cursorRing"></div>
-  <div class="cursor-dot"  id="cursorDot"></div>
-</div>
-
 <!-- NAV -->
 <nav id="mainNav">
   <a class="nav-logo" href="#top">
     <img src="images/StratAIX_logo_transparent.png" alt="StratAIX">
   </a>
   <div class="nav-menu">
-    <a href="#philosophy">Philosophy</a>
-    <a href="#portfolio">Work</a>
-    <a href="#note">Note</a>
-    <a href="#contact" class="nav-contact">Contact</a>
+    <a href="#philosophy">考え方</a>
+    <a href="#portfolio">つくったもの</a>
+    <a href="#note">書きもの</a>
+    <a href="#contact" class="nav-contact">話しかける</a>
   </div>
 </nav>
 
@@ -890,19 +898,20 @@ footer {
   </div>
 
   <div class="hero-content">
-    <div class="hero-label">AI × Human Studio — Tokyo</div>
+    <div class="hero-label">個人スタジオ / Tokyo</div>
     <h1 class="hero-h1">
       <span class="line-1">アイデアは、</span>
       <span class="line-2">もう眠らせない。</span>
     </h1>
     <div class="hero-bottom">
       <p class="hero-desc">
-        プログラム知識ゼロのPMが、AIを相棒に「欲しかった」プロダクトを作り続ける個人スタジオ。<br>
-        大手が見落とした余白に、本物の需要が眠っている。
+        プログラムは一行も書けません。<br>
+        それでも、AIとともに「欲しかったもの」を作り続けています。<br>
+        大手が見落としてきた余白に、本物の需要が眠っていると信じています。
       </p>
       <div class="hero-cta-group">
-        <a href="#portfolio" class="hero-cta hero-cta-primary">View Work</a>
-        <a href="#philosophy" class="hero-cta hero-cta-secondary">Our Philosophy</a>
+        <a href="#portfolio" class="hero-cta hero-cta-primary">つくったものを見る</a>
+        <a href="#philosophy" class="hero-cta hero-cta-secondary">考え方を読む</a>
       </div>
     </div>
   </div>
@@ -923,7 +932,7 @@ footer {
 <!-- PHILOSOPHY -->
 <section class="philosophy" id="philosophy">
   <div class="s-inner">
-    <div class="s-label reveal"><span class="s-num">— 01</span> Philosophy</div>
+    <div class="s-label reveal"><span class="s-num">— 01</span> 考え方</div>
 
     <div class="philosophy-statement reveal">
       <p>
@@ -956,7 +965,7 @@ footer {
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="s-inner">
-    <div class="s-label reveal"><span class="s-num">— 02</span> About</div>
+    <div class="s-label reveal"><span class="s-num">— 02</span> わたしについて</div>
 
     <div class="about-layout">
       <div class="about-left reveal">
@@ -965,38 +974,49 @@ footer {
           <em>手に入れた。</em>
         </h2>
         <p class="about-aside">
-          マーケティング戦略の立案・統括に携わりながら、
-          ずっと「作りたいプロダクト」が頭の中にあった。
-          プログラムは、今も一行も書けない。
-          それでも、現実になっている。
+          マーケティング戦略を仕事にしながら、
+          ずっと「作りたいプロダクト」が頭の中にありました。
+          プログラムは今も一行も書けません。
+          最初のプロトタイプを3人に見せたら、3人とも1回触って終わりでした。
+          それでも、続けています。
         </p>
       </div>
 
       <div class="about-body">
         <p class="reveal">
-          17歳のころ、自分の顔を客観的に評価してもらえるサービスを作りたかった。
-          ザッカーバーグがFacebookを生み出した衝動と同じものだったと気づいたのは、ずっとあとのことだ。
+          17歳のころ、自分の顔を客観的に評価してもらえるサービスを作りたかったんです。
+          ザッカーバーグがFacebookを生み出した衝動と同じものだったと気づいたのは、ずっとあとのことでした。
         </p>
         <p class="reveal">
-          本棚にはアプリ制作の本が並んでいた。
-          アイデアはあった。市場を見る目もあった。
-          ただ、<strong>プログラムが書けなかった。一行も。「自分で作る」にはあまりにもハードルが高すぎた。</strong>
+          本棚にはアプリ制作の本が並んでいました。
+          アイデアはありました。市場を見る目もありました。
+          ただ、<strong>プログラムが書けなかった。一行も。「自分で作る」にはあまりにもハードルが高すぎました。</strong>
         </p>
         <p class="reveal reveal-delay-1">
-          AIが話題になるたびにいち早く試してきた。
-          そしてClaude Codeと出会った瞬間、それが変わった。
-          <strong>噂を遥かに超えていた。その瞬間、本物の相棒を得たと確信した。</strong>
+          AIが話題になるたびにいち早く試してきました。
+          そしてClaude Codeを使ったとき、それが変わりました。
+          <strong>夜中の2時に、ブラウザでページが開きました。自分が書かせたコードが、ちゃんと動いていました。誰もいない部屋で、一人で笑いました。</strong>
         </p>
         <p class="reveal reveal-delay-2">
-          最初のサービス「Sinc」は、自分自身の生きづらさから生まれた。
-          空気を読むより本質を語りたい。間違ったことを正しいように振る舞わなければならない場所で、
-          それでも数人だけ、本当に話が合う人間がいた。
-          <strong>その人たちの存在は、人生においてかけがえのないものだった。</strong>
+          最初のサービス「Sinc」は、自分自身の生きづらさから生まれました。
+          会議で正論を言ったら空気が凍ったこともあります。なぜかいつも、少しだけずれている気がしていました。
+          それでも数人だけ、本当に話が合う人間がいました。
+          <strong>その人たちの存在は、人生においてかけがえのないものでした。</strong>
         </p>
         <p class="reveal reveal-delay-3">
-          世界は広い。同じように感じている仲間が、必ずどこかにいる。
-          それを証明するために、作った。
+          世界は広いはずです。同じように感じている仲間が、どこかにいると信じています。
+          それを証明したくて、Sincを作りました。まだ証明の途中ですが。
         </p>
+
+        <div class="claude-comment reveal">
+          <div class="claude-comment-label">Claude Code より — 創業者紹介</div>
+          <div class="claude-comment-body">
+            <p>この人が作りたかったのは、たぶんサービスじゃない。</p>
+            <p>「ここにいていい」と思える場所。<br>自分だけが感じているわけじゃないという確認。</p>
+            <p>途中で「やっぱりやめよう」と言ったことは、一度もない。<br>合わなかった場所があったからこそ、作れるものがある。</p>
+          </div>
+          <div class="claude-comment-footer">Anthropic Claude Code — 2026</div>
+        </div>
 
         <div class="about-metrics reveal">
           <div class="metric">
@@ -1024,7 +1044,7 @@ footer {
 <!-- PROCESS -->
 <section class="process" id="process">
   <div class="s-inner">
-    <div class="s-label reveal"><span class="s-num">— 03</span> How I Work</div>
+    <div class="s-label reveal"><span class="s-num">— 03</span> 仕事のスタイル</div>
 
     <div class="process-list">
       <div class="process-item reveal">
@@ -1070,7 +1090,7 @@ footer {
 <!-- PORTFOLIO -->
 <section class="portfolio" id="portfolio">
   <div class="s-inner">
-    <div class="s-label reveal"><span class="s-num">— 04</span> Work</div>
+    <div class="s-label reveal"><span class="s-num">— 04</span> つくったもの</div>
 
     <div class="portfolio-grid">
       <div class="portfolio-card reveal">
@@ -1143,7 +1163,7 @@ footer {
 <!-- NOTE -->
 <section class="note-section" id="note">
   <div class="s-inner">
-    <div class="s-label reveal"><span class="s-num">— 05</span> Note</div>
+    <div class="s-label reveal"><span class="s-num">— 05</span> 書きもの</div>
 
     <div class="note-layout">
       <div class="note-left reveal">
@@ -1188,15 +1208,15 @@ footer {
 <section class="contact-section" id="contact">
   <div class="s-inner">
     <div class="contact-inner">
-      <div class="s-label reveal"><span class="s-num">— 06</span> Contact</div>
+      <div class="s-label reveal"><span class="s-num">— 06</span> 話しかける</div>
       <h2 class="contact-heading reveal">
         何か、一緒に<br>
         <em>作りませんか。</em>
       </h2>
       <p class="contact-body reveal">
-        プロダクト開発の相談、コラボレーション、取材など、お気軽にご連絡ください。
-        「こういうサービスがあればいいのに」という話は大歓迎です。
-        誰も解いていない問い——そこに、一番面白い仕事があります。
+        プロダクト開発の相談、コラボレーション、取材など、お気軽にどうぞ。<br>
+        「こういうサービスがあればいいのに」という話は大歓迎です。<br>
+        誰も解いていない問い——そこに、一番面白い仕事があると思っています。
       </p>
       <div class="contact-row reveal">
         <a href="mailto:info@strataix.net" class="contact-mail">info@strataix.net</a>
@@ -1226,31 +1246,6 @@ footer {
 <p class="trademark-note">Apple and the Apple logo are trademarks of Apple Inc. App Store is a service mark of Apple Inc., registered in the U.S. and other countries. Google Play and the Google Play logo are trademarks of Google LLC.</p>
 
 <script>
-// カスタムカーソル
-const ring = document.getElementById('cursorRing');
-const dot  = document.getElementById('cursorDot');
-let mx = 0, my = 0, rx = 0, ry = 0;
-
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  dot.style.transform  = `translate(${mx}px,${my}px)`;
-});
-
-// リングはわずかに遅延追従
-function animateRing() {
-  rx += (mx - rx) * 0.12;
-  ry += (my - ry) * 0.12;
-  ring.style.transform = `translate(${rx}px,${ry}px)`;
-  requestAnimationFrame(animateRing);
-}
-animateRing();
-
-// ホバー時にリングを拡大
-document.querySelectorAll('a, button').forEach(el => {
-  el.addEventListener('mouseenter', () => ring.style.cssText += ';width:56px;height:56px;margin:-28px 0 0 -28px;opacity:.6');
-  el.addEventListener('mouseleave', () => ring.style.cssText += ';width:36px;height:36px;margin:-18px 0 0 -18px;opacity:1');
-});
-
 // ナビ スクロール
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => {
