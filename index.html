@@ -600,40 +600,72 @@ section { position:relative; z-index:1; }
   font-size:.95rem; color:var(--text-dim);
   line-height:1.85; font-weight:300; margin-bottom:36px;
 }
-.note-coming-btn {
-  display:inline-flex; align-items:center; gap:12px;
+.note-all-link {
+  display:inline-flex; align-items:center; gap:10px;
   font-family:var(--font-display);
   font-size:.75rem; font-weight:600;
-  color:var(--text-dim); letter-spacing:.1em; text-transform:uppercase;
-  border:1px solid var(--line-bright);
-  padding:14px 28px; border-radius:2px;
+  color:var(--cyan); letter-spacing:.1em; text-transform:uppercase;
+  text-decoration:none;
+  transition:opacity .2s;
 }
+.note-all-link:hover { opacity:.7; }
 
-.note-topics {
-  display:flex; flex-direction:column; gap:1px;
-  background:var(--line); border:1px solid var(--line); border-radius:4px; overflow:hidden;
+/* 記事カードグリッド */
+.note-cards {
+  display:flex; flex-direction:column; gap:20px;
 }
-.note-topic {
-  background:var(--bg);
-  padding:24px 28px;
-  display:flex; align-items:center; justify-content:space-between;
-  transition:background .3s; gap:16px;
+.note-card {
+  display:flex; flex-direction:column;
+  background:var(--bg-surface);
+  border:1px solid var(--line);
+  border-radius:8px; overflow:hidden;
+  text-decoration:none;
+  transition:border-color .3s, transform .3s;
 }
-.note-topic:hover { background:rgba(255,255,255,.03); }
-.note-topic-num {
+.note-card:hover {
+  border-color:var(--cyan-dim);
+  transform:translateY(-2px);
+}
+.note-card-thumb {
+  width:100%; aspect-ratio:1200/630;
+  object-fit:cover; display:block;
+  background:var(--bg-alt);
+}
+.note-card-body {
+  padding:20px 24px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.note-card-badges {
+  display:flex; gap:8px; align-items:center;
+}
+.note-badge {
   font-family:var(--font-display);
-  font-size:.62rem; color:var(--text-muted);
-  letter-spacing:.1em; flex-shrink:0;
-}
-.note-topic-title {
-  font-size:.88rem; font-weight:500; flex:1;
-}
-.note-topic-tag {
-  font-family:var(--font-display);
-  font-size:.6rem; color:var(--text-muted);
+  font-size:.58rem; font-weight:700;
   letter-spacing:.1em; text-transform:uppercase;
+  padding:3px 10px; border-radius:2px;
+}
+.note-badge-free {
+  background:rgba(94,207,220,.15);
+  color:var(--cyan);
+  border:1px solid rgba(94,207,220,.3);
+}
+.note-badge-coming {
+  background:rgba(255,255,255,.05);
+  color:var(--text-muted);
   border:1px solid var(--line-bright);
-  padding:3px 10px; border-radius:2px; flex-shrink:0;
+}
+.note-card-title {
+  font-size:.92rem; font-weight:500;
+  color:var(--text); line-height:1.6;
+}
+.note-card-link-label {
+  font-family:var(--font-display);
+  font-size:.65rem; font-weight:700;
+  color:var(--cyan); letter-spacing:.1em;
+  margin-top:4px;
+}
+.note-card.is-coming {
+  opacity:.55; pointer-events:none;
 }
 
 @media(max-width:768px){
@@ -1176,32 +1208,36 @@ footer {
           <em>作れる。</em>
         </h2>
         <p class="note-desc">
-          プログラム知識ゼロのPMが、AIとともにどうやってサービスを作ったか。その過程と知見を、noteで公開予定。
+          プログラム知識ゼロのPMが、AIとともにどうやってサービスを作ったか。その過程と知見を、noteで公開中。
           コードを書かなくても個人開発できる時代の、リアルな記録。
         </p>
-        <div class="note-coming-btn">近日公開予定 —</div>
+        <a class="note-all-link" href="https://note.com/strataix" target="_blank" rel="noopener">
+          note で全記事を読む →
+        </a>
       </div>
 
-      <div class="note-topics reveal reveal-delay-1">
-        <div class="note-topic">
-          <span class="note-topic-num">01</span>
-          <span class="note-topic-title">プログラム知識ゼロのPMが、AIと3週間でサービスを作った全記録</span>
-          <span class="note-topic-tag">Coming</span>
-        </div>
-        <div class="note-topic">
-          <span class="note-topic-num">02</span>
-          <span class="note-topic-title">Claude Codeとの協業——コードを書かずにプロダクトを完成させる方法</span>
-          <span class="note-topic-tag">Coming</span>
-        </div>
-        <div class="note-topic">
-          <span class="note-topic-num">03</span>
-          <span class="note-topic-title">「何を作るか」だけを考える——PM視点のAI開発の進め方</span>
-          <span class="note-topic-tag">Coming</span>
-        </div>
-        <div class="note-topic">
-          <span class="note-topic-num">04</span>
-          <span class="note-topic-title">個人プロダクトで採算を成立させるコスト設計</span>
-          <span class="note-topic-tag">Coming</span>
+      <div class="note-cards reveal reveal-delay-1">
+        <!-- 記事①：公開済み -->
+        <a class="note-card" href="https://note.com/strataix/n/n666e820df0fc" target="_blank" rel="noopener">
+          <img class="note-card-thumb" src="./images/note-01.png" alt="AIがX予約投稿を代わりにやってくれた話">
+          <div class="note-card-body">
+            <div class="note-card-badges">
+              <span class="note-badge note-badge-free">無料</span>
+            </div>
+            <div class="note-card-title">AIがXの予約投稿を代わりにやってくれた話——非エンジニアでもできた全手順</div>
+            <div class="note-card-link-label">note で読む →</div>
+          </div>
+        </a>
+
+        <!-- 記事②：公開予定 -->
+        <div class="note-card is-coming">
+          <div class="note-card-body">
+            <div class="note-card-badges">
+              <span class="note-badge note-badge-free">無料</span>
+              <span class="note-badge note-badge-coming">Coming Soon</span>
+            </div>
+            <div class="note-card-title">AIがnoteの記事投稿まで代わりにやってくれた話——X自動化の次にやったこと</div>
+          </div>
         </div>
       </div>
     </div>
