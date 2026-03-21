@@ -30,6 +30,9 @@
 ============================================= */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; font-size:16px; }
+@supports(word-break:auto-phrase){
+  .hero-desc,.about-body p,.pc-desc,.note-desc,.claude-comment-body p{word-break:auto-phrase}
+}
 
 :root {
   --bg:          #0d0d14;
@@ -1261,6 +1264,19 @@ const io = new IntersectionObserver(entries => {
   });
 }, { threshold:.08, rootMargin:'0px 0px -48px 0px' });
 revealEls.forEach(el => io.observe(el));
+</script>
+
+<!-- BudouX: 日本語テキストの自然な折り返し（Google製） -->
+<script src="https://unpkg.com/budoux/bundle/budoux-ja.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  if(typeof budoux==='undefined') return;
+  var parser=budoux.loadDefaultJapaneseParser();
+  var sel='.hero-desc,.about-body p,.pc-desc,.note-desc,.claude-comment-body p';
+  document.querySelectorAll(sel).forEach(function(el){
+    el.innerHTML=parser.translateHTMLString(el.innerHTML);
+  });
+});
 </script>
 </body>
 </html>
