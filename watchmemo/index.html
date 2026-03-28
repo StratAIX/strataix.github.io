@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Watchメモ — 腕だけで完結するメモアプリ</title>
 <meta name="description" content="Apple Watch の文字盤をタップして、声で話すだけ。思いついた瞬間にメモできる。サーバーゼロ・完全ローカル保存。買い切り ¥250。">
+<!-- OGP -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Watchメモ — 腕だけで完結するメモアプリ">
+<meta property="og:description" content="Apple Watchに話しかけるだけ。iPhoneはいらない。サーバーゼロ・完全ローカル保存。買い切り¥250。">
+<meta property="og:image" content="https://strataix.github.io/watchmemo/ogp.png">
+<meta property="og:url" content="https://strataix.github.io/watchmemo/">
+<meta property="og:site_name" content="Watchメモ by StratAIX">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@StratAIX_AI">
+<meta name="twitter:title" content="Watchメモ — 腕だけで完結するメモアプリ">
+<meta name="twitter:description" content="Apple Watchに話しかけるだけ。iPhoneはいらない。サーバーゼロ・完全ローカル保存。買い切り¥250。">
+<meta name="twitter:image" content="https://strataix.github.io/watchmemo/ogp.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
@@ -223,6 +235,29 @@ a {
   font-weight: 500;
   color: #6e6e73;
   letter-spacing: -0.01em;
+}
+
+.notify-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: #000;
+  color: #fff;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  margin-bottom: 12px;
+}
+.notify-btn:hover { opacity: 0.82; transform: translateY(-1px); }
+.notify-btn svg { width: 18px; height: 18px; fill: #fff; flex-shrink: 0; }
+.notify-sub {
+  font-size: 12px;
+  color: #aeaeb2;
+  margin-bottom: 20px;
 }
 
 .hero-meta {
@@ -1450,8 +1485,12 @@ a {
       Apple Watch に話しかけるだけ。iPhoneは、いらない。<br>あなたの言葉は、すぐに iPhone へ届いている。
     </p>
     <p class="hero-appstore">
-      <span class="appstore-badge">App Store に準備中</span>
+      <a href="https://twitter.com/StratAIX_AI" target="_blank" rel="noopener" class="notify-btn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        Xをフォローして通知を受け取る
+      </a>
     </p>
+    <p class="notify-sub">リリース時に X (@StratAIX_AI) でお知らせします</p>
     <p class="hero-meta">
       <span>iOS 17以上</span>
       <span>watchOS 10以上</span>
@@ -1850,7 +1889,11 @@ a {
       一度だけ、払う。ずっと、使う。<br>
       あなたのデータを売らない。サーバーコストがないから、永続的に維持できる。
     </p>
-    <p class="pricing-note">App Store に準備中</p>
+    <a href="https://twitter.com/StratAIX_AI" target="_blank" rel="noopener" class="notify-btn">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      リリース通知を受け取る
+    </a>
+    <p class="pricing-note">X (@StratAIX_AI) でリリース時にお知らせします</p>
   </div>
 </section>
 
