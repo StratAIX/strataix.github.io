@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7018374006710584" crossorigin="anonymous"></script>
 <title>StratAIX — AI × Human Studio</title>
 <meta name="description" content="AIを相棒に、自分が欲しかったサービスを作り続ける個人スタジオ。StratAIX。">
 <meta property="og:title" content="StratAIX — AI × Human Studio">
@@ -19,6 +18,36 @@
 <meta name="twitter:image" content="https://strataix.net/images/ogp-strataix.png">
 <link rel="canonical" href="https://strataix.net/">
 <link rel="icon" href="https://strataix.net/favicon.ico">
+
+<!-- 構造化データ（Schema.org）-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://strataix.net/#website",
+      "url": "https://strataix.net/",
+      "name": "StratAIX",
+      "description": "AIを相棒に、自分が欲しかったサービスを作り続ける個人開発スタジオ",
+      "inLanguage": "ja",
+      "publisher": { "@id": "https://strataix.net/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://strataix.net/#person",
+      "name": "しんくさん",
+      "url": "https://strataix.net/",
+      "sameAs": [
+        "https://twitter.com/StratAIX_AI",
+        "https://note.com/strataix"
+      ],
+      "jobTitle": "個人開発者 / AI × 個人開発スタジオ StratAIX",
+      "knowsAbout": ["AI", "個人開発", "Claude Code", "プロダクト開発"]
+    }
+  ]
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -98,7 +127,8 @@ nav.scrolled {
   border-bottom: 1px solid var(--line);
 }
 .nav-logo { display:flex; align-items:center; }
-.nav-logo img { height:104px; width:auto; }
+.nav-logo img { height:104px; width:auto; transition:height .4s ease; }
+nav.scrolled .nav-logo img { height:60px; }
 .nav-menu {
   display: flex; align-items:center; gap:48px;
 }
@@ -125,11 +155,52 @@ nav.scrolled {
   background: var(--cyan-dim);
   color: var(--cyan) !important;
 }
+/* ハンバーガーボタン */
+.nav-hamburger {
+  display:none;
+  flex-direction:column; justify-content:center; gap:5px;
+  width:36px; height:36px; cursor:pointer;
+  background:none; border:none; padding:4px;
+}
+.nav-hamburger span {
+  display:block; width:22px; height:1.5px;
+  background:var(--text-dim);
+  transition:all .3s;
+}
+.nav-hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity:0; }
+.nav-hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+
+/* モバイルドロワー */
+.nav-drawer {
+  display:none;
+  position:fixed; inset:0; top:0; z-index:499;
+  background:rgba(6,6,12,.97);
+  backdrop-filter:blur(24px);
+  flex-direction:column; align-items:center; justify-content:center;
+  gap:40px;
+}
+.nav-drawer.open { display:flex; }
+.nav-drawer a {
+  font-family:var(--font-display);
+  font-size:1.1rem; font-weight:600;
+  color:var(--text-dim); text-decoration:none;
+  letter-spacing:.1em; text-transform:uppercase;
+  transition:color .3s;
+}
+.nav-drawer a:hover { color:var(--text); }
+.nav-drawer .nav-contact {
+  color:var(--cyan) !important;
+  border:1px solid rgba(0,207,232,.3);
+  padding:12px 32px; border-radius:2px;
+}
+
 @media(max-width:768px){
   nav { padding:20px 24px; }
   nav.scrolled { padding:14px 24px; }
   .nav-menu { gap:24px; }
   .nav-menu a:not(.nav-contact) { display:none; }
+  .nav-hamburger { display:flex; }
 }
 
 /* =============================================
@@ -403,6 +474,29 @@ section { position:relative; z-index:1; }
 }
 .about-body p:last-child { margin-bottom:0; }
 .about-body strong { color:var(--text); font-weight:500; }
+
+.about-cta {
+  display:flex; align-items:center; gap:24px;
+  margin-top:48px; flex-wrap:wrap;
+}
+.about-cta-btn {
+  font-family:var(--font-display);
+  font-size:.8rem; font-weight:600;
+  letter-spacing:.08em; text-transform:uppercase;
+  text-decoration:none;
+  color:var(--bg); background:var(--cyan);
+  padding:14px 32px; border-radius:2px;
+  transition:opacity .3s, transform .3s;
+}
+.about-cta-btn:hover { opacity:.88; transform:translateY(-2px); }
+.about-cta-link {
+  font-family:var(--font-display);
+  font-size:.8rem; font-weight:500;
+  letter-spacing:.06em; text-transform:uppercase;
+  text-decoration:none; color:var(--text-dim);
+  transition:color .3s;
+}
+.about-cta-link:hover { color:var(--text); }
 
 .about-metrics {
   display:grid; grid-template-columns:1fr 1fr;
@@ -920,7 +1014,18 @@ footer {
     <a href="#note">書きもの</a>
     <a href="#contact" class="nav-contact">話しかける</a>
   </div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="メニューを開く">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- モバイルドロワー -->
+<div class="nav-drawer" id="navDrawer">
+  <a href="#philosophy" class="drawer-link">考え方</a>
+  <a href="#portfolio" class="drawer-link">つくったもの</a>
+  <a href="#note" class="drawer-link">書きもの</a>
+  <a href="#contact" class="nav-contact drawer-link">話しかける</a>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="top">
@@ -933,15 +1038,15 @@ footer {
   </div>
 
   <div class="hero-content">
-    <div class="hero-label">はみ出した人の、居場所を。</div>
+    <div class="hero-label">AI × 個人開発スタジオ — はみ出した人の、居場所を。</div>
     <h1 class="hero-h1">
       <span class="line-1">アイデアは、</span>
       <span class="line-2">もう眠らせない。</span>
     </h1>
     <div class="hero-bottom">
       <p class="hero-desc">
-        プログラムは一行も書けません。<br>
-        それでも、AIとともに「欲しかったもの」を作り続けています。<br>
+        <strong>プログラムは一行も書けません。</strong><br>
+        <strong>それでも、AIとともに「欲しかったもの」を作り続けています。</strong><br>
         大手が見落としてきた余白に、本物の需要が眠っていると信じています。
       </p>
       <div class="hero-cta-group">
@@ -1020,7 +1125,7 @@ footer {
 
       <div class="about-body">
         <p class="reveal">
-          17歳のころ、自分の顔を客観的に評価してもらえるサービスを作りたかったんです。
+          <strong>17歳のころ、自分の顔を客観的に評価してもらえるサービスを作りたかったんです。</strong>
           ザッカーバーグがFacebookを生み出した衝動と同じものだったと気づいたのは、ずっとあとのことでした。
         </p>
         <p class="reveal">
@@ -1040,7 +1145,7 @@ footer {
           <strong>その人たちの存在は、人生においてかけがえのないものでした。</strong>
         </p>
         <p class="reveal reveal-delay-3">
-          世界は広いはずです。同じように感じている仲間が、どこかにいると信じています。
+          世界は広いはずです。<strong>同じように感じている仲間が、どこかにいると信じています。</strong>
           それを証明したくて、Sincを作りました。まだ証明の途中ですが。
         </p>
 
@@ -1071,6 +1176,11 @@ footer {
             <div class="metric-val">0</div>
             <div class="metric-label">自分で書いたコードの行数</div>
           </div>
+        </div>
+
+        <div class="about-cta reveal">
+          <a href="https://twitter.com/StratAIX_AI" class="about-cta-btn" target="_blank" rel="noopener">X でフォローする →</a>
+          <a href="https://note.com/strataix" class="about-cta-link" target="_blank" rel="noopener">note で読む →</a>
         </div>
       </div>
     </div>
@@ -1304,6 +1414,24 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive:true });
 
+// ハンバーガーメニュー
+const hamburger = document.getElementById('navHamburger');
+const drawer = document.getElementById('navDrawer');
+hamburger.addEventListener('click', () => {
+  const isOpen = drawer.classList.toggle('open');
+  hamburger.classList.toggle('open', isOpen);
+  hamburger.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+// ドロワー内リンクをクリックで閉じる
+drawer.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    drawer.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
 // スクロールリビール
 const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver(entries => {
@@ -1326,5 +1454,7 @@ document.addEventListener('DOMContentLoaded',function(){
   });
 });
 </script>
+<!-- Google AdSense（レンダリングブロック回避のため body 末尾に配置）-->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7018374006710584" crossorigin="anonymous"></script>
 </body>
 </html>

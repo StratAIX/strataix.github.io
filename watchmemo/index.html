@@ -1,0 +1,2075 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Watchメモ — 腕だけで完結するメモアプリ</title>
+<meta name="description" content="Apple Watch の文字盤をタップして、声で話すだけ。思いついた瞬間にメモできる。サーバーゼロ・完全ローカル保存。買い切り ¥250。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  /* システムフォント優先 — Mac/iPhoneではHiraginoで表示 */
+  :root {
+    --font-ja: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', 'YuGothic', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  }
+</style>
+<style>
+
+/* =========================================================
+   RESET & BASE
+   ========================================================= */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@supports (word-break: auto-phrase) {
+  html {
+    word-break: auto-phrase;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-ja);
+  font-size: 17px;
+  line-height: 1.8;
+  color: #1d1d1f;
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+.hero-title {
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #1d1d1f;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: #1d1d1f;
+}
+
+.feature-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #1d1d1f;
+}
+
+.body-text {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #6e6e73;
+  font-weight: 400;
+}
+
+.secondary-text {
+  font-size: 14px;
+  color: #6e6e73;
+  font-weight: 300;
+}
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 120px 0;
+}
+
+.section--gray {
+  background-color: #f5f5f7;
+}
+
+.section--privacy-accent {
+  background-color: rgba(0, 199, 190, 0.05);
+}
+
+/* =========================================================
+   NAV
+   ========================================================= */
+#nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  height: 56px;
+}
+
+.nav-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.nav-logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+  /* ロゴは白色のため白背景NAVでは filter: brightness(0) で黒化 */
+  filter: brightness(0);
+}
+
+.nav-logo-name {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1d1d1f;
+  line-height: 1;
+}
+
+.nav-badge {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #6e6e73;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 980px;
+  padding: 5px 14px;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+#hero {
+  background-color: #ffffff;
+  padding: 160px 0 120px;
+  text-align: center;
+}
+
+.hero-eyebrow {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #00c7be;
+  margin-bottom: 24px;
+}
+
+.hero-title {
+  margin-bottom: 32px;
+}
+
+.hero-subtitle {
+  font-size: clamp(17px, 2.2vw, 21px);
+  line-height: 1.65;
+  color: #6e6e73;
+  font-weight: 300;
+  max-width: 600px;
+  margin: 0 auto 56px;
+}
+
+.hero-appstore {
+  margin-bottom: 24px;
+}
+
+.appstore-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #f5f5f7;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #6e6e73;
+  letter-spacing: -0.01em;
+}
+
+.hero-meta {
+  font-size: 13px;
+  color: #aeaeb2;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+
+.hero-meta span {
+  display: inline-block;
+  margin: 0 6px;
+}
+
+.hero-meta span::after {
+  content: '·';
+  margin-left: 12px;
+  color: #d2d2d7;
+}
+
+.hero-meta span:last-child::after {
+  content: '';
+}
+
+/* =========================================================
+   HOW IT WORKS
+   ========================================================= */
+#howitworks {
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 72px;
+}
+
+.section-eyebrow {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #00c7be;
+  margin-bottom: 16px;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.step-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px 32px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+.step-number {
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: rgba(0, 199, 190, 0.18);
+  line-height: 1;
+  margin-bottom: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+.step-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.step-desc {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #6e6e73;
+  font-weight: 300;
+}
+
+/* =========================================================
+   FEATURES
+   ========================================================= */
+#features {
+  padding: 0;
+}
+
+.feature-block {
+  padding: 120px 0;
+}
+
+.feature-block--gray {
+  background-color: #f5f5f7;
+}
+
+.feature-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.feature-inner--reverse {
+  direction: rtl;
+}
+
+.feature-inner--reverse > * {
+  direction: ltr;
+}
+
+.feature-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.feature-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  background: rgba(0, 199, 190, 0.1);
+  border-radius: 980px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #00a89f;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.feature-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =========================================================
+   APPLE WATCH MOCKUP
+   ========================================================= */
+.watch-mockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.watch-band-top,
+.watch-band-bottom {
+  width: 50px;
+  height: 30px;
+  background: #2c2c2e;
+  border-radius: 4px;
+}
+
+.watch-body {
+  width: 160px;
+  height: 195px;
+  border-radius: 42px;
+  background: #1c1c1e;
+  border: 6px solid #3a3a3c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.watch-crown {
+  position: absolute;
+  right: -11px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 36px;
+  background: #3a3a3c;
+  border-radius: 3px;
+}
+
+.watch-screen {
+  width: 120px;
+  height: 145px;
+  border-radius: 30px;
+  background: #000000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+}
+
+/* Watch screen content — speak button */
+.watch-screen-speak {
+  background: linear-gradient(160deg, #0a0a0a 0%, #111 100%);
+}
+
+.watch-mic-icon {
+  width: 36px;
+  height: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.watch-mic-body {
+  width: 20px;
+  height: 30px;
+  background: #ffffff;
+  border-radius: 10px;
+  position: relative;
+}
+
+.watch-mic-stand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.watch-mic-arc {
+  width: 28px;
+  height: 14px;
+  border: 2.5px solid rgba(255,255,255,0.7);
+  border-bottom: none;
+  border-radius: 14px 14px 0 0;
+}
+
+.watch-mic-line {
+  width: 2.5px;
+  height: 8px;
+  background: rgba(255,255,255,0.7);
+}
+
+.watch-mic-base {
+  width: 18px;
+  height: 2.5px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 2px;
+}
+
+.watch-speak-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 0.02em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+.watch-speak-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #00c7be;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 6px rgba(0,199,190,0.2);
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 6px rgba(0,199,190,0.2); }
+  50% { box-shadow: 0 0 0 10px rgba(0,199,190,0.08); }
+}
+
+.watch-speak-btn-icon {
+  width: 22px;
+  height: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.watch-speak-btn-icon .mic-body {
+  width: 12px;
+  height: 18px;
+  background: #ffffff;
+  border-radius: 6px;
+}
+
+.watch-speak-btn-icon .mic-arc {
+  width: 18px;
+  height: 9px;
+  border: 2px solid rgba(255,255,255,0.9);
+  border-bottom: none;
+  border-radius: 9px 9px 0 0;
+}
+
+.watch-speak-btn-icon .mic-line {
+  width: 2px;
+  height: 5px;
+  background: rgba(255,255,255,0.9);
+}
+
+/* Watch screen content — voice wave */
+.watch-screen-wave {
+  background: linear-gradient(160deg, #0a0a0a 0%, #111 100%);
+  padding: 12px;
+}
+
+.watch-wave-label {
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.wave-bars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 40px;
+}
+
+.wave-bar {
+  width: 4px;
+  background: #00c7be;
+  border-radius: 2px;
+  animation: wave-animate 1.2s ease-in-out infinite;
+}
+
+.wave-bar:nth-child(1) { height: 12px; animation-delay: 0s; }
+.wave-bar:nth-child(2) { height: 24px; animation-delay: 0.1s; }
+.wave-bar:nth-child(3) { height: 36px; animation-delay: 0.2s; }
+.wave-bar:nth-child(4) { height: 28px; animation-delay: 0.3s; }
+.wave-bar:nth-child(5) { height: 16px; animation-delay: 0.4s; }
+.wave-bar:nth-child(6) { height: 32px; animation-delay: 0.3s; }
+.wave-bar:nth-child(7) { height: 20px; animation-delay: 0.2s; }
+.wave-bar:nth-child(8) { height: 14px; animation-delay: 0.1s; }
+
+@keyframes wave-animate {
+  0%, 100% { transform: scaleY(1); opacity: 0.8; }
+  50% { transform: scaleY(1.4); opacity: 1; }
+}
+
+.watch-save-btn {
+  width: 72px;
+  height: 26px;
+  background: #00c7be;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.03em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+/* =========================================================
+   IPHONE MOCKUP
+   ========================================================= */
+.iphone-mockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.iphone-body {
+  width: 200px;
+  height: 400px;
+  border-radius: 44px;
+  background: #1c1c1e;
+  border: 6px solid #3a3a3c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22);
+}
+
+.iphone-dynamic-island {
+  width: 90px;
+  height: 28px;
+  background: #000000;
+  border-radius: 20px;
+  margin-top: 10px;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.iphone-screen {
+  flex: 1;
+  width: 100%;
+  background: #f2f2f7;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* iPhone memo list */
+.iphone-statusbar {
+  height: 24px;
+  background: #f2f2f7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  flex-shrink: 0;
+}
+
+.statusbar-time {
+  font-size: 11px;
+  font-weight: 600;
+  color: #1d1d1f;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+.statusbar-icons {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.statusbar-icon {
+  width: 14px;
+  height: 7px;
+  background: #1d1d1f;
+  border-radius: 1.5px;
+  opacity: 0.8;
+}
+
+.iphone-nav-header {
+  padding: 8px 14px 10px;
+  background: #f2f2f7;
+  flex-shrink: 0;
+}
+
+.iphone-nav-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1d1d1f;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+.iphone-memo-list {
+  flex: 1;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.memo-item {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.memo-item-time {
+  font-size: 9px;
+  color: #aeaeb2;
+  font-weight: 400;
+  margin-bottom: 4px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+.memo-item-text {
+  font-size: 11px;
+  color: #1d1d1f;
+  font-weight: 400;
+  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+.memo-item--pinned {
+  border-left: 3px solid #00c7be;
+}
+
+/* iPhone card grid */
+.iphone-card-grid {
+  flex: 1;
+  padding: 8px 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  overflow: hidden;
+  align-content: start;
+}
+
+.postit-card {
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.postit-card:nth-child(1) { background: #fffde7; }
+.postit-card:nth-child(2) { background: #e8f5e9; }
+.postit-card:nth-child(3) { background: #e3f2fd; }
+.postit-card:nth-child(4) { background: #fce4ec; }
+
+/* カラーバリアント（フォルダ機能モックアップ用） */
+.postit-card--yellow { background: #fffde7 !important; }
+.postit-card--blue   { background: #e3f2fd !important; }
+
+/* フォルダタブバー（iPhone モックアップ内） */
+.folder-tab-bar {
+  display: flex;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  background: #f9f9f9;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.folder-tab {
+  flex: 1;
+  text-align: center;
+  padding: 5px 2px;
+  font-size: 8px;
+  color: #6e6e73;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-bottom: 2px solid transparent;
+}
+
+.folder-tab--active {
+  color: #00c7be;
+  font-weight: 600;
+  border-bottom-color: #00c7be;
+}
+
+.postit-card-text {
+  font-size: 10px;
+  color: #1d1d1f;
+  font-weight: 400;
+  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+.postit-card-time {
+  font-size: 8.5px;
+  color: rgba(0,0,0,0.35);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+/* =========================================================
+   PRIVACY HIGHLIGHT
+   ========================================================= */
+#privacy {
+  text-align: center;
+}
+
+.privacy-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #1d1d1f;
+  margin-bottom: 24px;
+}
+
+.privacy-sub {
+  font-size: clamp(17px, 2vw, 20px);
+  line-height: 1.7;
+  color: #6e6e73;
+  font-weight: 300;
+  max-width: 620px;
+  margin: 0 auto 64px;
+}
+
+.privacy-badges {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.privacy-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  min-width: 140px;
+}
+
+.privacy-badge-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: rgba(0, 199, 190, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.privacy-badge-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: #00a89f;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.privacy-badge-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1d1d1f;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+/* =========================================================
+   PRICING
+   ========================================================= */
+#notify {
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.pricing-label {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #00c7be;
+  margin-bottom: 24px;
+}
+
+.pricing-price {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1d1d1f;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.pricing-tags {
+  font-size: 18px;
+  font-weight: 300;
+  color: #6e6e73;
+  letter-spacing: 0.02em;
+  margin-bottom: 24px;
+}
+
+.pricing-tags span {
+  display: inline-block;
+  margin: 0 8px;
+}
+
+.pricing-tags span::before {
+  content: '·';
+  margin-right: 16px;
+  color: #d2d2d7;
+}
+
+.pricing-tags span:first-child::before {
+  content: '';
+  margin-right: 0;
+}
+
+.pricing-desc {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #6e6e73;
+  font-weight: 300;
+  max-width: 480px;
+  margin: 0 auto 56px;
+}
+
+.pricing-form {
+  display: flex;
+  gap: 12px;
+  max-width: 480px;
+  margin: 0 auto 20px;
+  justify-content: center;
+}
+
+.pricing-form input[type="email"] {
+  flex: 1;
+  height: 52px;
+  padding: 0 20px;
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  font-size: 16px;
+  font-family: inherit;
+  color: #1d1d1f;
+  background: #ffffff;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pricing-form input[type="email"]::placeholder {
+  color: #aeaeb2;
+}
+
+.pricing-form input[type="email"]:focus {
+  border-color: #00c7be;
+  box-shadow: 0 0 0 3px rgba(0, 199, 190, 0.12);
+}
+
+.pricing-note {
+  font-size: 14px;
+  color: #aeaeb2;
+  font-weight: 300;
+}
+
+/* =========================================================
+   PRIVACY POLICY
+   ========================================================= */
+#privacypolicy {
+}
+
+.accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.accordion-item {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1d1d1f;
+  letter-spacing: -0.01em;
+  transition: background-color 0.15s ease;
+}
+
+.accordion-trigger:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.accordion-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: 16px;
+  transition: transform 0.25s ease, background-color 0.2s ease;
+}
+
+.accordion-icon svg {
+  width: 12px;
+  height: 12px;
+  stroke: #1d1d1f;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  transition: transform 0.25s ease;
+}
+
+.accordion-item.is-open .accordion-icon {
+  transform: rotate(180deg);
+  background-color: rgba(0, 199, 190, 0.12);
+}
+
+.accordion-item.is-open .accordion-icon svg {
+  stroke: #00a89f;
+}
+
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.accordion-body-inner {
+  padding: 0 28px 24px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #6e6e73;
+  font-weight: 300;
+}
+
+.accordion-body-inner a {
+  color: #00a89f;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.accordion-item.is-open .accordion-body {
+  max-height: 600px;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+#footer {
+  background-color: #f5f5f7;
+  padding: 48px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.footer-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-copyright {
+  font-size: 13px;
+  color: #6e6e73;
+  font-weight: 300;
+}
+
+.footer-trademark {
+  font-size: 10px;
+  color: #aeaeb2;
+  font-weight: 300;
+  line-height: 1.6;
+  max-width: 640px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.footer-link {
+  font-size: 13px;
+  color: #6e6e73;
+  font-weight: 400;
+  transition: color 0.15s ease;
+}
+
+.footer-link:hover {
+  color: #1d1d1f;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 640px) {
+
+  .section {
+    padding: 80px 0;
+  }
+
+  .nav-cta {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  #hero {
+    padding: 120px 0 80px;
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .step-card {
+    padding: 28px 24px;
+  }
+
+  .feature-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .feature-inner--reverse {
+    direction: ltr;
+  }
+
+  .feature-visual {
+    order: -1;
+  }
+
+  .feature-block {
+    padding: 80px 0;
+  }
+
+  .privacy-badges {
+    gap: 32px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .accordion-trigger {
+    padding: 18px 20px;
+    font-size: 15px;
+  }
+
+  .accordion-body-inner {
+    padding: 0 20px 20px;
+  }
+
+  .watch-body {
+    width: 140px;
+    height: 172px;
+    border-radius: 36px;
+  }
+
+  .watch-screen {
+    width: 104px;
+    height: 128px;
+    border-radius: 26px;
+  }
+
+  .iphone-body {
+    width: 170px;
+    height: 340px;
+  }
+}
+
+/* =========================================================
+   SHARE MOCKUP
+   ========================================================= */
+.iphone-share-screen {
+  flex: 1;
+  width: 100%;
+  background: #f2f2f7;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.share-memo-card {
+  margin: 12px 10px 8px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  flex-shrink: 0;
+}
+
+.share-memo-text {
+  font-size: 11px;
+  font-weight: 500;
+  color: #1d1d1f;
+  line-height: 1.4;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+.share-memo-time {
+  font-size: 9px;
+  color: #aeaeb2;
+  margin-top: 4px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+.share-sheet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #f2f2f7;
+  border-radius: 14px 14px 0 0;
+  padding: 8px 8px 12px;
+  box-shadow: 0 -2px 16px rgba(0,0,0,0.12);
+}
+
+.share-sheet-handle {
+  width: 32px;
+  height: 3px;
+  background: #c7c7cc;
+  border-radius: 2px;
+  margin: 0 auto 10px;
+}
+
+.share-sheet-row {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.share-app-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: 46px;
+}
+
+.share-app-icon-img {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.share-app-icon-label {
+  font-size: 8px;
+  color: #6e6e73;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  white-space: nowrap;
+}
+
+.share-icon-copy { background: #e5e5ea; }
+.share-icon-chatgpt { background: #10a37f; }
+.share-icon-claude { background: #c7aaff; }
+.share-icon-google { background: #4285f4; }
+.share-icon-obsidian { background: #7c3aed; }
+.share-icon-bear { background: #e75022; }
+
+.share-app-icon-img svg {
+  width: 18px;
+  height: 18px;
+  fill: #ffffff;
+}
+
+/* =========================================================
+   WIDGET MOCKUP
+   ========================================================= */
+.iphone-widget-screen {
+  flex: 1;
+  width: 100%;
+  background: linear-gradient(160deg, #1c3553 0%, #0f2132 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.widget-home-grid {
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.widget-card {
+  background: rgba(255,255,255,0.14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255,255,255,0.16);
+}
+
+.widget-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.widget-card-title {
+  font-size: 9px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+.widget-card-nav {
+  display: flex;
+  gap: 6px;
+}
+
+.widget-card-nav-btn {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.widget-card-nav-btn svg {
+  width: 8px;
+  height: 8px;
+  stroke: rgba(255,255,255,0.7);
+  fill: none;
+  stroke-width: 2;
+}
+
+.widget-card-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.4;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+.widget-card-time {
+  font-size: 9px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 5px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+.widget-dots {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.widget-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+}
+
+.widget-dot--active {
+  background: rgba(255,255,255,0.8);
+  width: 12px;
+  border-radius: 2px;
+}
+
+/* share/widget feature app list */
+.feature-app-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.feature-app-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: #f5f5f7;
+  border-radius: 980px;
+  font-size: 13px;
+  color: #3c3c43;
+  font-weight: 400;
+}
+
+/* =========================================================
+   UTILITY
+   ========================================================= */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     NAV
+     ========================================================= -->
+<header id="nav" role="banner">
+  <div class="nav-inner">
+    <a class="nav-logo" href="https://strataix.net/" aria-label="Watchメモ by StratAIX">
+      <img src="../images/StratAIX_logo_transparent.png" alt="StratAIX" class="nav-logo-img">
+      <span class="nav-logo-name">Watchメモ</span>
+    </a>
+    <span class="nav-badge">App Store 準備中</span>
+  </div>
+</header>
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+<section id="hero">
+  <div class="container">
+    <p class="hero-eyebrow">Apple Watch 専用メモアプリ</p>
+    <h1 class="hero-title">
+      Watchが、メモ帳になる。
+    </h1>
+    <p class="hero-subtitle">
+      Apple Watch に話しかけるだけ。iPhoneは、いらない。<br>あなたの言葉は、すぐに iPhone へ届いている。
+    </p>
+    <p class="hero-appstore">
+      <span class="appstore-badge">App Store に準備中</span>
+    </p>
+    <p class="hero-meta">
+      <span>iOS 17以上</span>
+      <span>watchOS 10以上</span>
+      <span>お手軽な買い切り</span>
+    </p>
+  </div>
+</section>
+
+<!-- =========================================================
+     HOW IT WORKS
+     ========================================================= -->
+<section id="howitworks" class="section section--gray">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">使い方</p>
+      <h2 class="section-title">使い方は、ない。</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number" aria-hidden="true">01</div>
+        <h3 class="step-title">文字盤をタップ</h3>
+        <p class="step-desc">Apple Watch のコンプリケーションをタップするだけ。ポケットからスマホを取り出す必要はありません。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number" aria-hidden="true">02</div>
+        <h3 class="step-title">声で話す</h3>
+        <p class="step-desc">マイクに向かって話すと自動でテキスト化。手は使わなくていい。歩きながらでも、料理中でも。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number" aria-hidden="true">03</div>
+        <h3 class="step-title">iPhoneに届く</h3>
+        <p class="step-desc">保存すると同時に iPhone へ自動同期。すぐ使えて、いつでも見返せる。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FEATURES
+     ========================================================= -->
+<div id="features">
+
+  <!-- Feature A: 瞬間起動 -->
+  <div class="feature-block">
+    <div class="feature-inner">
+      <div class="feature-text-block">
+        <span class="feature-tag">瞬間起動</span>
+        <h2 class="feature-title">上げるだけで、<br>起きている。</h2>
+        <p class="body-text">財布も、スマホも、関係ない。Apple Watch の文字盤から Watchメモを起動すれば、音声入力画面が即座に開きます。</p>
+      </div>
+      <div class="feature-visual">
+        <div class="watch-mockup" aria-label="Apple Watch のモックアップ — 話すボタン表示">
+          <div class="watch-band-top"></div>
+          <div class="watch-body">
+            <div class="watch-crown" aria-hidden="true"></div>
+            <div class="watch-screen watch-screen-speak">
+              <div class="watch-speak-btn" aria-hidden="true">
+                <div class="watch-speak-btn-icon">
+                  <div class="mic-body"></div>
+                  <div class="mic-arc"></div>
+                  <div class="mic-line"></div>
+                </div>
+              </div>
+              <span class="watch-speak-label">話す</span>
+            </div>
+          </div>
+          <div class="watch-band-bottom"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature B: 音声入力 -->
+  <div class="feature-block feature-block--gray">
+    <div class="feature-inner feature-inner--reverse">
+      <div class="feature-text-block">
+        <span class="feature-tag">音声入力</span>
+        <h2 class="feature-title">話すだけで、<br>テキストになる。</h2>
+        <p class="body-text">Apple の音声認識技術を使って、話した言葉をそのままテキストに変換。保存ボタンを押すと腕に Taptic で確認が届きます。画面を見なくていい。</p>
+      </div>
+      <div class="feature-visual">
+        <div class="watch-mockup" aria-label="Apple Watch のモックアップ — 音声入力中">
+          <div class="watch-band-top"></div>
+          <div class="watch-body">
+            <div class="watch-crown" aria-hidden="true"></div>
+            <div class="watch-screen watch-screen-wave">
+              <p class="watch-wave-label">認識中</p>
+              <div class="wave-bars" aria-hidden="true">
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+              </div>
+              <div class="watch-save-btn">保存する</div>
+            </div>
+          </div>
+          <div class="watch-band-bottom"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature C: iPhone連携 -->
+  <div class="feature-block">
+    <div class="feature-inner">
+      <div class="feature-text-block">
+        <span class="feature-tag">iPhone 連携</span>
+        <h2 class="feature-title">腕で取って、<br>手で読む。</h2>
+        <p class="body-text">Watch で保存したメモは自動で iPhone に届きます。タイムライン表示・ピン留め・スワイプ完了で、シンプルに管理できます。</p>
+      </div>
+      <div class="feature-visual">
+        <div class="iphone-mockup" aria-label="iPhone のメモ一覧モックアップ">
+          <div class="iphone-body">
+            <div class="iphone-dynamic-island" aria-hidden="true"></div>
+            <div class="iphone-screen">
+              <div class="iphone-statusbar" aria-hidden="true">
+                <span class="statusbar-time">9:41</span>
+                <div class="statusbar-icons">
+                  <div class="statusbar-icon" style="width:10px;height:7px;border-radius:2px;background:transparent;border:1.5px solid #1d1d1f;position:relative;"><div style="width:3px;height:4px;background:#1d1d1f;position:absolute;right:-1px;top:50%;transform:translateY(-50%);border-radius:1px;"></div><div style="width:7px;height:4px;background:#1d1d1f;border-radius:0.5px;position:absolute;top:50%;left:1px;transform:translateY(-50%);"></div></div>
+                </div>
+              </div>
+              <div class="iphone-nav-header">
+                <div class="iphone-nav-title">watchメモ</div>
+              </div>
+              <div class="iphone-memo-list">
+                <div class="memo-item memo-item--pinned">
+                  <div class="memo-item-time">今日 · 14:32</div>
+                  <div class="memo-item-text">新しいキャッチコピーの案を考えてみる</div>
+                </div>
+                <div class="memo-item">
+                  <div class="memo-item-time">今日 · 11:15</div>
+                  <div class="memo-item-text">ランチはあの店にしよう</div>
+                </div>
+                <div class="memo-item">
+                  <div class="memo-item-time">昨日 · 22:47</div>
+                  <div class="memo-item-text">読みたい本のタイトルをあとで検索</div>
+                </div>
+                <div class="memo-item">
+                  <div class="memo-item-time">昨日 · 09:03</div>
+                  <div class="memo-item-text">MTGで話す内容を整理しておく</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature D: ポストイットボード + フォルダ -->
+  <div class="feature-block feature-block--gray">
+    <div class="feature-inner feature-inner--reverse">
+      <div class="feature-text-block">
+        <span class="feature-tag">カードビュー &amp; 整理</span>
+        <h2 class="feature-title">ためて、<br>仕分けする。</h2>
+        <p class="body-text">メモが溜まってきたら、ポストイット風のカードビューに切り替えられます。<br><br>4つのフォルダタブで仕分け。「仕事」「アイデア」「タスク」など、自分だけのカテゴリ名をつけてカードを整理できます。タップで編集、長押しでフォルダ移動。</p>
+      </div>
+      <div class="feature-visual">
+        <div class="iphone-mockup" aria-label="iPhone のカードグリッド＋フォルダタブモックアップ">
+          <div class="iphone-body">
+            <div class="iphone-dynamic-island" aria-hidden="true"></div>
+            <div class="iphone-screen">
+              <div class="iphone-statusbar" aria-hidden="true">
+                <span class="statusbar-time">9:41</span>
+                <div class="statusbar-icons"></div>
+              </div>
+              <div class="iphone-nav-header">
+                <div class="iphone-nav-title">ボード</div>
+              </div>
+              <!-- フォルダタブ -->
+              <div class="folder-tab-bar" aria-hidden="true">
+                <div class="folder-tab folder-tab--active">すべて</div>
+                <div class="folder-tab">仕事</div>
+                <div class="folder-tab">アイデア</div>
+                <div class="folder-tab">タスク</div>
+              </div>
+              <div class="iphone-card-grid">
+                <div class="postit-card postit-card--yellow">
+                  <div class="postit-card-text">新しいキャッチコピーの案</div>
+                  <div class="postit-card-time">14:32</div>
+                </div>
+                <div class="postit-card postit-card--blue">
+                  <div class="postit-card-text">ランチはあの店にしよう</div>
+                  <div class="postit-card-time">11:15</div>
+                </div>
+                <div class="postit-card">
+                  <div class="postit-card-text">読みたい本を検索する</div>
+                  <div class="postit-card-time">昨日</div>
+                </div>
+                <div class="postit-card postit-card--yellow">
+                  <div class="postit-card-text">MTGで話す内容を整理</div>
+                  <div class="postit-card-time">昨日</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Feature E: 他アプリへ共有 -->
+  <div class="feature-block">
+    <div class="feature-inner">
+      <div class="feature-text-block">
+        <span class="feature-tag">アプリ連携</span>
+        <h2 class="feature-title">取ったメモを、<br>すぐ展開する。</h2>
+        <p class="body-text">メモはそのまま他のアプリへ。思考を途切れさせず、ChatGPT や Claude に貼り付けて深掘り。Google で検索し、Obsidian や Bear に保存。Watchで拾って、最適なツールへ流す。</p>
+        <div class="feature-app-list" aria-label="連携対応アプリ">
+          <span class="feature-app-chip">💬 ChatGPT</span>
+          <span class="feature-app-chip">🤖 Claude</span>
+          <span class="feature-app-chip">🔍 Google</span>
+          <span class="feature-app-chip">📓 Obsidian</span>
+          <span class="feature-app-chip">🐻 Bear</span>
+          <span class="feature-app-chip">📋 コピー</span>
+        </div>
+      </div>
+      <div class="feature-visual">
+        <div class="iphone-mockup" aria-label="iPhone の共有シートモックアップ">
+          <div class="iphone-body">
+            <div class="iphone-dynamic-island" aria-hidden="true"></div>
+            <div class="iphone-share-screen">
+              <div class="iphone-statusbar" aria-hidden="true">
+                <span class="statusbar-time">9:41</span>
+                <div class="statusbar-icons"></div>
+              </div>
+              <div class="share-memo-card">
+                <div class="share-memo-text">次のMTGで話すこと：KPIの見直し、採用計画、Q2予算</div>
+                <div class="share-memo-time">今日 9:38</div>
+              </div>
+              <div class="share-sheet">
+                <div class="share-sheet-handle"></div>
+                <div class="share-sheet-row">
+                  <div class="share-app-icon">
+                    <div class="share-app-icon-img share-icon-copy">
+                      <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                    </div>
+                    <span class="share-app-icon-label">コピー</span>
+                  </div>
+                  <div class="share-app-icon">
+                    <div class="share-app-icon-img share-icon-chatgpt">
+                      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+                    </div>
+                    <span class="share-app-icon-label">ChatGPT</span>
+                  </div>
+                  <div class="share-app-icon">
+                    <div class="share-app-icon-img share-icon-claude">
+                      <svg viewBox="0 0 24 24"><path d="M12 3L2 21h20L12 3zm0 3.5l7 14H5l7-14z"/></svg>
+                    </div>
+                    <span class="share-app-icon-label">Claude</span>
+                  </div>
+                  <div class="share-app-icon">
+                    <div class="share-app-icon-img share-icon-google">
+                      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    </div>
+                    <span class="share-app-icon-label">Google</span>
+                  </div>
+                  <div class="share-app-icon">
+                    <div class="share-app-icon-img share-icon-obsidian">
+                      <svg viewBox="0 0 24 24"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/></svg>
+                    </div>
+                    <span class="share-app-icon-label">Obsidian</span>
+                  </div>
+                  <div class="share-app-icon">
+                    <div class="share-app-icon-img share-icon-bear">
+                      <svg viewBox="0 0 24 24"><path d="M12 2a9 9 0 100 18A9 9 0 0012 2zm0 2a7 7 0 010 14A7 7 0 0112 4z"/></svg>
+                    </div>
+                    <span class="share-app-icon-label">Bear</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature F: iPhoneウィジェット -->
+  <div class="feature-block feature-block--gray">
+    <div class="feature-inner feature-inner--reverse">
+      <div class="feature-text-block">
+        <span class="feature-tag">ウィジェット</span>
+        <h2 class="feature-title">メモを、ホーム画面に<br>貼っておく。</h2>
+        <p class="body-text">iPhone のホーム画面にウィジェットを配置すれば、アプリを開かずにメモを確認できます。日時と内容を表示、左右のボタンで前後のメモを切り替え。タスク管理ツールのようにも使えます。</p>
+      </div>
+      <div class="feature-visual">
+        <div class="iphone-mockup" aria-label="iPhone ホーム画面ウィジェットモックアップ">
+          <div class="iphone-body">
+            <div class="iphone-dynamic-island" aria-hidden="true"></div>
+            <div class="iphone-widget-screen">
+              <div class="widget-home-grid">
+                <div class="widget-card">
+                  <div class="widget-card-header">
+                    <span class="widget-card-title">Watchメモ</span>
+                    <div class="widget-card-nav" aria-hidden="true">
+                      <div class="widget-card-nav-btn">
+                        <svg viewBox="0 0 8 8"><polyline points="5 2 3 4 5 6"/></svg>
+                      </div>
+                      <div class="widget-card-nav-btn">
+                        <svg viewBox="0 0 8 8"><polyline points="3 2 5 4 3 6"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="widget-card-text">次のMTGで話すこと：KPIの見直し、採用計画、Q2予算</div>
+                  <div class="widget-card-time">今日 9:38</div>
+                  <div class="widget-dots">
+                    <div class="widget-dot widget-dot--active"></div>
+                    <div class="widget-dot"></div>
+                    <div class="widget-dot"></div>
+                  </div>
+                </div>
+                <div class="widget-card">
+                  <div class="widget-card-header">
+                    <span class="widget-card-title">Watchメモ</span>
+                  </div>
+                  <div class="widget-card-text">新しいキャッチコピーのアイデア</div>
+                  <div class="widget-card-time">昨日 14:32</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /#features -->
+
+<!-- =========================================================
+     PRIVACY HIGHLIGHT
+     ========================================================= -->
+<section id="privacy" class="section section--privacy-accent">
+  <div class="container">
+    <h2 class="privacy-title">声は、外に出ない。</h2>
+    <p class="privacy-sub">
+      当社のサーバーには何も届きません。音声も、テキストも、すべてあなたのデバイスの中だけ。Wi-Fi もクラウドも、必要ない。
+    </p>
+    <div class="privacy-badges">
+      <div class="privacy-badge">
+        <div class="privacy-badge-icon" aria-hidden="true">
+          <!-- Server icon -->
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="2" y="3" width="20" height="5" rx="2"/>
+            <rect x="2" y="11" width="20" height="5" rx="2"/>
+            <line x1="6" y1="5.5" x2="6" y2="5.5" stroke-width="2" stroke-linecap="round"/>
+            <line x1="6" y1="13.5" x2="6" y2="13.5" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4" y1="20" x2="20" y2="20" stroke-linecap="round"/>
+            <line x1="12" y1="16" x2="12" y2="20" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="privacy-badge-label">サーバーなし</span>
+      </div>
+      <div class="privacy-badge">
+        <div class="privacy-badge-icon" aria-hidden="true">
+          <!-- Ad-block icon -->
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+          </svg>
+        </div>
+        <span class="privacy-badge-label">広告なし</span>
+      </div>
+      <div class="privacy-badge">
+        <div class="privacy-badge-icon" aria-hidden="true">
+          <!-- Shield icon -->
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/>
+            <polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
+        <span class="privacy-badge-label">データ販売なし</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     PRICING / NOTIFY
+     ========================================================= -->
+<section id="notify" class="section">
+  <div class="container">
+    <p class="pricing-label">価格</p>
+    <div class="pricing-price">お手軽な買い切り</div>
+    <p class="pricing-tags">
+      <span>サブスクなし</span>
+      <span>広告なし</span>
+      <span>追加課金なし</span>
+    </p>
+    <p class="pricing-desc">
+      一度だけ、払う。ずっと、使う。<br>
+      あなたのデータを売らない。サーバーコストがないから、永続的に維持できる。
+    </p>
+    <p class="pricing-note">App Store に準備中</p>
+  </div>
+</section>
+
+<!-- =========================================================
+     PRIVACY POLICY
+     ========================================================= -->
+<section id="privacypolicy" class="section section--gray">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">プライバシーポリシー</p>
+      <h2 class="section-title">個人情報の取り扱いについて</h2>
+    </div>
+    <div class="accordion-list" role="list">
+
+      <!-- 第1条 -->
+      <div class="accordion-item" role="listitem">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="accord-1">
+          <span>第1条 事業者情報</span>
+          <span class="accordion-icon" aria-hidden="true">
+            <svg viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4"/></svg>
+          </span>
+        </button>
+        <div class="accordion-body" id="accord-1" role="region">
+          <div class="accordion-body-inner">
+            本アプリ「Watchメモ」は、StratAIX が開発・提供しております。<br>
+            お問い合わせは <a href="mailto:support@strataix.net">support@strataix.net</a> までご連絡ください。
+          </div>
+        </div>
+      </div>
+
+      <!-- 第2条 -->
+      <div class="accordion-item" role="listitem">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="accord-2">
+          <span>第2条 収集する情報</span>
+          <span class="accordion-icon" aria-hidden="true">
+            <svg viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4"/></svg>
+          </span>
+        </button>
+        <div class="accordion-body" id="accord-2" role="region">
+          <div class="accordion-body-inner">
+            当社は、本アプリを通じてお名前・住所・電話番号などの個人識別情報を収集しません。メモの内容はすべてお客様のデバイス内にのみ保存され、当社のサーバーには送信されません。
+          </div>
+        </div>
+      </div>
+
+      <!-- 第3条 -->
+      <div class="accordion-item" role="listitem">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="accord-3">
+          <span>第3条 マイクの使用について</span>
+          <span class="accordion-icon" aria-hidden="true">
+            <svg viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4"/></svg>
+          </span>
+        </button>
+        <div class="accordion-body" id="accord-3" role="region">
+          <div class="accordion-body-inner">
+            音声入力には Apple の音声認識技術を経由します。音声データの取り扱いについては <a href="https://www.apple.com/legal/privacy/ja/" target="_blank" rel="noopener noreferrer">Apple のプライバシーポリシー</a> をご参照ください。当社が音声データを収集・保存することはありません。
+          </div>
+        </div>
+      </div>
+
+      <!-- 第4条 -->
+      <div class="accordion-item" role="listitem">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="accord-4">
+          <span>第4条 データの保管</span>
+          <span class="accordion-icon" aria-hidden="true">
+            <svg viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4"/></svg>
+          </span>
+        </button>
+        <div class="accordion-body" id="accord-4" role="region">
+          <div class="accordion-body-inner">
+            すべてのメモデータはお客様の iPhone および Apple Watch 内にのみ保存されます。アプリをアンインストールすることで、データは完全に削除されます。当社はお客様のデータにアクセスすることができません。
+          </div>
+        </div>
+      </div>
+
+      <!-- 第5条 -->
+      <div class="accordion-item" role="listitem">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="accord-5">
+          <span>第5条 第三者への提供</span>
+          <span class="accordion-icon" aria-hidden="true">
+            <svg viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4"/></svg>
+          </span>
+        </button>
+        <div class="accordion-body" id="accord-5" role="region">
+          <div class="accordion-body-inner">
+            当社はお客様の個人情報を第三者に提供・販売・貸与することは一切ありません。法令に基づく開示が必要な場合を除き、お客様の同意なしに第三者へ情報を提供することはありません。
+          </div>
+        </div>
+      </div>
+
+      <!-- 第6条 -->
+      <div class="accordion-item" role="listitem">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="accord-6">
+          <span>第6条 ポリシーの変更</span>
+          <span class="accordion-icon" aria-hidden="true">
+            <svg viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4"/></svg>
+          </span>
+        </button>
+        <div class="accordion-body" id="accord-6" role="region">
+          <div class="accordion-body-inner">
+            本ポリシーは必要に応じて変更される場合があります。変更があった場合は、本ページへの掲載をもって通知とさせていただきます。重要な変更がある場合は、アプリ内でもお知らせします。<br><br>
+            お問い合わせ: <a href="mailto:support@strataix.net">support@strataix.net</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+<footer id="footer" role="contentinfo">
+  <div class="footer-inner">
+    <p class="footer-copyright">StratAIX &copy; 2026</p>
+    <p class="footer-trademark">Apple、Apple Watch、iPhone は Apple Inc. の商標であり、米国およびその他の国々で登録されています。ChatGPT® は OpenAI, Inc. の商標です。Claude® は Anthropic, PBC の商標です。Google™ は Google LLC の商標です。当アプリはこれらのサービスとの提携・承認関係にありません。各サービスへの共有機能はユーザーの選択によるものです。</p>
+    <nav class="footer-links" aria-label="フッターナビゲーション">
+      <a href="https://strataix.net/" class="footer-link" target="_blank" rel="noopener noreferrer">StratAIX</a>
+      <a href="https://sinc.strataix.net/" class="footer-link" target="_blank" rel="noopener noreferrer">Sinc</a>
+      <a href="mailto:support@strataix.net" class="footer-link">support@strataix.net</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+<script>
+(function () {
+  'use strict';
+
+  /* -----------------------------------------------------------
+     ACCORDION
+     ----------------------------------------------------------- */
+  var triggers = document.querySelectorAll('.accordion-trigger');
+
+  triggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var item = this.closest('.accordion-item');
+      var isOpen = item.classList.contains('is-open');
+
+      // Close all
+      document.querySelectorAll('.accordion-item').forEach(function (el) {
+        el.classList.remove('is-open');
+        el.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+      });
+
+      // Toggle clicked
+      if (!isOpen) {
+        item.classList.add('is-open');
+        this.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* -----------------------------------------------------------
+     SMOOTH SCROLL (fallback for older browsers)
+     ----------------------------------------------------------- */
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        var offset = 64; // nav height
+        var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  /* -----------------------------------------------------------
+     SCROLL-IN ANIMATION
+     ----------------------------------------------------------- */
+  var style = document.createElement('style');
+  style.textContent = [
+    '.anim-fade { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1); }',
+    '.anim-fade.is-visible { opacity: 1; transform: translateY(0); }',
+    '.anim-fade:nth-child(2) { transition-delay: 0.08s; }',
+    '.anim-fade:nth-child(3) { transition-delay: 0.16s; }'
+  ].join('\n');
+  document.head.appendChild(style);
+
+  var animEls = [
+    '.step-card',
+    '.feature-text-block',
+    '.feature-visual',
+    '.privacy-badge',
+    '.accordion-item'
+  ];
+
+  animEls.forEach(function (selector) {
+    document.querySelectorAll(selector).forEach(function (el) {
+      el.classList.add('anim-fade');
+    });
+  });
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.anim-fade').forEach(function (el) {
+      observer.observe(el);
+    });
+  } else {
+    // Fallback: show all immediately
+    document.querySelectorAll('.anim-fade').forEach(function (el) {
+      el.classList.add('is-visible');
+    });
+  }
+
+})();
+</script>
+
+</body>
+</html>
