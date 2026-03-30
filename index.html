@@ -586,12 +586,24 @@ section { position:relative; z-index:1; }
    PORTFOLIO
 ============================================= */
 .portfolio { background:var(--bg-alt); }
+.portfolio-row-label {
+  font-size:.62rem; font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--text-muted);
+  margin-bottom:16px; margin-top:40px;
+  display:flex; align-items:center; gap:12px;
+}
+.portfolio-row-label:first-child { margin-top:0; }
+.portfolio-row-label::after {
+  content:''; flex:1; height:1px; background:var(--line);
+}
 .portfolio-grid {
   display:grid; grid-template-columns:repeat(3,1fr);
   gap:1px; background:var(--line);
   border:1px solid var(--line);
   border-radius:4px; overflow:hidden;
+  margin-bottom:0;
 }
+.portfolio-grid.two-col { grid-template-columns:repeat(2,1fr); }
 .portfolio-card {
   background:var(--bg-alt);
   padding:48px 40px;
@@ -1238,6 +1250,7 @@ footer {
   <div class="s-inner">
     <div class="s-label reveal"><span class="s-num">— 04</span> つくったもの</div>
 
+    <div class="portfolio-row-label reveal">アプリ</div>
     <div class="portfolio-grid">
       <div class="portfolio-card reveal">
         <div class="pc-status live">
@@ -1275,33 +1288,95 @@ footer {
 
       <div class="portfolio-card coming reveal reveal-delay-1">
         <div class="pc-status soon">
-          <span class="pc-status-dot"></span> Concept
+          <span class="pc-status-dot"></span> In Development
         </div>
-        <div class="pc-title">Session</div>
-        <div class="pc-category">ミュージシャン向けマッチング（仮）</div>
+        <div class="pc-title">Watchメモ</div>
+        <div class="pc-category">Apple Watch × アプリ連携</div>
         <div class="pc-desc">
-          同じバンドが好きで、一緒に演奏したい人がいる。でも、同じ熱量の仲間が見つからない。趣味の音楽を、もっと気軽に楽しめる場所を作る。
+          Apple Watchと連携する便利アプリを開発中。
         </div>
         <div class="pc-tags">
-          <span class="pc-tag">Music</span>
-          <span class="pc-tag">Community</span>
-          <span class="pc-tag">Niche</span>
+          <span class="pc-tag">Apple Watch</span>
+          <span class="pc-tag">iOS</span>
         </div>
       </div>
 
       <div class="portfolio-card coming reveal reveal-delay-2">
         <div class="pc-status soon">
-          <span class="pc-status-dot"></span> Next
+          <span class="pc-status-dot"></span> In Development
         </div>
-        <div class="pc-title">TBD</div>
-        <div class="pc-category">次のプロダクトは、まだ余白の中にある</div>
+        <div class="pc-title">相関図メーカー</div>
+        <div class="pc-category">人間関係を図で整理するアプリ</div>
         <div class="pc-desc">
-          「なぜ、これが世にないんだろう？」という次の問いから、次のサービスが生まれる。ポートフォリオは増え続ける。
+          登場人物と関係性を入力するだけで相関図が自動生成。ドラマ・小説・職場の人間関係まで、複雑な関係をシンプルに可視化。
         </div>
         <div class="pc-tags">
-          <span class="pc-tag">Coming Soon</span>
+          <span class="pc-tag">Diagram</span>
+          <span class="pc-tag">Web App</span>
+          <span class="pc-tag">iOS / Android</span>
         </div>
       </div>
+    </div>
+
+    <div class="portfolio-row-label reveal">Webツール</div>
+    <div class="portfolio-grid">
+      <div class="portfolio-card reveal">
+        <div class="pc-status live">
+          <span class="pc-status-dot"></span> Live
+        </div>
+        <div class="pc-title">AIワーク相性チェッカー</div>
+        <div class="pc-category">AIとの働き方タイプ診断</div>
+        <div class="pc-desc">
+          16問でわかる、あなたのAI活用スタイル。習熟度×興味の2軸で16タイプに分類。結果をシェアして仲間を見つけよう。
+        </div>
+        <div class="pc-tags">
+          <span class="pc-tag">AI</span>
+          <span class="pc-tag">Work</span>
+          <span class="pc-tag">Free</span>
+        </div>
+        <a href="https://checker.strataix.net/ai-work/" class="pc-link" target="_blank" rel="noopener">
+          診断する <span class="pc-link-icon">→</span>
+        </a>
+      </div>
+
+      <div class="portfolio-card reveal reveal-delay-1">
+        <div class="pc-status live">
+          <span class="pc-status-dot"></span> Live
+        </div>
+        <div class="pc-title">好かれ度チェッカー</div>
+        <div class="pc-category">人に好かれるタイプ診断</div>
+        <div class="pc-desc">
+          12問でわかる、あなたが人に好かれる理由。天然好かれ型・ムードメーカー型など5タイプ。シェアして友達と比べよう。
+        </div>
+        <div class="pc-tags">
+          <span class="pc-tag">Personality</span>
+          <span class="pc-tag">Social</span>
+          <span class="pc-tag">Free</span>
+        </div>
+        <a href="https://checker.strataix.net/moterudo/" class="pc-link" target="_blank" rel="noopener">
+          診断する <span class="pc-link-icon">→</span>
+        </a>
+      </div>
+
+      <div class="portfolio-card reveal reveal-delay-2">
+        <div class="pc-status live">
+          <span class="pc-status-dot"></span> Live
+        </div>
+        <div class="pc-title">職場適性チェッカー</div>
+        <div class="pc-category">あなたに合う職場環境診断</div>
+        <div class="pc-desc">
+          12問でわかる、あなたが輝ける職場タイプ。変化志向×協調志向の2軸でスタートアップ・大企業など5タイプに分類。
+        </div>
+        <div class="pc-tags">
+          <span class="pc-tag">Career</span>
+          <span class="pc-tag">Work</span>
+          <span class="pc-tag">Free</span>
+        </div>
+        <a href="https://checker.strataix.net/shokuba/" class="pc-link" target="_blank" rel="noopener">
+          診断する <span class="pc-link-icon">→</span>
+        </a>
+      </div>
+
     </div>
   </div>
 </section>
