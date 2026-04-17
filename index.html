@@ -205,8 +205,10 @@ nav.scrolled .nav-logo img { height:44px; }
 }
 
 @media(max-width:768px){
-  nav { padding:16px 20px; }
-  nav.scrolled { padding:12px 20px; }
+  nav { padding:14px 20px; }
+  nav.scrolled { padding:11px 20px; }
+  .nav-logo img { height:40px; } /* 72px → 40px：モバイルで横幅を圧迫しないよう縮小 */
+  nav.scrolled .nav-logo img { height:36px; }
   .nav-menu a:not(.nav-contact) { display:none; }
   .nav-hamburger { display:flex; }
 }
@@ -392,14 +394,18 @@ nav.scrolled .nav-logo img { height:44px; }
 }
 
 @media(max-width:768px){
-  .hero { padding:0 20px 72px; }
-  .hero-h1 { font-size:clamp(2.8rem,12vw,5rem); }
-  .hero-bottom { flex-direction:column; align-items:flex-start; }
+  .hero { padding:72px 20px 72px; } /* padding-top でナビ分の余白確保 */
+  .hero-h1 { font-size:clamp(2.6rem,11vw,4.5rem); letter-spacing:-.03em; }
+  .hero-h1 .line-1,
+  .hero-h1 .line-2 { white-space:normal; word-break:keep-all; } /* 改行位置を自然に */
+  .hero-desc { font-size:.92rem; }
+  .hero-bottom { flex-direction:column; align-items:flex-start; gap:24px; }
   .hero-scroll-hint { display:none; }
   .hero-blob-1 { width:400px; height:400px; }
   .hero-blob-2 { width:350px; height:350px; }
   .hero-blob-3 { display:none; }
-  .hero-logo-bg { top: 8%; width: min(300px, 82vw); }
+  .hero-logo-bg { top:20%; width:min(260px,72vw); } /* ナビと重ならない位置に下げる */
+  .hero-matrix { opacity:0.35; } /* モバイルはやや薄く */
 }
 
 /* =============================================
