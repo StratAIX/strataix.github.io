@@ -894,7 +894,7 @@ section { position:relative; z-index:1; }
 .note-all-link:hover { opacity:.7; }
 
 .note-cards {
-  display:flex; flex-direction:column; gap:16px;
+  display:grid; grid-template-columns:1fr 1fr; gap:16px;
 }
 .note-card {
   display:flex; flex-direction:column;
@@ -936,6 +936,10 @@ section { position:relative; z-index:1; }
   background:var(--bg-alt); color:var(--text-muted);
   border:1px solid var(--line-bright);
 }
+.note-badge-writing {
+  background:rgba(94,207,220,.1); color:var(--teal);
+  border:1px solid rgba(94,207,220,.25);
+}
 .note-card-title {
   font-size:.9rem; font-weight:500;
   color:var(--text); line-height:1.6;
@@ -949,6 +953,7 @@ section { position:relative; z-index:1; }
 
 @media(max-width:768px){
   .note-layout { grid-template-columns:1fr; gap:48px; }
+  .note-cards { grid-template-columns:1fr; }
 }
 
 /* =============================================
@@ -1110,6 +1115,102 @@ footer {
 .reveal-delay-3 { transition-delay:.3s; }
 
 /* =============================================
+   CONSULTING
+============================================= */
+.consulting-section { background:var(--bg-alt); }
+
+.consulting-layout {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:80px; align-items:start;
+}
+
+.consulting-title {
+  font-family:var(--font-display);
+  font-size:clamp(1.7rem,3vw,2.6rem);
+  font-weight:800;
+  letter-spacing:-.03em;
+  line-height:1.3;
+  color:var(--text);
+  margin-bottom:24px;
+}
+.consulting-title em {
+  font-style:normal;
+  background:linear-gradient(90deg,var(--teal),#0ec9b0);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.consulting-desc {
+  font-size:.88rem; color:var(--text-dim);
+  line-height:1.9; margin-bottom:28px;
+}
+
+.consulting-proof {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(10,146,128,.08);
+  border:1px solid rgba(10,146,128,.2);
+  border-radius:6px; padding:9px 16px;
+  font-family:var(--font-display);
+  font-size:.72rem; font-weight:700;
+  color:var(--teal); letter-spacing:.06em;
+  margin-bottom:36px;
+}
+
+.consulting-cta {
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--text); color:var(--text-inv);
+  font-family:var(--font-display);
+  font-size:.78rem; font-weight:600;
+  letter-spacing:.08em; text-transform:uppercase;
+  text-decoration:none;
+  padding:14px 32px; border-radius:6px;
+  transition:background .3s, transform .3s;
+}
+.consulting-cta:hover {
+  background:var(--bg-dark-alt); transform:translateY(-2px);
+}
+
+.consulting-sub {
+  font-size:.75rem; color:var(--text-muted);
+  margin-top:14px; line-height:1.6;
+}
+
+.consulting-features {
+  display:flex; flex-direction:column; gap:16px;
+}
+
+.consulting-feature {
+  background:var(--bg-surface);
+  border:1px solid var(--line);
+  border-radius:14px; padding:24px 26px;
+  box-shadow:var(--shadow-card);
+  display:flex; gap:16px; align-items:flex-start;
+  transition:transform .3s, box-shadow .3s, border-color .3s;
+}
+.consulting-feature:hover {
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-md);
+  border-color:rgba(10,146,128,.2);
+}
+.consulting-feature-icon {
+  font-size:1.5rem; flex-shrink:0;
+  line-height:1; margin-top:1px;
+}
+.consulting-feature-title {
+  font-family:var(--font-display);
+  font-size:.88rem; font-weight:700;
+  color:var(--text); margin-bottom:5px;
+}
+.consulting-feature-body {
+  font-size:.78rem; color:var(--text-muted);
+  line-height:1.75;
+}
+
+@media(max-width:768px){
+  .consulting-layout { grid-template-columns:1fr; gap:48px; }
+}
+
+/* =============================================
    CONTACT内 s-label の文字色（ダーク背景）
 ============================================= */
 .contact-section .s-label {
@@ -1142,6 +1243,7 @@ footer {
     <a href="#philosophy">考え方</a>
     <a href="#portfolio">つくったもの</a>
     <a href="#note">書きもの</a>
+    <a href="#consulting">AI相談</a>
     <a href="#contact" class="nav-contact">話しかける</a>
   </div>
   <button class="nav-hamburger" id="navHamburger" aria-label="メニューを開く">
@@ -1154,6 +1256,7 @@ footer {
   <a href="#philosophy" class="drawer-link">考え方</a>
   <a href="#portfolio" class="drawer-link">つくったもの</a>
   <a href="#note" class="drawer-link">書きもの</a>
+  <a href="#consulting" class="drawer-link">AI相談</a>
   <a href="#contact" class="nav-contact drawer-link">話しかける</a>
 </div>
 
@@ -1609,7 +1712,76 @@ footer {
             <div class="note-card-link-label">note で読む →</div>
           </div>
         </a>
+
+        <!-- 記事④：公開済み -->
+        <a class="note-card" href="https://note.com/strataix/n/n73c105523fdc" target="_blank" rel="noopener">
+          <img class="note-card-thumb" src="./images/note-07.png" alt="ClaudeCodeを生かすための最大の能力は「判断力」だ">
+          <div class="note-card-body">
+            <div class="note-card-badges">
+              <span class="note-badge note-badge-free">無料</span>
+            </div>
+            <div class="note-card-title">ClaudeCodeを生かすための最大の能力は「判断力」だ</div>
+            <div class="note-card-link-label">note で読む →</div>
+          </div>
+        </a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSULTING -->
+<section class="consulting-section" id="consulting">
+  <div class="s-inner">
+    <div class="s-label reveal"><span class="s-num">— 06</span> AI活用サポート</div>
+
+    <div class="consulting-layout">
+
+      <!-- 左：テキスト -->
+      <div class="consulting-left">
+        <h2 class="consulting-title reveal">
+          AIで仕事が変わった。<br>
+          <em>同じことを、一緒にやりましょう。</em>
+        </h2>
+        <p class="consulting-desc reveal">
+          現役マーケターとして毎日AIを実務に使い、自分の作業時間を10分の1にしました。<br>
+          高いツールも、エンジニアへの依頼も不要です。<br>
+          同じことをあなたの仕事で実現するための、1on1サポートです。
+        </p>
+        <div class="consulting-proof reveal">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          大手企業 現役マーケターによる実践知
+        </div>
+        <a href="mailto:info@strataix.net" class="consulting-cta reveal">
+          まずは相談してみる →
+        </a>
+        <p class="consulting-sub reveal">お気軽にどうぞ。返信まで2〜3営業日いただきます。</p>
+      </div>
+
+      <!-- 右：できること -->
+      <div class="consulting-features reveal reveal-delay-1">
+        <div class="consulting-feature">
+          <span class="consulting-feature-icon">⚡</span>
+          <div>
+            <div class="consulting-feature-title">繰り返し作業をなくす</div>
+            <div class="consulting-feature-body">リストの転記、メールの下書き、定期集計——毎日やっている単純作業を、AIとExcelマクロで一瞬にします。</div>
+          </div>
+        </div>
+        <div class="consulting-feature">
+          <span class="consulting-feature-icon">📊</span>
+          <div>
+            <div class="consulting-feature-title">データを自動で集めて見える化する</div>
+            <div class="consulting-feature-body">APIやPower Queryでデータ収集を自動化。Power BIで他部署にも共有できるダッシュボードを構築します。</div>
+          </div>
+        </div>
+        <div class="consulting-feature">
+          <span class="consulting-feature-icon">🎯</span>
+          <div>
+            <div class="consulting-feature-title">「自分でできる」が身につく</div>
+            <div class="consulting-feature-body">ツールを渡して終わりではありません。あなたが自走できるまで1on1で伴走。部下への展開もサポートします。</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1618,7 +1790,7 @@ footer {
 <section class="contact-section" id="contact">
   <div class="s-inner">
     <div class="contact-inner">
-      <div class="s-label reveal"><span class="s-num">— 06</span> 話しかける</div>
+      <div class="s-label reveal"><span class="s-num">— 07</span> 話しかける</div>
       <h2 class="contact-heading reveal">
         何か、一緒に<br>
         <em>作りませんか。</em>
