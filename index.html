@@ -1,1955 +1,899 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StratAIX — AI × Human Studio</title>
-<meta name="description" content="AIを相棒に、自分が欲しかったサービスを作り続ける個人スタジオ。StratAIX。">
-<meta property="og:title" content="StratAIX — AI × Human Studio">
-<meta property="og:description" content="アイデアは、もう眠らせない。AIと組んで、誰も届けていない余白を形にする。">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://strataix.net/">
-<meta property="og:image" content="https://strataix.net/images/ogp-strataix.png">
-<meta property="og:site_name" content="StratAIX">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@StratAIX_AI">
-<meta name="twitter:title" content="StratAIX — AI × Human Studio">
-<meta name="twitter:description" content="AIを相棒に、自分が欲しかったサービスを作り続ける個人スタジオ。StratAIX。">
-<meta name="twitter:image" content="https://strataix.net/images/ogp-strataix.png">
-<link rel="canonical" href="https://strataix.net/">
-<link rel="icon" href="https://strataix.net/favicon.ico">
-
-<!-- 構造化データ（Schema.org）-->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "https://strataix.net/#website",
-      "url": "https://strataix.net/",
-      "name": "StratAIX",
-      "description": "AIを相棒に、自分が欲しかったサービスを作り続ける個人開発スタジオ",
-      "inLanguage": "ja",
-      "publisher": { "@id": "https://strataix.net/#person" }
-    },
-    {
-      "@type": "Person",
-      "@id": "https://strataix.net/#person",
-      "name": "しんくさん",
-      "url": "https://strataix.net/",
-      "sameAs": [
-        "https://twitter.com/StratAIX_AI",
-        "https://note.com/strataix"
-      ],
-      "jobTitle": "個人開発者 / AI × 個人開発スタジオ StratAIX",
-      "knowsAbout": ["AI", "個人開発", "Claude Code", "プロダクト開発"]
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watchメモ — Apple Watch 専用メモアプリ</title>
+  <meta name="description" content="Apple Watchに話しかけるだけ。iPhoneは、いらない。あなたの言葉は、すぐにiPhoneへ届いている。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Noto+Sans+JP:wght@200;300&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/budoux/bundle/budoux.min.js"></script>
+  <style>
+    /* ── Tokens ── */
+    :root {
+      --bg:           #ffffff;
+      --ink:          #1d1d1f;
+      --ink-muted:    #6e6e73;
+      --ink-subtle:   #a1a1a6;
+      --hairline:     #e5e5e5;
+      --hairline-soft:#f0f0f0;
+      --black:        #0a0a0a;
+      --font-jp: "Noto Sans JP","Hiragino Kaku Gothic ProN","游ゴシック",YuGothic,sans-serif;
+      --font-en: "Inter",-apple-system,BlinkMacSystemFont,sans-serif;
     }
-  ]
-}
-</script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-
-<style>
-/* =============================================
-   RESET & BASE
-============================================= */
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; font-size:16px; }
-@supports(word-break:auto-phrase){
-  .hero-desc,.about-body p,.pc-desc,.note-desc,.claude-comment-body p{word-break:auto-phrase}
-}
-
-:root {
-  /* ライトモード カラーパレット */
-  --bg:          #fdfcfa;
-  --bg-alt:      #f4f2ee;
-  --bg-surface:  #ffffff;
-  --bg-dark:     #1c1917;
-  --bg-dark-alt: #231f1c;
-
-  --line:        rgba(26,24,22,.14);
-  --line-bright: rgba(26,24,22,.22);
-
-  --text:        #1c1917;
-  --text-dim:    rgba(28,25,23,.72);
-  --text-muted:  rgba(28,25,23,.48);
-  --text-inv:    #fdfcfa;
-  --text-inv-dim: rgba(253,252,250,.6);
-
-  /* アクセントカラー */
-  --orange:      #e8611a;
-  --orange-dim:  rgba(232,97,26,.1);
-  --orange-glow: rgba(232,97,26,.22);
-  --orange-light:#fff3ec;
-  --teal:        #0a9280;
-  --teal-dim:    rgba(10,146,128,.1);
-  --purple:      #7c3aed;
-  --purple-dim:  rgba(124,58,237,.1);
-  --warm:        #c2730a;
-  --warm-dim:    rgba(194,115,10,.12);
-
-  --label-size:  .68rem;
-  --label-space: .14em;
-
-  --font-display: 'Syne', 'Noto Sans JP', sans-serif;
-  --font-body:    'Noto Sans JP', sans-serif;
-
-  --shadow-sm:   0 1px 3px rgba(26,24,22,.08), 0 1px 2px rgba(26,24,22,.06);
-  --shadow-md:   0 4px 16px rgba(26,24,22,.08), 0 2px 6px rgba(26,24,22,.05);
-  --shadow-lg:   0 12px 40px rgba(26,24,22,.1), 0 4px 12px rgba(26,24,22,.06);
-  --shadow-card: 0 2px 8px rgba(26,24,22,.07), 0 0 1px rgba(26,24,22,.1);
-}
-
-body {
-  font-family: var(--font-body);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.9;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  word-break: auto-phrase;
-}
-
-h1, h2, h3, p, li {
-  text-wrap: pretty;
-  overflow-wrap: break-word;
-}
-
-/* =============================================
-   NAV
-============================================= */
-nav {
-  position: fixed; top:0; left:0; right:0; z-index:500;
-  display: flex; align-items:center; justify-content:space-between;
-  padding: 20px 64px;
-  transition: all .4s ease;
-}
-nav.scrolled {
-  padding: 14px 64px;
-  background: rgba(16,10,8,.94);
-  backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(255,255,255,.08);
-}
-.nav-logo { display:flex; align-items:center; }
-.nav-logo img {
-  height:72px; width:auto; transition:height .4s ease;
-}
-nav.scrolled .nav-logo img { height:44px; }
-.nav-menu {
-  display: flex; align-items:center; gap:48px;
-}
-.nav-menu a {
-  font-family: var(--font-display);
-  font-size: .78rem; font-weight:500;
-  color: rgba(253,252,250,.65); text-decoration:none;
-  letter-spacing: var(--label-space);
-  text-transform: uppercase;
-  transition: color .3s;
-}
-.nav-menu a:hover { color: #fdfcfa; }
-.nav-contact {
-  font-family: var(--font-display);
-  font-size: .75rem; font-weight:600;
-  color: var(--orange) !important;
-  border: 1.5px solid rgba(232,97,26,.3);
-  padding: 9px 22px; border-radius:4px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  transition: background .3s, color .3s, border-color .3s !important;
-}
-.nav-contact:hover {
-  background: var(--orange-dim);
-  border-color: rgba(232,97,26,.5);
-  color: var(--orange) !important;
-}
-.nav-hamburger {
-  display:none;
-  flex-direction:column; justify-content:center; gap:5px;
-  width:36px; height:36px; cursor:pointer;
-  background:none; border:none; padding:4px;
-}
-.nav-hamburger span {
-  display:block; width:22px; height:1.5px;
-  background:rgba(253,252,250,.65);
-  transition:all .3s;
-}
-.nav-hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
-.nav-hamburger.open span:nth-child(2) { opacity:0; }
-.nav-hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
-
-.nav-drawer {
-  display:none;
-  position:fixed; inset:0; top:0; z-index:499;
-  background:rgba(253,252,250,.97);
-  backdrop-filter:blur(24px);
-  flex-direction:column; align-items:center; justify-content:center;
-  gap:40px;
-}
-.nav-drawer.open { display:flex; }
-.nav-drawer a {
-  font-family:var(--font-display);
-  font-size:1.1rem; font-weight:600;
-  color:var(--text-dim); text-decoration:none;
-  letter-spacing:.1em; text-transform:uppercase;
-  transition:color .3s;
-}
-.nav-drawer a:hover { color:var(--text); }
-.nav-drawer .nav-contact {
-  color:var(--orange) !important;
-  border:1.5px solid rgba(232,97,26,.3);
-  padding:12px 32px; border-radius:4px;
-}
-
-@media(max-width:768px){
-  nav { padding:14px 20px; }
-  nav.scrolled { padding:11px 20px; }
-  .nav-logo img { height:40px; } /* 72px → 40px：モバイルで横幅を圧迫しないよう縮小 */
-  nav.scrolled .nav-logo img { height:36px; }
-  .nav-menu a:not(.nav-contact) { display:none; }
-  .nav-hamburger { display:flex; }
-}
-
-/* =============================================
-   HERO
-============================================= */
-.hero {
-  min-height: 100vh;
-  display: flex; flex-direction:column;
-  justify-content: flex-end;
-  padding: 0 64px 88px;
-  position: relative; overflow:hidden;
-  background: #141210;
-}
-
-/* グリッドライン背景 */
-.hero-grid {
-  position:absolute; inset:0; z-index:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 40%, transparent 100%);
-}
-
-/* グラデーションblob（dark bg なので screen で光らせる） */
-.hero-blob {
-  position:absolute; z-index:0;
-  border-radius:50%; filter:blur(90px);
-  pointer-events:none; mix-blend-mode:screen;
-  will-change: transform; /* GPUレイヤーに昇格し、メインスレッドをブロックしない */
-}
-.hero-blob-1 {
-  width:700px; height:700px;
-  background: radial-gradient(circle, rgba(232,97,26,.22), transparent 65%);
-  top:-180px; right:-120px;
-  animation: blob-drift-1 14s ease-in-out infinite;
-}
-.hero-blob-2 {
-  width:600px; height:600px;
-  background: radial-gradient(circle, rgba(10,146,128,.18), transparent 65%);
-  bottom:-120px; left:-60px;
-  animation: blob-drift-2 18s ease-in-out infinite;
-}
-.hero-blob-3 {
-  width:400px; height:400px;
-  background: radial-gradient(circle, rgba(124,58,237,.12), transparent 65%);
-  top:30%; left:40%;
-  animation: blob-drift-3 22s ease-in-out infinite;
-}
-@keyframes blob-drift-1 {
-  0%,100% { transform: translate(0,0) scale(1); }
-  33%      { transform: translate(-40px,30px) scale(1.06); }
-  66%      { transform: translate(20px,-20px) scale(.96); }
-}
-@keyframes blob-drift-2 {
-  0%,100% { transform: translate(0,0) scale(1); }
-  40%      { transform: translate(50px,-40px) scale(1.08); }
-  70%      { transform: translate(-20px,20px) scale(.94); }
-}
-@keyframes blob-drift-3 {
-  0%,100% { transform: translate(0,0) scale(1); }
-  50%      { transform: translate(-30px,50px) scale(1.1); }
-}
-
-/* ノイズテクスチャ */
-.hero-noise {
-  position: absolute; inset: 0; z-index: 0;
-  pointer-events: none; opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 200px 200px; background-repeat: repeat;
-}
-
-/* マトリックス雨 canvas */
-.hero-matrix {
-  position: absolute; inset: 0; z-index: 0;
-  pointer-events: none; display: block;
-  width: 100%; height: 100%;
-  opacity: 0.55;
-}
-
-/* ロゴ背景 */
-.hero-logo-bg {
-  position: absolute; top: 12%; left: 50%;
-  transform: translateX(-50%); z-index: 1;
-  pointer-events: none; width: min(700px, 80vw);
-  overflow: hidden;
-}
-.hero-logo-bg img {
-  width: 100%; opacity: 0.85; display: block;
-  filter: brightness(1.4);
-  -webkit-mask-image: radial-gradient(ellipse 90% 75% at 50% 50%, black 50%, transparent 88%);
-  mask-image: radial-gradient(ellipse 90% 75% at 50% 50%, black 50%, transparent 88%);
-}
-
-.hero-content { position:relative; z-index:2; max-width:1200px; }
-
-.hero-badge {
-  display: inline-flex; align-items:center; gap:8px;
-  background: rgba(232,97,26,.18);
-  border: 1px solid rgba(232,97,26,.35);
-  border-radius: 100px;
-  padding: 6px 16px; margin-bottom:36px;
-  font-family: var(--font-display);
-  font-size: .7rem; font-weight:600;
-  color: #f4a06a; letter-spacing:.06em;
-  text-transform: uppercase;
-}
-.hero-badge-dot {
-  width:6px; height:6px; border-radius:50%;
-  background: var(--orange);
-  box-shadow: 0 0 0 3px rgba(232,97,26,.2);
-  animation: pulse-dot 2s ease infinite;
-}
-
-.hero-label {
-  font-family: var(--font-body);
-  font-size: 1.05rem; font-weight:400;
-  color: rgba(253,252,250,.55); letter-spacing: .04em;
-  text-transform: none; margin-bottom:36px;
-  display: flex; align-items:center; gap:16px;
-}
-.hero-label::before {
-  content:''; display:block; width:32px; height:2px;
-  background: var(--orange); border-radius:2px;
-}
-
-.hero-h1 {
-  font-family: var(--font-display);
-  font-size: clamp(3.6rem, 9vw, 8rem);
-  font-weight: 800; line-height: 1.0;
-  letter-spacing: -.04em;
-  margin-bottom: 40px;
-}
-.hero-h1 .line-1 { display:block; color:#fdfcfa; }
-.hero-h1 .line-2 {
-  display:block;
-  color: #fdfcfa;
-}
-
-.hero-bottom {
-  display:flex; align-items:flex-end;
-  justify-content:space-between; gap:40px; flex-wrap:wrap;
-}
-.hero-desc {
-  font-size:1.05rem; color:rgba(253,252,250,.58);
-  line-height:1.85; max-width:480px; font-weight:400;
-}
-.hero-desc strong { color:rgba(253,252,250,.88); font-weight:500; }
-.hero-cta-group {
-  display:flex; align-items:center; gap:20px; flex-shrink:0;
-}
-.hero-cta {
-  font-family:var(--font-display);
-  font-size:.8rem; font-weight:600;
-  letter-spacing:.08em; text-transform:uppercase;
-  text-decoration:none; transition:color .3s;
-}
-.hero-cta-primary {
-  color:#fff; background:var(--orange);
-  padding:14px 36px; border-radius:6px;
-  transition:opacity .3s, transform .3s, box-shadow .3s;
-  box-shadow: 0 4px 16px rgba(232,97,26,.3);
-}
-.hero-cta-primary:hover { opacity:.9; transform:translateY(-2px); box-shadow: 0 8px 24px rgba(232,97,26,.35); }
-.hero-cta-secondary { color:rgba(253,252,250,.55); }
-.hero-cta-secondary:hover { color:rgba(253,252,250,.9); }
-.hero-cta-secondary::after { content:' →'; transition:letter-spacing .3s; }
-.hero-cta-secondary:hover::after { letter-spacing:.2em; }
-
-.hero-scroll-hint {
-  position:absolute; right:64px; bottom:88px; z-index:1;
-  font-family:var(--font-display);
-  font-size:.62rem; color:rgba(253,252,250,.3);
-  letter-spacing:.2em; text-transform:uppercase;
-  writing-mode:vertical-rl;
-  display:flex; align-items:center; gap:16px;
-}
-.hero-scroll-hint::after {
-  content:''; display:block; width:1px; height:60px;
-  background:linear-gradient(rgba(253,252,250,.3), transparent);
-}
-
-@media(max-width:768px){
-  .hero { padding:80px 24px 64px; }
-  .hero-h1 { font-size:clamp(2.4rem,10.5vw,4rem); letter-spacing:-.03em; }
-  .hero-h1 .line-1,
-  .hero-h1 .line-2 { white-space:normal; word-break:keep-all; }
-  .hero-desc { font-size:.9rem; max-width:100%; }
-  .hero-bottom { flex-direction:column; align-items:flex-start; gap:20px; }
-  .hero-scroll-hint { display:none; }
-  .hero-blob-1 { width:360px; height:360px; }
-  .hero-blob-2 { width:300px; height:300px; }
-  .hero-blob-3 { display:none; }
-  .hero-logo-bg { display:none; } /* モバイルは装飾ロゴ非表示。テキストと被るため */
-  .hero-matrix { opacity:0.3; }
-}
-
-/* =============================================
-   MARQUEE
-============================================= */
-.marquee-wrap {
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  padding:18px 0; overflow:hidden;
-  background:var(--bg-alt);
-}
-.marquee-track {
-  display:flex; gap:0;
-  animation:marquee 32s linear infinite;
-  white-space:nowrap;
-  will-change: transform;
-}
-.marquee-item {
-  font-family:var(--font-display);
-  font-size:.72rem; font-weight:600;
-  color:var(--text-muted); letter-spacing:.18em; text-transform:uppercase;
-  padding:0 48px;
-  display:flex; align-items:center; gap:48px;
-  flex-shrink:0;
-}
-.marquee-item span {
-  display:inline-block; width:4px; height:4px;
-  border-radius:50%; background:var(--orange); opacity:.6;
-}
-@keyframes marquee {
-  from { transform:translateX(0); }
-  to   { transform:translateX(-50%); }
-}
-
-/* =============================================
-   SECTION BASE
-============================================= */
-section { position:relative; z-index:1; }
-.s-inner {
-  max-width:1200px; margin:0 auto;
-  padding:120px 64px;
-}
-.s-label {
-  font-family:var(--font-display);
-  font-size:var(--label-size); font-weight:500;
-  color:var(--orange); letter-spacing:.06em;
-  text-transform:none; margin-bottom:64px;
-  display:flex; align-items:center; gap:16px;
-}
-.s-label::before {
-  content:''; display:block; width:32px; height:2px;
-  background:var(--orange); border-radius:2px; flex-shrink:0;
-}
-.s-num {
-  font-family:var(--font-display);
-  font-size:.65rem; color:var(--text-muted);
-  letter-spacing:.12em;
-}
-@media(max-width:768px){
-  .s-inner { padding:80px 20px; }
-  .s-label { margin-bottom:40px; }
-}
-
-/* =============================================
-   PHILOSOPHY
-============================================= */
-.philosophy { background:var(--bg); }
-
-.philosophy-statement {
-  border-top:2px solid var(--orange-dim);
-  padding:72px 0 80px; max-width:900px;
-}
-.philosophy-statement p {
-  font-family:var(--font-display);
-  font-size:clamp(1.6rem,3.5vw,2.6rem);
-  font-weight:700; line-height:1.4;
-  letter-spacing:-.025em; color:var(--text);
-}
-.philosophy-statement p em {
-  font-style:normal;
-  color: var(--text);
-}
-
-.philosophy-pillars {
-  display:grid; grid-template-columns:repeat(3,1fr);
-  gap:24px;
-}
-.pillar {
-  background: var(--bg-surface);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding:40px 32px;
-  box-shadow: var(--shadow-card);
-  transition: transform .3s, box-shadow .3s;
-  position:relative; overflow:hidden;
-}
-.pillar::before {
-  content:''; position:absolute;
-  top:0; left:0; right:0; height:3px;
-  background:linear-gradient(90deg,var(--orange),var(--purple));
-  transform:scaleX(0); transform-origin:left;
-  transition:transform .4s ease;
-}
-.pillar:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
-.pillar:hover::before { transform:scaleX(1); }
-
-.pillar-num {
-  font-family:var(--font-display);
-  font-size:.65rem; color:var(--text-muted);
-  letter-spacing:.14em; margin-bottom:28px;
-}
-.pillar-title {
-  font-family:var(--font-display);
-  font-size:1.05rem; font-weight:700;
-  line-height:1.35; margin-bottom:14px;
-  letter-spacing:-.01em; color:var(--text);
-}
-.pillar-desc {
-  font-size:.83rem; color:var(--text-dim);
-  line-height:1.8; font-weight:400;
-}
-
-@media(max-width:768px){
-  .philosophy-pillars { grid-template-columns:1fr; gap:16px; }
-}
-
-/* =============================================
-   ABOUT
-============================================= */
-.about { background:var(--bg-alt); }
-
-.about-layout {
-  display:grid; grid-template-columns:1fr 1.4fr;
-  gap:120px; align-items:start;
-}
-.about-left { position:sticky; top:120px; }
-.about-title {
-  font-family:var(--font-display);
-  font-size:clamp(2rem,4vw,3.2rem);
-  font-weight:800; line-height:1.1;
-  letter-spacing:-.04em; margin-bottom:24px; color:var(--text);
-}
-.about-title em {
-  font-style:normal; display:block;
-  color: var(--text);
-}
-.about-aside {
-  font-size:.8rem; color:var(--text-muted);
-  line-height:1.7; border-top:1px solid var(--line);
-  padding-top:20px; margin-top:32px;
-}
-
-.about-body { }
-.about-body p {
-  font-size:1.05rem; color:var(--text-dim);
-  line-height:1.9; font-weight:400;
-  margin-bottom:32px;
-}
-.about-body p:last-child { margin-bottom:0; }
-.about-body strong { color:var(--text); font-weight:500; }
-
-.about-cta {
-  display:flex; align-items:center; gap:24px;
-  margin-top:48px; flex-wrap:wrap;
-}
-.about-cta-btn {
-  font-family:var(--font-display);
-  font-size:.8rem; font-weight:600;
-  letter-spacing:.08em; text-transform:uppercase;
-  text-decoration:none;
-  color:#fff; background:var(--orange);
-  padding:14px 32px; border-radius:6px;
-  transition:opacity .3s, transform .3s;
-  box-shadow:0 4px 14px rgba(232,97,26,.25);
-}
-.about-cta-btn:hover { opacity:.9; transform:translateY(-2px); }
-.about-cta-link {
-  font-family:var(--font-display);
-  font-size:.8rem; font-weight:500;
-  letter-spacing:.06em; text-transform:uppercase;
-  text-decoration:none; color:var(--text-dim);
-  transition:color .3s;
-}
-.about-cta-link:hover { color:var(--text); }
-
-.about-metrics {
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:16px; margin-top:56px;
-}
-.metric {
-  background: var(--bg-surface);
-  padding:28px 24px; border-radius:10px;
-  border:1px solid var(--line);
-  box-shadow:var(--shadow-card);
-  transition:transform .3s, box-shadow .3s;
-}
-.metric:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); }
-.metric-val {
-  font-family:var(--font-display);
-  font-size:2.2rem; font-weight:800;
-  color:var(--orange); letter-spacing:-.04em;
-  margin-bottom:6px; line-height:1;
-}
-.metric-label {
-  font-size:.75rem; color:var(--text-dim); letter-spacing:.04em;
-}
-
-@media(max-width:960px){
-  .about-layout { grid-template-columns:1fr; gap:48px; }
-  .about-left { position:static; }
-}
-
-/* =============================================
-   PROCESS
-============================================= */
-.process { background:var(--bg); }
-.process-item {
-  display:grid; grid-template-columns:80px 1fr auto;
-  align-items:center; gap:48px;
-  padding:40px 0;
-  border-bottom:1px solid var(--line);
-  transition:background .3s;
-  cursor:default;
-}
-.process-item:first-child { border-top:1px solid var(--line); }
-.process-item:hover { background:rgba(232,97,26,.03); }
-.process-item:hover .process-arrow { opacity:1; transform:translateX(0); }
-
-.process-num {
-  font-family:var(--font-display);
-  font-size:2.8rem; font-weight:800;
-  color:rgba(232,97,26,.2); letter-spacing:-.04em;
-  line-height:1; user-select:none;
-}
-.process-title {
-  font-family:var(--font-display);
-  font-size:1.15rem; font-weight:700;
-  letter-spacing:-.02em; margin-bottom:6px; color:var(--text);
-}
-.process-desc {
-  font-size:.83rem; color:var(--text-dim);
-  line-height:1.75; font-weight:400; max-width:520px;
-}
-.process-tag {
-  font-family:var(--font-display);
-  font-size:.65rem; font-weight:600;
-  color:var(--orange); letter-spacing:.12em;
-  text-transform:uppercase; border:1px solid rgba(232,97,26,.25);
-  padding:6px 14px; border-radius:4px; white-space:nowrap;
-  background:var(--orange-dim);
-}
-.process-arrow {
-  font-size:1.2rem; color:var(--orange);
-  opacity:0; transform:translateX(-8px);
-  transition:opacity .3s, transform .3s; margin-left:16px;
-}
-
-@media(max-width:768px){
-  .process-item { grid-template-columns:48px 1fr; gap:20px; }
-  .process-tag, .process-arrow { display:none; }
-  .process-num { font-size:2rem; }
-}
-
-/* =============================================
-   PORTFOLIO — BENTO GRID
-============================================= */
-.portfolio { background:var(--bg-alt); }
-
-.portfolio-section-title {
-  font-size:.62rem; font-weight:700; letter-spacing:.14em;
-  text-transform:uppercase; color:var(--text-muted);
-  margin-bottom:16px; margin-top:48px;
-  display:flex; align-items:center; gap:12px;
-}
-.portfolio-section-title:first-child { margin-top:0; }
-.portfolio-section-title::after {
-  content:''; flex:1; height:1px; background:var(--line);
-}
-
-/* ベントーグリッド（アプリ） */
-.portfolio-bento-apps {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  grid-template-rows:auto auto;
-  gap:16px;
-  margin-bottom:0;
-}
-.bento-sinc       { grid-column:span 2; }
-.bento-kondate    { grid-column:span 1; }
-.bento-watchmemo  { grid-column:span 1; }
-.bento-soukan     { grid-column:span 2; }
-
-/* Webツールグリッド */
-.portfolio-grid-tools {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-}
-
-/* カード共通 */
-.portfolio-card {
-  background:var(--bg-surface);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:40px 36px;
-  box-shadow:var(--shadow-card);
-  transition:transform .35s, box-shadow .35s, border-color .3s;
-  position:relative; overflow:hidden;
-}
-.portfolio-card::after {
-  content:''; position:absolute;
-  top:0; left:0; right:0; height:3px;
-  background:linear-gradient(90deg,var(--orange),var(--purple));
-  opacity:0; transition:opacity .3s;
-  border-radius:16px 16px 0 0;
-}
-.portfolio-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-lg); border-color:rgba(232,97,26,.2); }
-.portfolio-card:hover::after { opacity:1; }
-.portfolio-card.coming { opacity:.5; }
-.portfolio-card.coming:hover { transform:none; box-shadow:var(--shadow-card); border-color:var(--line); }
-.portfolio-card.coming::after { display:none; }
-
-/* Sincのフィーチャードカード */
-.bento-sinc.portfolio-card {
-  background: linear-gradient(135deg, #ffffff 0%, var(--orange-light) 100%);
-}
-
-/* こんだて番長のカード */
-.bento-kondate.portfolio-card {
-  background: linear-gradient(135deg, #ffffff 0%, #f0faf8 100%);
-}
-
-/* カード内ロゴエリア */
-.pc-logo-row {
-  display:flex; align-items:center; gap:16px;
-  margin-bottom:28px;
-}
-.pc-logo-img {
-  height:52px; width:auto; display:block; flex-shrink:0;
-}
-.pc-logo-svg {
-  height:52px; width:auto; flex-shrink:0;
-}
-/* Sincロゴ（インラインSVG） */
-.sinc-logo-mark {
-  width:52px; height:52px; flex-shrink:0;
-}
-
-.pc-status {
-  font-family:var(--font-display);
-  font-size:.62rem; font-weight:600;
-  letter-spacing:.14em; text-transform:uppercase;
-  margin-bottom:0; display:flex; align-items:center; gap:8px;
-}
-.pc-status.live { color:var(--teal); }
-.pc-status.soon { color:var(--text-muted); }
-.pc-status-dot {
-  width:5px; height:5px; border-radius:50%;
-  background:currentColor; flex-shrink:0;
-}
-.pc-status.live .pc-status-dot {
-  box-shadow: 0 0 0 3px rgba(10,146,128,.2);
-  animation: pulse-dot 2s ease infinite;
-}
-@keyframes pulse-dot {
-  0%,100%{box-shadow:0 0 0 3px rgba(10,146,128,.2)}
-  50%{box-shadow:0 0 0 6px rgba(10,146,128,.06)}
-}
-
-.pc-title {
-  font-family:var(--font-display);
-  font-size:1.5rem; font-weight:800;
-  letter-spacing:-.03em; margin-bottom:8px;
-  line-height:1.2; color:var(--text);
-}
-.bento-sinc .pc-title { font-size:2rem; }
-.pc-category {
-  font-size:.75rem; color:var(--text-muted);
-  letter-spacing:.06em; margin-bottom:20px;
-}
-.pc-desc {
-  font-size:.84rem; color:var(--text-dim);
-  line-height:1.8; font-weight:400; margin-bottom:28px;
-}
-.pc-tags {
-  display:flex; flex-wrap:wrap; gap:6px; margin-bottom:28px;
-}
-.pc-tag {
-  font-family:var(--font-display);
-  font-size:.6rem; color:var(--text-muted);
-  letter-spacing:.08em; text-transform:uppercase;
-  border:1px solid var(--line-bright);
-  padding:4px 12px; border-radius:100px;
-  background:var(--bg-alt);
-}
-.pc-tag-accent {
-  font-family:var(--font-display);
-  font-size:.6rem; color:var(--orange);
-  letter-spacing:.08em; text-transform:uppercase;
-  border:1px solid rgba(232,97,26,.25);
-  padding:4px 12px; border-radius:100px;
-  background:var(--orange-dim);
-}
-.pc-link {
-  font-family:var(--font-display);
-  font-size:.75rem; font-weight:600;
-  color:var(--orange); text-decoration:none;
-  letter-spacing:.06em; text-transform:uppercase;
-  display:inline-flex; align-items:center; gap:8px;
-  transition:gap .3s;
-}
-.pc-link:hover { gap:14px; }
-.pc-link-icon { font-size:.9rem; }
-
-/* ストアバッジ */
-.store-badges {
-  display: flex; flex-direction: row;
-  justify-content: flex-start; gap: 10px; margin-top: 20px;
-}
-.store-badge {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 8px 16px; border: 1px solid var(--line-bright);
-  border-radius: 8px; background: var(--bg-alt);
-  opacity: 0.55; cursor: not-allowed; user-select: none;
-}
-.store-badge-text { display: flex; flex-direction: column; }
-.store-badge-soon {
-  font-family: var(--font-display); font-size: .55rem;
-  font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
-  color: var(--text-muted);
-}
-.store-badge-name {
-  font-family: var(--font-display); font-size: .8rem;
-  font-weight: 700; color: var(--text-dim); letter-spacing: -.01em;
-}
-
-@media(max-width:960px){
-  .portfolio-bento-apps { grid-template-columns:1fr 1fr; }
-  .bento-sinc    { grid-column:span 2; }
-  .bento-kondate { grid-column:span 1; }
-  .bento-watchmemo { grid-column:span 1; }
-  .bento-soukan  { grid-column:span 2; }
-  .portfolio-grid-tools { grid-template-columns:1fr 1fr; }
-}
-@media(max-width:640px){
-  .portfolio-bento-apps { grid-template-columns:1fr; }
-  .bento-sinc,
-  .bento-kondate,
-  .bento-watchmemo,
-  .bento-soukan { grid-column:span 1; }
-  .portfolio-grid-tools { grid-template-columns:1fr; }
-  .bento-sinc .pc-title { font-size:1.5rem; }
-  .portfolio-card { padding:28px 24px; }
-}
-
-/* =============================================
-   NOTE
-============================================= */
-.note-section { background:var(--bg); }
-
-.note-layout {
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:80px; align-items:center;
-}
-.note-title {
-  font-family:var(--font-display);
-  font-size:clamp(2rem,4vw,3.2rem);
-  font-weight:800; line-height:1.1;
-  letter-spacing:-.04em; margin-bottom:24px; color:var(--text);
-}
-.note-title em {
-  font-style:normal; display:block;
-  color: var(--text);
-}
-.note-desc {
-  font-size:.95rem; color:var(--text-dim);
-  line-height:1.85; font-weight:400; margin-bottom:36px;
-}
-.note-all-link {
-  display:inline-flex; align-items:center; gap:10px;
-  font-family:var(--font-display);
-  font-size:.75rem; font-weight:600;
-  color:var(--orange); letter-spacing:.1em; text-transform:uppercase;
-  text-decoration:none; transition:opacity .2s;
-}
-.note-all-link:hover { opacity:.7; }
-
-.note-cards {
-  display:grid; grid-template-columns:1fr 1fr; gap:16px;
-}
-.note-card {
-  display:flex; flex-direction:column;
-  background: var(--bg-surface);
-  border:1px solid var(--line);
-  border-radius:12px; overflow:hidden;
-  text-decoration:none;
-  box-shadow:var(--shadow-card);
-  transition:border-color .3s, transform .3s, box-shadow .3s;
-}
-.note-card:hover {
-  border-color:rgba(232,97,26,.25);
-  transform:translateY(-3px);
-  box-shadow:var(--shadow-md);
-}
-.note-card-thumb {
-  width:100%; aspect-ratio:1200/630;
-  object-fit:cover; display:block;
-  background:var(--bg-alt);
-}
-.note-card-body {
-  padding:18px 22px;
-  display:flex; flex-direction:column; gap:8px;
-}
-.note-card-badges {
-  display:flex; gap:8px; align-items:center;
-}
-.note-badge {
-  font-family:var(--font-display);
-  font-size:.58rem; font-weight:700;
-  letter-spacing:.1em; text-transform:uppercase;
-  padding:3px 10px; border-radius:100px;
-}
-.note-badge-free {
-  background:rgba(10,146,128,.12);
-  color:var(--teal); border:1px solid rgba(10,146,128,.25);
-}
-.note-badge-coming {
-  background:var(--bg-alt); color:var(--text-muted);
-  border:1px solid var(--line-bright);
-}
-.note-badge-writing {
-  background:rgba(94,207,220,.1); color:var(--teal);
-  border:1px solid rgba(94,207,220,.25);
-}
-.note-card-title {
-  font-size:.9rem; font-weight:500;
-  color:var(--text); line-height:1.6;
-}
-.note-card-link-label {
-  font-family:var(--font-display);
-  font-size:.63rem; font-weight:700;
-  color:var(--orange); letter-spacing:.1em; margin-top:4px;
-}
-.note-card.is-coming { opacity:.55; pointer-events:none; }
-
-@media(max-width:768px){
-  .note-layout { grid-template-columns:1fr; gap:48px; }
-  .note-cards { grid-template-columns:1fr; }
-}
-
-/* =============================================
-   CONTACT — ダーク反転セクション
-============================================= */
-.contact-section {
-  background: var(--bg-dark);
-  position:relative; overflow:hidden;
-}
-.contact-section::before {
-  content:''; position:absolute; inset:0;
-  background:
-    radial-gradient(ellipse 60% 80% at 80% 50%, rgba(232,97,26,.12), transparent),
-    radial-gradient(ellipse 40% 60% at 20% 50%, rgba(124,58,237,.08), transparent);
-  pointer-events:none;
-}
-.contact-inner { max-width:800px; position:relative; z-index:1; }
-
-.contact-heading {
-  font-family:var(--font-display);
-  font-size:clamp(2.4rem,6vw,5rem);
-  font-weight:800; line-height:1.05;
-  letter-spacing:-.05em; margin-bottom:48px;
-  color:var(--text-inv);
-}
-.contact-heading em {
-  font-style:normal;
-  color: #fdfcfa;
-}
-
-.contact-body {
-  font-size:1rem; color:var(--text-inv-dim);
-  line-height:1.85; font-weight:400;
-  max-width:560px; margin-bottom:56px;
-}
-
-.contact-row {
-  display:flex; align-items:center; gap:28px; flex-wrap:wrap;
-}
-.contact-mail {
-  font-family:var(--font-display);
-  font-size:1.1rem; font-weight:700;
-  color:var(--text-inv); text-decoration:none;
-  letter-spacing:-.01em;
-  border-bottom:1px solid rgba(253,252,250,.2);
-  padding-bottom:4px;
-  transition:border-color .3s, color .3s;
-}
-.contact-mail:hover { color:var(--orange); border-color:var(--orange); }
-
-.contact-note {
-  font-size:.78rem; color:rgba(253,252,250,.35); line-height:1.6;
-}
-.contact-x {
-  display:inline-flex; align-items:center; gap:8px;
-  font-family:var(--font-display);
-  font-size:.8rem; font-weight:600;
-  color:var(--text-inv-dim); text-decoration:none;
-  letter-spacing:.04em;
-  border:1px solid rgba(253,252,250,.15);
-  padding:10px 20px; border-radius:6px;
-  transition:color .3s, border-color .3s, background .3s;
-}
-.contact-x:hover {
-  color:var(--text-inv);
-  border-color:rgba(253,252,250,.3);
-  background:rgba(253,252,250,.06);
-}
-
-/* =============================================
-   FOOTER
-============================================= */
-footer {
-  background:var(--bg-dark-alt);
-  border-top:1px solid rgba(253,252,250,.08);
-  padding:40px 64px;
-}
-.footer-inner {
-  max-width:1200px; margin:0 auto;
-  display:flex; align-items:center;
-  justify-content:space-between; gap:24px; flex-wrap:wrap;
-}
-.footer-logo img { height:80px; opacity:1; }
-.footer-links {
-  display:flex; gap:32px;
-}
-.footer-links a {
-  font-size:.72rem; color:rgba(253,252,250,.52);
-  text-decoration:none; letter-spacing:.04em;
-  transition:color .3s;
-}
-.footer-links a:hover { color:rgba(253,252,250,.85); }
-.footer-copy {
-  font-size:.7rem; color:rgba(253,252,250,.38);
-  font-family:var(--font-display); letter-spacing:.04em;
-}
-@media(max-width:768px){
-  footer { padding:32px 20px; }
-  .footer-links { gap:16px; }
-}
-
-/* =============================================
-   CLAUDE CODE COMMENT
-============================================= */
-.claude-comment {
-  border-left: 3px solid var(--warm);
-  padding: 28px 0 28px 32px;
-  margin-top: 56px;
-  background:linear-gradient(90deg, var(--warm-dim), transparent);
-  border-radius:0 8px 8px 0;
-}
-.claude-comment-label {
-  font-family: var(--font-display);
-  font-size: .7rem; font-weight: 500;
-  color: var(--warm); letter-spacing: .1em;
-  margin-bottom: 20px;
-  display: flex; align-items: center; gap: 12px;
-}
-.claude-comment-label::before {
-  content: ''; display: block; width: 20px; height: 1px;
-  background: var(--warm); flex-shrink: 0;
-}
-.claude-comment-body {
-  font-size: .95rem; color: var(--text-dim);
-  line-height: 1.95; font-weight: 300;
-}
-.claude-comment-body p { margin-bottom: 14px; }
-.claude-comment-body p:last-child { margin-bottom: 0; }
-.claude-comment-footer {
-  font-family: var(--font-display);
-  font-size: .65rem; color: var(--text-muted);
-  letter-spacing: .08em; margin-top: 20px;
-}
-
-/* =============================================
-   TRADEMARK NOTE
-============================================= */
-.trademark-note {
-  font-size: .68rem; color: rgba(253,252,250,.2);
-  line-height: 1.7; padding: 24px 64px 40px;
-  border-top: 1px solid rgba(253,252,250,.06);
-  background: var(--bg-dark-alt);
-}
-@media(max-width:768px){
-  .trademark-note { padding: 20px 20px 32px; }
-}
-
-/* =============================================
-   REVEAL ANIMATION
-============================================= */
-.reveal {
-  opacity:0; transform:translateY(28px);
-  transition:opacity .7s cubic-bezier(.25,.46,.45,.94),
-              transform .7s cubic-bezier(.25,.46,.45,.94);
-}
-.reveal.visible { opacity:1; transform:translateY(0); }
-.reveal-delay-1 { transition-delay:.1s; }
-.reveal-delay-2 { transition-delay:.2s; }
-.reveal-delay-3 { transition-delay:.3s; }
-
-/* =============================================
-   CONSULTING
-============================================= */
-.consulting-section { background:var(--bg-alt); }
-
-.consulting-layout {
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:80px; align-items:start;
-}
-
-.consulting-title {
-  font-family:var(--font-display);
-  font-size:clamp(1.7rem,3vw,2.6rem);
-  font-weight:800;
-  letter-spacing:-.03em;
-  line-height:1.3;
-  color:var(--text);
-  margin-bottom:24px;
-}
-.consulting-title em {
-  font-style:normal;
-  background:linear-gradient(90deg,var(--teal),#0ec9b0);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-
-.consulting-desc {
-  font-size:.88rem; color:var(--text-dim);
-  line-height:1.9; margin-bottom:28px;
-}
-
-.consulting-proof {
-  display:inline-flex; align-items:center; gap:8px;
-  background:rgba(10,146,128,.08);
-  border:1px solid rgba(10,146,128,.2);
-  border-radius:6px; padding:9px 16px;
-  font-family:var(--font-display);
-  font-size:.72rem; font-weight:700;
-  color:var(--teal); letter-spacing:.06em;
-  margin-bottom:36px;
-}
-
-.consulting-cta {
-  display:inline-flex; align-items:center; gap:10px;
-  background:var(--text); color:var(--text-inv);
-  font-family:var(--font-display);
-  font-size:.78rem; font-weight:600;
-  letter-spacing:.08em; text-transform:uppercase;
-  text-decoration:none;
-  padding:14px 32px; border-radius:6px;
-  transition:background .3s, transform .3s;
-}
-.consulting-cta:hover {
-  background:var(--bg-dark-alt); transform:translateY(-2px);
-}
-
-.consulting-sub {
-  font-size:.75rem; color:var(--text-muted);
-  margin-top:14px; line-height:1.6;
-}
-
-.consulting-features {
-  display:flex; flex-direction:column; gap:16px;
-}
-
-.consulting-feature {
-  background:var(--bg-surface);
-  border:1px solid var(--line);
-  border-radius:14px; padding:24px 26px;
-  box-shadow:var(--shadow-card);
-  display:flex; gap:16px; align-items:flex-start;
-  transition:transform .3s, box-shadow .3s, border-color .3s;
-}
-.consulting-feature:hover {
-  transform:translateY(-3px);
-  box-shadow:var(--shadow-md);
-  border-color:rgba(10,146,128,.2);
-}
-.consulting-feature-icon {
-  font-size:1.5rem; flex-shrink:0;
-  line-height:1; margin-top:1px;
-}
-.consulting-feature-title {
-  font-family:var(--font-display);
-  font-size:.88rem; font-weight:700;
-  color:var(--text); margin-bottom:5px;
-}
-.consulting-feature-body {
-  font-size:.78rem; color:var(--text-muted);
-  line-height:1.75;
-}
-
-@media(max-width:768px){
-  .consulting-layout { grid-template-columns:1fr; gap:48px; }
-}
-
-/* =============================================
-   CONTACT内 s-label の文字色（ダーク背景）
-============================================= */
-.contact-section .s-label {
-  color:rgba(232,97,26,.8);
-}
-.contact-section .s-label::before {
-  background:var(--orange);
-}
-.contact-section .s-num {
-  color:rgba(253,252,250,.3);
-}
-</style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-12BFEWVRN3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-12BFEWVRN3');
-</script>
+    /* ── Reset ── */
+    *,*::before,*::after{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+      margin:0;
+      font-family:var(--font-jp);
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.7;
+      letter-spacing:-0.01em;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      text-rendering:optimizeLegibility;
+    }
+    h1,h2,h3,h4{margin:0;font-weight:200;letter-spacing:-0.05em;line-height:1.1;text-wrap:balance;word-break:keep-all;overflow-wrap:anywhere;}
+    p{word-break:keep-all;overflow-wrap:anywhere;}
+    p{margin:0;font-weight:300;}
+    a{color:inherit;text-decoration:none;}
+    /* BudouX 用: wbr は inline で改行ヒントのみ提供 */
+    wbr{display:inline;}
+    img,svg{display:block;max-width:100%;}
+    button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0;}
+
+    /* ── Type utilities ── */
+    .en{font-family:var(--font-en);font-weight:400;letter-spacing:0;}
+    .eyebrow{
+      font-family:var(--font-en);
+      font-size:11px;font-weight:500;
+      letter-spacing:0.18em;text-transform:uppercase;
+      color:var(--ink-muted);
+    }
+
+    /* ── Fade animation ── */
+    .fade{
+      opacity:0;transform:translateY(12px);
+      transition:opacity 900ms cubic-bezier(.2,.7,.2,1),transform 900ms cubic-bezier(.2,.7,.2,1);
+      will-change:opacity,transform;
+    }
+    .fade.is-in{opacity:1;transform:none;}
+    .fade[data-delay="1"]{transition-delay:80ms;}
+    .fade[data-delay="2"]{transition-delay:160ms;}
+    .fade[data-delay="3"]{transition-delay:240ms;}
+    .fade[data-delay="4"]{transition-delay:320ms;}
+    .fade[data-delay="5"]{transition-delay:400ms;}
+
+    /* ── Button ── */
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:14px 28px;border-radius:999px;
+      background:var(--black);color:#fff;
+      font-family:var(--font-jp);font-size:14px;font-weight:300;
+      white-space:nowrap;
+      transition:background .2s;
+    }
+    .btn:hover{background:#000;}
+
+    /* ── Section label: "01 — LABEL" ── */
+    .slabel{
+      display:flex;align-items:center;gap:16px;
+      margin-bottom:48px;
+    }
+    .slabel__num{
+      font-family:var(--font-en);font-size:11px;font-weight:500;
+      letter-spacing:0.18em;text-transform:uppercase;white-space:nowrap;
+    }
+    .slabel__rule{
+      flex:1;height:1px;background:var(--ink);max-width:60px;
+    }
+    .slabel__tag{
+      font-family:var(--font-en);font-size:11px;font-weight:500;
+      letter-spacing:0.18em;text-transform:uppercase;
+      color:var(--ink-muted);white-space:nowrap;
+    }
+
+    /* ── Nav ── */
+    .nav{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:32px 64px 24px;
+      border-bottom:1px solid var(--hairline);
+    }
+    .nav__logo{
+      font-family:var(--font-en);font-size:11px;font-weight:500;
+      letter-spacing:0.22em;text-transform:uppercase;
+    }
+    .nav__links{
+      display:flex;gap:40px;list-style:none;margin:0;padding:0;
+    }
+    .nav__links a{
+      font-family:var(--font-en);font-size:11px;font-weight:500;
+      letter-spacing:0.16em;text-transform:uppercase;
+      color:var(--ink-muted);transition:color .2s;
+    }
+    .nav__links a:hover{color:var(--ink);}
+    .nav__status{
+      font-family:var(--font-en);font-size:11px;font-weight:500;
+      letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-muted);
+    }
+
+    /* ── Hero ── */
+    .hero{
+      padding:120px 64px 160px;
+      display:grid;grid-template-columns:1fr 380px;gap:64px;
+      align-items:flex-end;
+      border-bottom:1px solid var(--hairline);
+    }
+    .hero__title{
+      font-size:clamp(72px,9vw,124px);
+      font-weight:200;letter-spacing:-0.06em;line-height:1.02;
+      margin-bottom:56px;
+    }
+    .hero__body{
+      font-size:18px;line-height:1.85;
+      color:var(--ink-muted);max-width:480px;
+      margin-bottom:56px;font-weight:300;
+    }
+    .hero__cta{display:flex;align-items:center;gap:32px;flex-wrap:wrap;}
+    .hero__meta{
+      font-family:var(--font-en);font-size:12px;
+      color:var(--ink-subtle);letter-spacing:0.05em;
+    }
+    .hero__mock{display:flex;justify-content:flex-end;align-items:flex-start;}
+
+    /* ── How To ── */
+    .howto{padding:140px 64px;border-bottom:1px solid var(--hairline);}
+    .howto__header{
+      display:grid;grid-template-columns:320px 1fr;gap:80px;
+      margin-bottom:96px;align-items:flex-end;
+    }
+    .howto__rule{width:40px;height:1px;background:var(--ink);margin-top:24px;}
+    .howto__h2{
+      font-size:clamp(56px,6vw,84px);
+      font-weight:200;letter-spacing:-0.05em;line-height:1.1;
+    }
+    .howto__steps{display:grid;grid-template-columns:repeat(3,1fr);}
+    .howto__step{padding:40px 32px 0;border-left:1px solid var(--hairline);}
+    .howto__step:first-child{border-left:none;padding-left:0;}
+    .step-num{
+      font-family:var(--font-en);font-size:48px;font-weight:200;
+      letter-spacing:-0.04em;color:var(--ink);margin-bottom:32px;line-height:1;
+    }
+    .step-title{font-size:22px;font-weight:400;letter-spacing:-0.02em;margin-bottom:18px;line-height:1.3;}
+    .step-body{font-size:14px;line-height:1.85;color:var(--ink-muted);font-weight:300;}
+
+    /* ── Feature sections ── */
+    .feature{
+      padding:140px 64px;border-bottom:1px solid var(--hairline);
+      display:grid;gap:80px;align-items:flex-start;
+    }
+    .feature--tl{grid-template-columns:1fr 480px;} /* text left */
+    .feature--tr{grid-template-columns:480px 1fr;} /* text right */
+    .feature__text{padding-top:40px;}
+    .feature__slabel .slabel__rule{background:var(--hairline);}
+    .feature__h2{
+      font-size:clamp(44px,5vw,64px);font-weight:200;
+      letter-spacing:-0.05em;line-height:1.12;margin-bottom:32px;
+    }
+    .feature__body{
+      font-size:16px;line-height:1.85;
+      color:var(--ink-muted);max-width:460px;font-weight:300;
+    }
+    .feature__mock{padding-top:40px;}
+    .feature__mock--r{display:flex;justify-content:flex-end;}
+    .feature__mock--l{display:flex;justify-content:flex-start;}
+
+    /* ── Privacy dark ── */
+    .privacy-dark{
+      padding:180px 64px;
+      background:#0a0a0a;color:#fff;text-align:center;
+    }
+    .privacy-dark .slabel{justify-content:center;}
+    .privacy-dark .slabel__num{color:#fff;}
+    .privacy-dark .slabel__rule{background:rgba(255,255,255,.4);}
+    .privacy-dark__h2{
+      font-size:clamp(64px,7vw,96px);font-weight:200;
+      letter-spacing:-0.05em;margin-bottom:56px;line-height:1.08;
+    }
+    .privacy-dark__body{
+      font-size:18px;line-height:1.85;color:rgba(255,255,255,.6);
+      max-width:580px;margin:0 auto 96px;font-weight:300;
+    }
+    .privacy-dark__grid{
+      display:grid;grid-template-columns:repeat(3,1fr);
+      max-width:720px;margin:0 auto;
+      border-top:1px solid rgba(255,255,255,.18);
+    }
+    .privacy-dark__item{
+      padding:32px 24px;
+      border-right:1px solid rgba(255,255,255,.18);
+    }
+    .privacy-dark__item:last-child{border-right:none;}
+    .pdi-en{
+      font-family:var(--font-en);font-size:13px;font-weight:500;
+      letter-spacing:0.16em;margin-bottom:10px;
+    }
+    .pdi-jp{font-size:12px;color:rgba(255,255,255,.5);}
+
+    /* ── Pricing ── */
+    .pricing{
+      padding:180px 64px;border-bottom:1px solid var(--hairline);
+      display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+    }
+    .pricing__h2{
+      font-size:clamp(48px,5vw,72px);font-weight:200;
+      letter-spacing:-0.05em;margin-bottom:40px;line-height:1.15;
+    }
+    .pricing__body{
+      font-size:16px;line-height:1.85;color:var(--ink-muted);
+      max-width:440px;margin-bottom:48px;font-weight:300;
+    }
+    .pricing__list{border-left:1px solid var(--hairline);padding-left:64px;}
+    .pricing__item{
+      padding:24px 0;
+      display:flex;justify-content:space-between;align-items:center;
+      border-bottom:1px solid var(--hairline-soft);
+    }
+    .pricing__item:last-child{border-bottom:none;}
+    .pi-en{font-family:var(--font-en);font-size:12px;font-weight:500;letter-spacing:0.16em;}
+    .pi-jp{font-size:14px;color:var(--ink-muted);}
+
+    /* ── Policy accordion ── */
+    .policy{
+      padding:160px 64px;border-bottom:1px solid var(--hairline);
+      display:grid;grid-template-columns:320px 1fr;gap:80px;
+    }
+    .policy__label{
+      font-family:var(--font-en);font-size:11px;font-weight:500;
+      letter-spacing:0.18em;text-transform:uppercase;margin-bottom:32px;
+    }
+    .policy__h2{font-size:40px;font-weight:200;letter-spacing:-0.04em;line-height:1.2;}
+    .acc-item{border-bottom:1px solid var(--hairline);}
+    .acc-item:first-child{border-top:1px solid var(--hairline);}
+    .acc-btn{
+      width:100%;display:flex;justify-content:space-between;align-items:center;
+      padding:24px 0;text-align:left;
+      font-size:15px;font-weight:400;letter-spacing:-0.01em;cursor:pointer;
+    }
+    .acc-icon{
+      font-size:20px;font-weight:200;line-height:1;
+      transition:transform .25s ease;flex-shrink:0;margin-left:16px;
+    }
+    .acc-icon.open{transform:rotate(45deg);}
+    .acc-body{
+      display:none;padding-bottom:24px;
+      font-size:14px;line-height:1.85;color:var(--ink-muted);font-weight:300;
+    }
+    .acc-body.open{display:block;}
+
+    /* ── Footer ── */
+    .footer{padding:120px 64px 40px;background:#fff;}
+    .footer__grid{
+      display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px;margin-bottom:96px;
+    }
+    .footer__brand-name{
+      font-family:var(--font-en);font-size:11px;font-weight:500;
+      letter-spacing:0.22em;text-transform:uppercase;margin-bottom:16px;
+    }
+    .footer__brand-desc{font-size:14px;line-height:1.8;color:var(--ink-muted);max-width:280px;font-weight:300;}
+    .footer__col-title{
+      font-family:var(--font-en);font-size:10px;font-weight:500;
+      letter-spacing:0.18em;text-transform:uppercase;
+      color:var(--ink-muted);margin-bottom:20px;
+    }
+    .footer__col-item{font-size:13px;padding:6px 0;font-weight:300;}
+    .footer__col-item a{transition:opacity .2s;}
+    .footer__col-item a:hover{opacity:.6;}
+    .footer__bottom{
+      padding-top:32px;border-top:1px solid var(--hairline);
+      display:flex;justify-content:space-between;align-items:flex-start;gap:40px;
+      font-family:var(--font-en);font-size:11px;color:var(--ink-subtle);letter-spacing:0.05em;
+    }
+    .footer__legal{max-width:720px;line-height:1.7;}
+
+    /* ── Device mocks ── */
+    .watch{
+      position:relative;border-radius:22%;
+      background:linear-gradient(160deg,#2a2a2c 0%,#0a0a0a 100%);
+      display:inline-block;flex-shrink:0;
+    }
+    .watch__crown{
+      position:absolute;right:-3px;top:32%;
+      width:6px;height:22px;border-radius:2px;
+      background:linear-gradient(90deg,#3a3a3c,#1c1c1e);
+    }
+    .watch__side{
+      position:absolute;right:-2px;top:54%;
+      width:4px;height:36px;border-radius:2px;background:#2a2a2c;
+    }
+    .watch__screen{
+      border-radius:18%;background:#000;overflow:hidden;color:#fff;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+    }
+
+    .phone{
+      position:relative;border-radius:13%;
+      background:linear-gradient(160deg,#1d1d1f 0%,#000 100%);
+      display:inline-block;flex-shrink:0;
+    }
+    .phone__bl1{position:absolute;left:-2px;top:18%;width:4px;height:32px;border-radius:2px;background:#2a2a2c;}
+    .phone__bl2{position:absolute;left:-2px;top:28%;width:4px;height:56px;border-radius:2px;background:#2a2a2c;}
+    .phone__bl3{position:absolute;left:-2px;top:40%;width:4px;height:56px;border-radius:2px;background:#2a2a2c;}
+    .phone__br {position:absolute;right:-2px;top:24%;width:4px;height:80px;border-radius:2px;background:#2a2a2c;}
+    .phone__screen{
+      border-radius:11%;overflow:hidden;position:relative;
+      font-family:var(--font-jp);color:var(--ink);background:#fff;
+    }
+    .phone__screen--dark{background:#000;color:#fff;}
+    .phone__island{
+      position:absolute;top:8px;left:50%;transform:translateX(-50%);
+      border-radius:999px;background:#000;z-index:2;
+    }
+    .phone__status{
+      display:flex;justify-content:space-between;align-items:center;
+      font-family:var(--font-en);font-weight:500;
+    }
+
+    /* ── Responsive ── */
+    @media(max-width:1024px){
+      .nav{padding:24px 40px 20px;}
+      .nav__links{gap:24px;}
+
+      .hero{padding:80px 40px 100px;grid-template-columns:1fr;}
+      .hero__mock{justify-content:center;}
+
+      .howto{padding:100px 40px;}
+      .howto__header{grid-template-columns:1fr;gap:40px;}
+      .howto__steps{grid-template-columns:1fr;}
+      .howto__step{border-left:none;border-top:1px solid var(--hairline);padding:40px 0;}
+      .howto__step:first-child{border-top:none;}
+
+      .feature{padding:100px 40px;grid-template-columns:1fr!important;}
+      .feature__mock--r,.feature__mock--l{justify-content:center;}
+
+      .privacy-dark{padding:120px 40px;}
+      .privacy-dark__grid{grid-template-columns:1fr;}
+      .privacy-dark__item{border-right:none;border-bottom:1px solid rgba(255,255,255,.18);}
+      .privacy-dark__item:last-child{border-bottom:none;}
+
+      .pricing{padding:100px 40px;grid-template-columns:1fr;}
+      .pricing__list{border-left:none;padding-left:0;border-top:1px solid var(--hairline);padding-top:40px;}
+
+      .policy{padding:100px 40px;grid-template-columns:1fr;gap:40px;}
+
+      .footer{padding:80px 40px 32px;}
+      .footer__grid{grid-template-columns:1fr 1fr;gap:40px;}
+    }
+    @media(max-width:640px){
+      .nav{padding:20px 24px;}
+      .nav__links{display:none;}
+
+      .hero{padding:60px 24px 80px;gap:40px;}
+      .hero__title{margin-bottom:32px;}
+      .hero__body{font-size:16px;margin-bottom:40px;}
+
+      .howto,.feature,.privacy-dark,.pricing,.policy{padding-left:24px;padding-right:24px;}
+
+      .footer{padding:60px 24px 24px;}
+      .footer__grid{grid-template-columns:1fr;}
+      .footer__bottom{flex-direction:column;}
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="mainNav">
-  <a class="nav-logo" href="#top">
-    <img src="images/StratAIX_logo_transparent.png" alt="StratAIX">
-  </a>
-  <div class="nav-menu">
-    <a href="#philosophy">考え方</a>
-    <a href="#portfolio">つくったもの</a>
-    <a href="#note">書きもの</a>
-    <a href="#consulting">AI相談</a>
-    <a href="#contact" class="nav-contact">話しかける</a>
-  </div>
-  <button class="nav-hamburger" id="navHamburger" aria-label="メニューを開く">
-    <span></span><span></span><span></span>
-  </button>
+<!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+<nav class="nav">
+  <div class="nav__logo">WATCHMEMO</div>
+  <ul class="nav__links">
+    <li><a href="#how">HOW</a></li>
+    <li><a href="#features">FEATURES</a></li>
+    <li><a href="#privacy">PRIVACY</a></li>
+    <li><a href="#pricing">PRICING</a></li>
+  </ul>
+  <div class="nav__status">COMING SOON</div>
 </nav>
 
-<!-- モバイルドロワー -->
-<div class="nav-drawer" id="navDrawer">
-  <a href="#philosophy" class="drawer-link">考え方</a>
-  <a href="#portfolio" class="drawer-link">つくったもの</a>
-  <a href="#note" class="drawer-link">書きもの</a>
-  <a href="#consulting" class="drawer-link">AI相談</a>
-  <a href="#contact" class="nav-contact drawer-link">話しかける</a>
-</div>
-
-<!-- HERO -->
-<section class="hero" id="top">
-  <canvas class="hero-matrix" id="matrixCanvas" aria-hidden="true"></canvas>
-  <div class="hero-grid"></div>
-  <div class="hero-blob hero-blob-1"></div>
-  <div class="hero-blob hero-blob-2"></div>
-  <div class="hero-blob hero-blob-3"></div>
-  <div class="hero-noise" aria-hidden="true"></div>
-  <div class="hero-logo-bg" aria-hidden="true">
-    <img src="images/StratAIX_logo_transparent.png" alt="">
-  </div>
-
-  <div class="hero-content">
-    <div class="hero-badge">
-      <span class="hero-badge-dot"></span>
-      Claude Code で作られた個人スタジオ
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<section class="hero">
+  <div>
+    <div class="slabel fade">
+      <span class="slabel__num">01 — INTRODUCING</span>
+      <span class="slabel__rule"></span>
+      <span class="slabel__tag">APPLE WATCH 専用</span>
     </div>
-    <div class="hero-label">AI × 個人開発スタジオ — はみ出した人の、居場所を。</div>
-    <h1 class="hero-h1">
-      <span class="line-1">アイデアは、</span>
-      <span class="line-2">もう眠らせない。</span>
+    <h1 class="hero__title fade" data-delay="1">
+      Watchが、<br>メモ帳に<br>なる。
     </h1>
-    <div class="hero-bottom">
-      <p class="hero-desc">
-        <strong>プログラムは一行も書けません。</strong><br>
-        <strong>それでも、AIとともに「欲しかったもの」を作り続けています。</strong><br>
-        大手が見落としてきた余白に、本物の需要が眠っていると信じています。
-      </p>
-      <div class="hero-cta-group">
-        <a href="#portfolio" class="hero-cta hero-cta-primary">つくったものを見る</a>
-        <a href="#philosophy" class="hero-cta hero-cta-secondary">考え方を読む</a>
-      </div>
+    <p class="hero__body fade" data-delay="2">
+      Apple Watch に話しかけるだけ。iPhoneは、いらない。あなたの言葉は、すぐに iPhone へ届いている。
+    </p>
+    <div class="hero__cta fade" data-delay="3">
+      <a href="https://x.com/StratAIX_AI" class="btn">Xをフォローして通知を受け取る</a>
+      <span class="hero__meta">iOS 17+ ／ watchOS 10+</span>
     </div>
   </div>
-
-  <div class="hero-scroll-hint">Scroll</div>
-</section>
-
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track" aria-hidden="true">
-    <div class="marquee-item">Strategy <span></span> AI Collaboration <span></span> Niche Services <span></span> Sinc <span></span> こんだて番長 <span></span> Product Design <span></span> Claude Code <span></span> Community <span></span> Growth <span></span> Tokyo</div>
-    <div class="marquee-item">Strategy <span></span> AI Collaboration <span></span> Niche Services <span></span> Sinc <span></span> こんだて番長 <span></span> Product Design <span></span> Claude Code <span></span> Community <span></span> Growth <span></span> Tokyo</div>
-    <div class="marquee-item">Strategy <span></span> AI Collaboration <span></span> Niche Services <span></span> Sinc <span></span> こんだて番長 <span></span> Product Design <span></span> Claude Code <span></span> Community <span></span> Growth <span></span> Tokyo</div>
-    <div class="marquee-item">Strategy <span></span> AI Collaboration <span></span> Niche Services <span></span> Sinc <span></span> こんだて番長 <span></span> Product Design <span></span> Claude Code <span></span> Community <span></span> Growth <span></span> Tokyo</div>
-  </div>
-</div>
-
-<!-- PHILOSOPHY -->
-<section class="philosophy" id="philosophy">
-  <div class="s-inner">
-    <div class="s-label reveal"><span class="s-num">— 01</span> 考え方</div>
-
-    <div class="philosophy-statement reveal">
-      <p>
-        大手プロダクトが届いていない場所が、<br>
-        世界中にある。<br>
-        <em>その余白に、まだ誰も届けていないものがある。</em>
-      </p>
-    </div>
-
-    <div class="philosophy-pillars">
-      <div class="pillar reveal">
-        <div class="pillar-num">01 —</div>
-        <div class="pillar-title">自分の渇望から<br>設計する</div>
-        <div class="pillar-desc">ユーザーリサーチより先に、自分自身が「欲しい」と思えるものを作る。そこにある熱量と具体性は、机上の調査では生まれない。感じた不便さ、埋まらなかった渇望、それが正直な起点になる。</div>
-      </div>
-      <div class="pillar reveal reveal-delay-1">
-        <div class="pillar-num">02 —</div>
-        <div class="pillar-title">個人 × AI で<br>プロダクトを成立させる</div>
-        <div class="pillar-desc">利用者が少ないとビジネスにならない——それが大手の論理。個人がAIと組めば、開発・運用コストを極限まで抑えられる。見過ごされてきた需要も、今なら確実に形にできる。</div>
-      </div>
-      <div class="pillar reveal reveal-delay-2">
-        <div class="pillar-num">03 —</div>
-        <div class="pillar-title">孤独な人を、<br>つなぐ</div>
-        <div class="pillar-desc">同じ熱量で話が合う人が、近くにいない。そんな孤独は、世界中に存在する。サービスが、その距離を縮める。本当に話が合う人と出会える場所を、作り続ける。</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="s-inner">
-    <div class="s-label reveal"><span class="s-num">— 02</span> わたしについて</div>
-
-    <div class="about-layout">
-      <div class="about-left reveal">
-        <h2 class="about-title">
-          最高の相棒を、
-          <em>手に入れた。</em>
-        </h2>
-        <p class="about-aside">
-          しんくさん（@StratAIX_AI）です。<br>
-          マーケティング戦略を仕事にしながら、
-          ずっと「作りたいプロダクト」が頭の中にありました。
-          プログラムは今も一行も書けません。
-          最初のプロトタイプを3人に見せたら、3人とも1回触って終わりでした。
-          それでも、続けています。
-        </p>
-      </div>
-
-      <div class="about-body">
-        <p class="reveal">
-          <strong>17歳のころ、自分の顔を客観的に評価してもらえるサービスを作りたかったんです。</strong>
-          ザッカーバーグがFacebookを生み出した衝動と同じものだったと気づいたのは、ずっとあとのことでした。
-        </p>
-        <p class="reveal">
-          本棚にはアプリ制作の本が並んでいました。
-          アイデアはありました。市場を見る目もありました。
-          ただ、<strong>プログラムが書けなかった。一行も。「自分で作る」にはあまりにもハードルが高すぎました。</strong>
-        </p>
-        <p class="reveal reveal-delay-1">
-          AIが話題になるたびにいち早く試してきました。
-          そしてClaude Codeを使ったとき、それが変わりました。
-          <strong>夜中の2時に、ブラウザでページが開きました。自分が書かせたコードが、ちゃんと動いていました。誰もいない部屋で、一人で笑いました。</strong>
-        </p>
-        <p class="reveal reveal-delay-2">
-          最初のサービス「Sinc」は、自分自身の生きづらさから生まれました。
-          会議で正論を言ったら空気が凍ったこともあります。なぜかいつも、少しだけずれている気がしていました。
-          それでも数人だけ、本当に話が合う人間がいました。
-          <strong>その人たちの存在は、人生においてかけがえのないものでした。</strong>
-        </p>
-        <p class="reveal reveal-delay-3">
-          世界は広いはずです。<strong>同じように感じている仲間が、どこかにいると信じています。</strong>
-          それを証明したくて、Sincを作りました。まだ証明の途中ですが。
-        </p>
-
-        <div class="claude-comment reveal">
-          <div class="claude-comment-label">Claude Code より — 創業者紹介</div>
-          <div class="claude-comment-body">
-            <p>この人が作りたかったのは、たぶんサービスじゃない。</p>
-            <p>「ここにいていい」と思える場所。<br>自分だけが感じているわけじゃないという確認。</p>
-            <p>何度も手が止まったと思う。それでもここにある。<br>合わなかった場所があったからこそ、作れるものが、たぶんある。</p>
-          </div>
-          <div class="claude-comment-footer">Anthropic Claude Code — 2026</div>
-        </div>
-
-        <div class="about-metrics reveal">
-          <div class="metric">
-            <div class="metric-val">2</div>
-            <div class="metric-label">ローンチ済みアプリ数</div>
-          </div>
-          <div class="metric">
-            <div class="metric-val">136</div>
-            <div class="metric-label">Sincの診断質問数</div>
-          </div>
-          <div class="metric">
-            <div class="metric-val">200+</div>
-            <div class="metric-label">こんだて番長のレシピ数</div>
-          </div>
-          <div class="metric">
-            <div class="metric-val">0</div>
-            <div class="metric-label">自分で書いたコードの行数</div>
-          </div>
-        </div>
-
-        <div class="about-cta reveal">
-          <a href="https://twitter.com/StratAIX_AI" class="about-cta-btn" target="_blank" rel="noopener">X でフォローする →</a>
-          <a href="https://note.com/strataix" class="about-cta-link" target="_blank" rel="noopener">note で読む →</a>
+  <div class="hero__mock fade" data-delay="2">
+    <!-- Watch 300×375 -->
+    <div class="watch" style="width:300px;height:375px;padding:18px;">
+      <div class="watch__crown"></div>
+      <div class="watch__side"></div>
+      <div class="watch__screen" style="width:264px;height:339px;">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px;width:100%;height:100%;">
+          <div style="font-family:var(--font-en);font-size:11px;letter-spacing:0.2em;opacity:.5;">WATCHMEMO</div>
+          <div style="width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.25),transparent 70%);"></div>
+          <div style="font-size:13px;opacity:.9;text-align:center;line-height:1.4;">話しかけて<br>ください</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROCESS -->
-<section class="process" id="process">
-  <div class="s-inner">
-    <div class="s-label reveal"><span class="s-num">— 03</span> 仕事のスタイル</div>
+<!-- ═══════════════════════════════ HOW TO ═══════════════════════════════ -->
+<section class="howto" id="how">
+  <div class="howto__header">
+    <div class="fade">
+      <div class="eyebrow">02 — USAGE</div>
+      <div class="howto__rule"></div>
+    </div>
+    <h2 class="howto__h2 fade" data-delay="1">使い方は、ない。</h2>
+  </div>
+  <div class="howto__steps">
+    <div class="howto__step fade" data-delay="1">
+      <div class="step-num">01</div>
+      <h3 class="step-title">文字盤をタップ</h3>
+      <p class="step-body">Apple Watch のコンプリケーションをタップするだけ。ポケットからスマホを取り出す必要はありません。</p>
+    </div>
+    <div class="howto__step fade" data-delay="2">
+      <div class="step-num">02</div>
+      <h3 class="step-title">声で話す</h3>
+      <p class="step-body">マイクに向かって話すと自動でテキスト化。手は使わなくていい。歩きながらでも、料理中でも。</p>
+    </div>
+    <div class="howto__step fade" data-delay="3">
+      <div class="step-num">03</div>
+      <h3 class="step-title">iPhoneに届く</h3>
+      <p class="step-body">保存すると同時に iPhone へ自動同期。すぐ使えて、いつでも見返せる。</p>
+    </div>
+  </div>
+</section>
 
-    <div class="process-list">
-      <div class="process-item reveal">
-        <div class="process-num">01</div>
-        <div class="process-body">
-          <div class="process-title">自分の渇望から発想する</div>
-          <div class="process-desc">「なぜ、これが世にないんだろう？」という問いがスタート。自分自身がユーザー0号として、課題を骨の髄まで理解している状態で設計に入る。</div>
+<!-- ═══════════════════════════════ FEATURES ═══════════════════════════════ -->
+
+<!-- 03 INSTANT LAUNCH — text left, mock right -->
+<section class="feature feature--tl" id="features">
+  <div class="feature__text">
+    <div class="slabel feature__slabel fade">
+      <span class="slabel__num">03 — FEATURE</span>
+      <span class="slabel__rule"></span>
+      <span class="slabel__tag">INSTANT LAUNCH</span>
+    </div>
+    <h2 class="feature__h2 fade" data-delay="1">上げるだけで、<br>起きている。</h2>
+    <p class="feature__body fade" data-delay="2">財布も、スマホも、関係ない。Apple Watch の文字盤から Watchメモを起動すれば、音声入力画面が即座に開きます。</p>
+  </div>
+  <div class="feature__mock feature__mock--r fade" data-delay="2">
+    <div class="watch" style="width:240px;height:300px;padding:14px;">
+      <div class="watch__crown"></div>
+      <div class="watch__side"></div>
+      <div class="watch__screen" style="width:212px;height:272px;">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px;width:100%;height:100%;">
+          <div style="font-family:var(--font-en);font-size:11px;letter-spacing:0.2em;opacity:.5;">WATCHMEMO</div>
+          <div style="width:56px;height:56px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.25),transparent 70%);"></div>
+          <div style="font-size:13px;opacity:.9;text-align:center;line-height:1.4;">話しかけて<br>ください</div>
         </div>
-        <div class="process-tag">Ideation</div>
-        <div class="process-arrow">→</div>
-      </div>
-      <div class="process-item reveal">
-        <div class="process-num">02</div>
-        <div class="process-body">
-          <div class="process-title">AIと設計を詰める</div>
-          <div class="process-desc">プログラムは一行も書けない。その代わり、「何を作るか」を徹底的に言語化する。伝える力がある側がAIを動かせば、圧倒的なスピードで形になる。</div>
-        </div>
-        <div class="process-tag">Build</div>
-        <div class="process-arrow">→</div>
-      </div>
-      <div class="process-item reveal">
-        <div class="process-num">03</div>
-        <div class="process-body">
-          <div class="process-title">小さく出して、育てる</div>
-          <div class="process-desc">完璧を待たずにアルファ版を展開。ユーザーの反応を見ながら磨き続ける。プロダクトが刺さった瞬間、サービスは急速に育ち始める。</div>
-        </div>
-        <div class="process-tag">Launch</div>
-        <div class="process-arrow">→</div>
-      </div>
-      <div class="process-item reveal">
-        <div class="process-num">04</div>
-        <div class="process-body">
-          <div class="process-title">次のアイデアへ</div>
-          <div class="process-desc">ポートフォリオが積み重なるほど、個人スタジオとしての力は増す。やりたいことは山のようにある。作り続ける理由は、尽きない。</div>
-        </div>
-        <div class="process-tag">Scale</div>
-        <div class="process-arrow">→</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PORTFOLIO -->
-<section class="portfolio" id="portfolio">
-  <div class="s-inner">
-    <div class="s-label reveal"><span class="s-num">— 04</span> つくったもの</div>
+<!-- 04 VOICE TO TEXT — mock left, text right -->
+<section class="feature feature--tr">
+  <div class="feature__mock feature__mock--l fade" data-delay="2">
+    <div class="watch" style="width:240px;height:300px;padding:14px;">
+      <div class="watch__crown"></div>
+      <div class="watch__side"></div>
+      <div class="watch__screen" style="width:212px;height:272px;">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:14px;width:100%;height:100%;">
+          <div style="font-family:var(--font-en);font-size:10px;opacity:.5;letter-spacing:.18em;">RECORDING</div>
+          <div style="display:flex;align-items:center;gap:3px;height:40px;">
+            <div style="width:3px;height:8px;background:#fff;border-radius:2px;opacity:.85;"></div>
+            <div style="width:3px;height:18px;background:#fff;border-radius:2px;opacity:.85;"></div>
+            <div style="width:3px;height:32px;background:#fff;border-radius:2px;opacity:.85;"></div>
+            <div style="width:3px;height:24px;background:#fff;border-radius:2px;opacity:.85;"></div>
+            <div style="width:3px;height:38px;background:#fff;border-radius:2px;opacity:.85;"></div>
+            <div style="width:3px;height:16px;background:#fff;border-radius:2px;opacity:.85;"></div>
+            <div style="width:3px;height:28px;background:#fff;border-radius:2px;opacity:.85;"></div>
+            <div style="width:3px;height:20px;background:#fff;border-radius:2px;opacity:.85;"></div>
+            <div style="width:3px;height:34px;background:#fff;border-radius:2px;opacity:.85;"></div>
+            <div style="width:3px;height:12px;background:#fff;border-radius:2px;opacity:.85;"></div>
+            <div style="width:3px;height:26px;background:#fff;border-radius:2px;opacity:.85;"></div>
+            <div style="width:3px;height:18px;background:#fff;border-radius:2px;opacity:.85;"></div>
+          </div>
+          <div style="font-size:10px;opacity:.6;">00:04</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="feature__text">
+    <div class="slabel feature__slabel fade">
+      <span class="slabel__num">04 — FEATURE</span>
+      <span class="slabel__rule"></span>
+      <span class="slabel__tag">VOICE TO TEXT</span>
+    </div>
+    <h2 class="feature__h2 fade" data-delay="1">話すだけで、<br>テキストになる。</h2>
+    <p class="feature__body fade" data-delay="2">Apple の音声認識技術を使って、話した言葉をそのままテキストに変換。保存ボタンを押すと腕に Taptic で確認が届きます。画面を見なくていい。</p>
+  </div>
+</section>
 
-    <!-- アプリ ベントーグリッド -->
-    <div class="portfolio-section-title reveal">アプリ</div>
-    <div class="portfolio-bento-apps">
-
-      <!-- Sinc（フィーチャード、2列） -->
-      <div class="portfolio-card bento-sinc reveal">
-        <div class="pc-logo-row">
-          <img src="images/sinc-logo.png" class="pc-logo-img" alt="Sinc">
-          <div class="pc-status live">
-            <span class="pc-status-dot"></span> Alpha — Live
+<!-- 05 iPHONE SYNC — text left, mock right -->
+<section class="feature feature--tl">
+  <div class="feature__text">
+    <div class="slabel feature__slabel fade">
+      <span class="slabel__num">05 — FEATURE</span>
+      <span class="slabel__rule"></span>
+      <span class="slabel__tag">iPHONE SYNC</span>
+    </div>
+    <h2 class="feature__h2 fade" data-delay="1">腕で取って、<br>手で読む。</h2>
+    <p class="feature__body fade" data-delay="2">Watch で保存したメモは自動で iPhone に届きます。タイムライン表示・ピン留め・スワイプ完了で、シンプルに管理できます。</p>
+  </div>
+  <div class="feature__mock feature__mock--r fade" data-delay="2">
+    <div class="phone" style="width:280px;height:574px;padding:10px;">
+      <div class="phone__bl1"></div><div class="phone__bl2"></div>
+      <div class="phone__bl3"></div><div class="phone__br"></div>
+      <div class="phone__screen" style="width:260px;height:554px;border-radius:9%;">
+        <div class="phone__island" style="width:90px;height:24px;"></div>
+        <div class="phone__status" style="padding:10px 22px 6px;font-size:14px;">
+          <span>9:41</span><span style="opacity:0;">·</span>
+        </div>
+        <div style="padding:12px 20px;">
+          <div style="font-size:22px;font-weight:400;letter-spacing:-0.03em;margin-bottom:16px;">watchメモ</div>
+          <div style="padding:14px 0;border-bottom:1px solid #f0f0f0;">
+            <div style="font-size:10px;color:#a1a1a6;font-family:var(--font-en);letter-spacing:.05em;margin-bottom:4px;">今日 · 14:32</div>
+            <div style="font-size:13px;line-height:1.5;font-weight:300;">新しいキャッチコピーの案を考えてみる</div>
+          </div>
+          <div style="padding:14px 0;border-bottom:1px solid #f0f0f0;">
+            <div style="font-size:10px;color:#a1a1a6;font-family:var(--font-en);letter-spacing:.05em;margin-bottom:4px;">今日 · 11:15</div>
+            <div style="font-size:13px;line-height:1.5;font-weight:300;">ランチはあの店にしよう</div>
+          </div>
+          <div style="padding:14px 0;border-bottom:1px solid #f0f0f0;">
+            <div style="font-size:10px;color:#a1a1a6;font-family:var(--font-en);letter-spacing:.05em;margin-bottom:4px;">昨日 · 22:47</div>
+            <div style="font-size:13px;line-height:1.5;font-weight:300;">読みたい本のタイトルをあとで検索</div>
+          </div>
+          <div style="padding:14px 0;">
+            <div style="font-size:10px;color:#a1a1a6;font-family:var(--font-en);letter-spacing:.05em;margin-bottom:4px;">昨日 · 09:03</div>
+            <div style="font-size:13px;line-height:1.5;font-weight:300;">MTGで話す内容を整理しておく</div>
           </div>
         </div>
-        <div class="pc-title">Sinc</div>
-        <div class="pc-category">性格診断 × コミュニティ SNS</div>
-        <div class="pc-desc">
-          136問の本格診断で32タイプに分類。同じタイプが集まる掲示板と、相性スコアで出会えるマッチング機能を持つ。「本当に話が合う人」と出会うために設計されたサービス。自分自身の生きづらさから生まれた。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 CARD VIEW — mock left, text right -->
+<section class="feature feature--tr">
+  <div class="feature__mock feature__mock--l fade" data-delay="2">
+    <div class="phone" style="width:280px;height:574px;padding:10px;">
+      <div class="phone__bl1"></div><div class="phone__bl2"></div>
+      <div class="phone__bl3"></div><div class="phone__br"></div>
+      <div class="phone__screen" style="width:260px;height:554px;border-radius:9%;">
+        <div class="phone__island" style="width:90px;height:24px;"></div>
+        <div class="phone__status" style="padding:10px 22px 6px;font-size:14px;">
+          <span>9:41</span><span style="opacity:0;">·</span>
         </div>
-        <div class="pc-tags">
-          <span class="pc-tag">Diagnosis</span>
-          <span class="pc-tag">Community</span>
-          <span class="pc-tag">Matching</span>
-          <span class="pc-tag">Web App</span>
-          <span class="pc-tag-accent">Claude Code</span>
-        </div>
-        <a href="https://sinc.strataix.net/lp.html" class="pc-link" target="_blank" rel="noopener">
-          Visit Service <span class="pc-link-icon">→</span>
-        </a>
-        <div class="store-badges">
-          <div class="store-badge">
-            <div class="store-badge-text">
-              <span class="store-badge-soon">Coming Soon</span>
-              <span class="store-badge-name">App Store</span>
+        <div style="padding:12px 16px;">
+          <div style="font-size:22px;font-weight:400;letter-spacing:-0.03em;margin-bottom:12px;">ボード</div>
+          <div style="display:flex;gap:6px;margin-bottom:14px;font-size:11px;flex-wrap:wrap;">
+            <span style="padding:5px 10px;border-radius:999px;background:#1d1d1f;color:#fff;">すべて</span>
+            <span style="padding:5px 10px;border-radius:999px;background:#f2f2f4;">仕事</span>
+            <span style="padding:5px 10px;border-radius:999px;background:#f2f2f4;">アイデア</span>
+            <span style="padding:5px 10px;border-radius:999px;background:#f2f2f4;">タスク</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div style="background:#fff7c2;border-radius:8px;padding:10px;min-height:78px;display:flex;flex-direction:column;justify-content:space-between;">
+              <div style="font-size:11px;line-height:1.45;color:#3a2f1a;">新しいキャッチコピーの案</div>
+              <div style="font-size:9px;color:#7a6f5a;font-family:var(--font-en);">14:32</div>
             </div>
-          </div>
-          <div class="store-badge">
-            <div class="store-badge-text">
-              <span class="store-badge-soon">Coming Soon</span>
-              <span class="store-badge-name">Google Play</span>
+            <div style="background:#d9e9ff;border-radius:8px;padding:10px;min-height:78px;display:flex;flex-direction:column;justify-content:space-between;">
+              <div style="font-size:11px;line-height:1.45;color:#3a2f1a;">ランチはあの店にしよう</div>
+              <div style="font-size:9px;color:#7a6f5a;font-family:var(--font-en);">11:15</div>
+            </div>
+            <div style="background:#ffe1d4;border-radius:8px;padding:10px;min-height:78px;display:flex;flex-direction:column;justify-content:space-between;">
+              <div style="font-size:11px;line-height:1.45;color:#3a2f1a;">読みたい本を検索する</div>
+              <div style="font-size:9px;color:#7a6f5a;font-family:var(--font-en);">昨日</div>
+            </div>
+            <div style="background:#e0e8d8;border-radius:8px;padding:10px;min-height:78px;display:flex;flex-direction:column;justify-content:space-between;">
+              <div style="font-size:11px;line-height:1.45;color:#3a2f1a;">MTGで話す内容を整理</div>
+              <div style="font-size:9px;color:#7a6f5a;font-family:var(--font-en);">昨日</div>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- こんだて番長（1列） -->
-      <div class="portfolio-card bento-kondate reveal reveal-delay-1">
-        <div class="pc-logo-row">
-          <!-- こんだて番長ロゴマーク（logo-mark.svg からインライン） -->
-          <svg class="pc-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="こんだて番長">
-            <circle cx="100" cy="100" r="90" fill="#FF6600"/>
-            <circle cx="100" cy="100" r="84" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"/>
-            <rect x="84" y="30" width="32" height="9" rx="4.5" fill="white" opacity="0.9"/>
-            <rect x="66" y="37" width="68" height="8" rx="3" fill="white" opacity="0.9"/>
-            <rect x="62" y="43" width="76" height="16" rx="3" fill="white" opacity="0.9"/>
-            <rect x="47" y="46" width="17" height="9" rx="4.5" fill="white" opacity="0.75"/>
-            <rect x="136" y="46" width="17" height="9" rx="4.5" fill="white" opacity="0.75"/>
-            <line x1="52" y1="96" x2="148" y2="96" stroke="white" stroke-width="1.2" opacity="0.45"/>
-            <text x="100" y="80" font-family="serif" font-size="20" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle" letter-spacing="4">こんだて</text>
-            <text x="100" y="128" font-family="serif" font-size="54" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">番長</text>
-          </svg>
-          <div class="pc-status live">
-            <span class="pc-status-dot"></span> Alpha — Live
-          </div>
-        </div>
-        <div class="pc-title">こんだて番長</div>
-        <div class="pc-category">AI 献立プランナー</div>
-        <div class="pc-desc">
-          今ある食材・気分・人数を入力するだけで、AIが今夜の献立を自動提案。200種超のレシピから毎日のメニューを生成。料理写真のシェア機能も搭載。コードゼロから生まれた、家族の食卓を変えるAIアシスタント。
-        </div>
-        <div class="pc-tags">
-          <span class="pc-tag">AI献立</span>
-          <span class="pc-tag">レシピ</span>
-          <span class="pc-tag">写真共有</span>
-          <span class="pc-tag-accent">Claude Code</span>
-        </div>
-        <a href="https://kondatebanchou.strataix.net/lp/" class="pc-link" target="_blank" rel="noopener">
-          Visit Service <span class="pc-link-icon">→</span>
-        </a>
-      </div>
-
-      <!-- Watchメモ（1列、coming） -->
-      <div class="portfolio-card bento-watchmemo coming reveal">
-        <div class="pc-status soon">
-          <span class="pc-status-dot"></span> In Development
-        </div>
-        <div class="pc-title">Watchメモ</div>
-        <div class="pc-category">Apple Watch × アプリ連携</div>
-        <div class="pc-desc">
-          Apple Watchと連携する便利アプリを開発中。
-        </div>
-        <div class="pc-tags">
-          <span class="pc-tag">Apple Watch</span>
-          <span class="pc-tag">iOS</span>
-        </div>
-      </div>
-
-      <!-- 相関図メーカー（2列、coming） -->
-      <div class="portfolio-card bento-soukan coming reveal reveal-delay-1">
-        <div class="pc-status soon">
-          <span class="pc-status-dot"></span> In Development
-        </div>
-        <div class="pc-title">相関図メーカー</div>
-        <div class="pc-category">人間関係を図で整理するアプリ</div>
-        <div class="pc-desc">
-          登場人物と関係性を入力するだけで相関図が自動生成。ドラマ・小説・職場の人間関係まで、複雑な関係をシンプルに可視化。
-        </div>
-        <div class="pc-tags">
-          <span class="pc-tag">Diagram</span>
-          <span class="pc-tag">Web App</span>
-          <span class="pc-tag">iOS / Android</span>
-        </div>
-      </div>
-
     </div>
-
-    <!-- Webツール -->
-    <div class="portfolio-section-title reveal">Webツール</div>
-    <div class="portfolio-grid-tools">
-
-      <div class="portfolio-card reveal">
-        <div class="pc-status live">
-          <span class="pc-status-dot"></span> Live
-        </div>
-        <div class="pc-title">AIワーク相性チェッカー</div>
-        <div class="pc-category">AIとの働き方タイプ診断</div>
-        <div class="pc-desc">
-          16問でわかる、あなたのAI活用スタイル。習熟度×興味の2軸で16タイプに分類。結果をシェアして仲間を見つけよう。
-        </div>
-        <div class="pc-tags">
-          <span class="pc-tag">AI</span>
-          <span class="pc-tag">Work</span>
-          <span class="pc-tag">Free</span>
-        </div>
-        <a href="https://checker.strataix.net/ai-work/" class="pc-link" target="_blank" rel="noopener">
-          診断する <span class="pc-link-icon">→</span>
-        </a>
-      </div>
-
-      <div class="portfolio-card reveal reveal-delay-1">
-        <div class="pc-status live">
-          <span class="pc-status-dot"></span> Live
-        </div>
-        <div class="pc-title">好かれ度チェッカー</div>
-        <div class="pc-category">人に好かれるタイプ診断</div>
-        <div class="pc-desc">
-          12問でわかる、あなたが人に好かれる理由。天然好かれ型・ムードメーカー型など5タイプ。シェアして友達と比べよう。
-        </div>
-        <div class="pc-tags">
-          <span class="pc-tag">Personality</span>
-          <span class="pc-tag">Social</span>
-          <span class="pc-tag">Free</span>
-        </div>
-        <a href="https://checker.strataix.net/moterudo/" class="pc-link" target="_blank" rel="noopener">
-          診断する <span class="pc-link-icon">→</span>
-        </a>
-      </div>
-
-      <div class="portfolio-card reveal reveal-delay-2">
-        <div class="pc-status live">
-          <span class="pc-status-dot"></span> Live
-        </div>
-        <div class="pc-title">職場適性チェッカー</div>
-        <div class="pc-category">あなたに合う職場環境診断</div>
-        <div class="pc-desc">
-          12問でわかる、あなたが輝ける職場タイプ。変化志向×協調志向の2軸でスタートアップ・大企業など5タイプに分類。
-        </div>
-        <div class="pc-tags">
-          <span class="pc-tag">Career</span>
-          <span class="pc-tag">Work</span>
-          <span class="pc-tag">Free</span>
-        </div>
-        <a href="https://checker.strataix.net/shokuba/" class="pc-link" target="_blank" rel="noopener">
-          診断する <span class="pc-link-icon">→</span>
-        </a>
-      </div>
-
+  </div>
+  <div class="feature__text">
+    <div class="slabel feature__slabel fade">
+      <span class="slabel__num">06 — FEATURE</span>
+      <span class="slabel__rule"></span>
+      <span class="slabel__tag">CARD VIEW</span>
     </div>
+    <h2 class="feature__h2 fade" data-delay="1">ためて、<br>仕分けする。</h2>
+    <p class="feature__body fade" data-delay="2">メモが溜まってきたら、ポストイット風のカードビューに切り替えられます。4つのフォルダタブで、自分だけのカテゴリに整理できます。</p>
   </div>
 </section>
 
-<!-- NOTE -->
-<section class="note-section" id="note">
-  <div class="s-inner">
-    <div class="s-label reveal"><span class="s-num">— 05</span> 書きもの</div>
-
-    <div class="note-layout">
-      <div class="note-left reveal">
-        <h2 class="note-title">
-          書けなくても、
-          <em>作れる。</em>
-        </h2>
-        <p class="note-desc">
-          プログラム知識ゼロのPMが、AIとともにどうやってサービスを作ったか。その過程と知見を、noteで公開中。
-          コードを書かなくても個人開発できる時代の、リアルな記録。
-        </p>
-        <a class="note-all-link" href="https://note.com/strataix" target="_blank" rel="noopener">
-          note で全記事を読む →
-        </a>
-      </div>
-
-      <div class="note-cards reveal reveal-delay-1">
-        <!-- 記事①：公開済み -->
-        <a class="note-card" href="https://note.com/strataix/n/n666e820df0fc" target="_blank" rel="noopener">
-          <img class="note-card-thumb" src="./images/note-01.png" alt="AIがX予約投稿を代わりにやってくれた話">
-          <div class="note-card-body">
-            <div class="note-card-badges">
-              <span class="note-badge note-badge-free">無料</span>
-            </div>
-            <div class="note-card-title">AIがXの予約投稿を代わりにやってくれた話——非エンジニアでもできた全手順</div>
-            <div class="note-card-link-label">note で読む →</div>
+<!-- 07 APP INTEGRATION — text left, mock right -->
+<section class="feature feature--tl">
+  <div class="feature__text">
+    <div class="slabel feature__slabel fade">
+      <span class="slabel__num">07 — FEATURE</span>
+      <span class="slabel__rule"></span>
+      <span class="slabel__tag">APP INTEGRATION</span>
+    </div>
+    <h2 class="feature__h2 fade" data-delay="1">取ったメモを、<br>すぐ展開する。</h2>
+    <p class="feature__body fade" data-delay="2">メモはそのまま他のアプリへ。ChatGPT や Claude に貼り付けて深掘り、Google で検索、Obsidian や Bear に保存。最適なツールへ流す。</p>
+  </div>
+  <div class="feature__mock feature__mock--r fade" data-delay="2">
+    <div class="phone" style="width:280px;height:574px;padding:10px;">
+      <div class="phone__bl1"></div><div class="phone__bl2"></div>
+      <div class="phone__bl3"></div><div class="phone__br"></div>
+      <div class="phone__screen" style="width:260px;height:554px;border-radius:9%;">
+        <div class="phone__island" style="width:90px;height:24px;"></div>
+        <div class="phone__status" style="padding:10px 22px 6px;font-size:14px;">
+          <span>9:41</span><span style="opacity:0;">·</span>
+        </div>
+        <div style="padding:12px 18px;">
+          <div style="background:#f5f5f7;border-radius:14px;padding:14px;margin-bottom:14px;">
+            <div style="font-size:9px;color:#a1a1a6;font-family:var(--font-en);margin-bottom:4px;">今日 9:38</div>
+            <div style="font-size:12px;line-height:1.55;font-weight:300;">次のMTGで話すこと：KPIの見直し、採用計画、Q2予算</div>
           </div>
-        </a>
-
-        <!-- 記事②：公開済み -->
-        <a class="note-card" href="https://note.com/strataix/n/n036c0e9f6335" target="_blank" rel="noopener">
-          <img class="note-card-thumb" src="https://assets.st-note.com/production/uploads/images/262056101/rectangle_large_type_2_8c22141eae5b8994ac708cf950c12688.png?fit=bounds&quality=85&width=1280" alt="AIがnoteの記事投稿まで代わりにやってくれた話">
-          <div class="note-card-body">
-            <div class="note-card-badges">
-              <span class="note-badge note-badge-free">無料</span>
+          <div style="font-size:10px;color:#6e6e73;margin-bottom:8px;font-family:var(--font-en);letter-spacing:.08em;">SHARE TO</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+            <div style="background:#f5f5f7;border-radius:12px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div style="font-size:22px;">💬</div><div style="font-size:9px;">ChatGPT</div>
             </div>
-            <div class="note-card-title">AIがnoteの記事投稿まで代わりにやってくれた話——X自動化の次にやったこと（Windowsでもできる）</div>
-            <div class="note-card-link-label">note で読む →</div>
-          </div>
-        </a>
-
-        <!-- 記事③：公開済み -->
-        <a class="note-card" href="https://note.com/strataix/n/nc656401ce662" target="_blank" rel="noopener">
-          <img class="note-card-thumb" src="https://assets.st-note.com/production/uploads/images/263136295/rectangle_large_type_2_0e140e5b7aaca7552223039ab585a8eb.png?fit=bounds&quality=85&width=1280" alt="Claudeのcoworkで5時間分の枠を溶かして分かった正しい使い方">
-          <div class="note-card-body">
-            <div class="note-card-badges">
-              <span class="note-badge note-badge-free">無料</span>
+            <div style="background:#f5f5f7;border-radius:12px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div style="font-size:22px;">🤖</div><div style="font-size:9px;">Claude</div>
             </div>
-            <div class="note-card-title">Claudeのcoworkで5時間分の枠を溶かして分かった"正しい使い方"</div>
-            <div class="note-card-link-label">note で読む →</div>
-          </div>
-        </a>
-
-        <!-- 記事④：公開済み -->
-        <a class="note-card" href="https://note.com/strataix/n/n73c105523fdc" target="_blank" rel="noopener">
-          <img class="note-card-thumb" src="./images/note-07.png" alt="ClaudeCodeを生かすための最大の能力は「判断力」だ">
-          <div class="note-card-body">
-            <div class="note-card-badges">
-              <span class="note-badge note-badge-free">無料</span>
+            <div style="background:#f5f5f7;border-radius:12px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div style="font-size:22px;">🔍</div><div style="font-size:9px;">Google</div>
             </div>
-            <div class="note-card-title">ClaudeCodeを生かすための最大の能力は「判断力」だ</div>
-            <div class="note-card-link-label">note で読む →</div>
+            <div style="background:#f5f5f7;border-radius:12px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div style="font-size:22px;">📓</div><div style="font-size:9px;">Obsidian</div>
+            </div>
+            <div style="background:#f5f5f7;border-radius:12px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div style="font-size:22px;">🐻</div><div style="font-size:9px;">Bear</div>
+            </div>
+            <div style="background:#f5f5f7;border-radius:12px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div style="font-size:22px;">📋</div><div style="font-size:9px;">コピー</div>
+            </div>
           </div>
-        </a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONSULTING -->
-<section class="consulting-section" id="consulting">
-  <div class="s-inner">
-    <div class="s-label reveal"><span class="s-num">— 06</span> AI活用サポート</div>
-
-    <div class="consulting-layout">
-
-      <!-- 左：テキスト -->
-      <div class="consulting-left">
-        <h2 class="consulting-title reveal">
-          AIで仕事が変わった。<br>
-          <em>同じことを、一緒にやりましょう。</em>
-        </h2>
-        <p class="consulting-desc reveal">
-          現役マーケターとして毎日AIを実務に使い、自分の作業時間を10分の1にしました。<br>
-          高いツールも、エンジニアへの依頼も不要です。<br>
-          同じことをあなたの仕事で実現するための、1on1サポートです。
-        </p>
-        <div class="consulting-proof reveal">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          大手企業 現役マーケターによる実践知
+<!-- 08 WIDGET — mock left, text right -->
+<section class="feature feature--tr">
+  <div class="feature__mock feature__mock--l fade" data-delay="2">
+    <div class="phone" style="width:280px;height:574px;padding:10px;">
+      <div class="phone__bl1"></div><div class="phone__bl2"></div>
+      <div class="phone__bl3"></div><div class="phone__br"></div>
+      <div class="phone__screen phone__screen--dark" style="width:260px;height:554px;border-radius:9%;">
+        <div class="phone__island" style="width:90px;height:24px;background:#111;"></div>
+        <div class="phone__status" style="padding:10px 22px 6px;font-size:14px;color:#fff;">
+          <span>9:41</span><span style="opacity:0;">·</span>
         </div>
-        <a href="mailto:info@strataix.net" class="consulting-cta reveal">
-          まずは相談してみる →
-        </a>
-        <p class="consulting-sub reveal">お気軽にどうぞ。返信まで2〜3営業日いただきます。</p>
-      </div>
-
-      <!-- 右：できること -->
-      <div class="consulting-features reveal reveal-delay-1">
-        <div class="consulting-feature">
-          <span class="consulting-feature-icon">⚡</span>
-          <div>
-            <div class="consulting-feature-title">繰り返し作業をなくす</div>
-            <div class="consulting-feature-body">リストの転記、メールの下書き、定期集計——毎日やっている単純作業を、AIとExcelマクロで一瞬にします。</div>
+        <div style="padding:14px 18px;display:flex;flex-direction:column;justify-content:center;gap:12px;height:calc(100% - 44px);">
+          <div style="background:rgba(255,255,255,.08);border-radius:18px;padding:14px;">
+            <div style="font-size:9px;opacity:.5;font-family:var(--font-en);letter-spacing:.1em;margin-bottom:6px;">WATCHMEMO</div>
+            <div style="font-size:12px;line-height:1.5;font-weight:300;margin-bottom:8px;">次のMTGで話すこと：KPIの見直し、採用計画、Q2予算</div>
+            <div style="font-size:9px;opacity:.4;font-family:var(--font-en);">今日 9:38</div>
           </div>
-        </div>
-        <div class="consulting-feature">
-          <span class="consulting-feature-icon">📊</span>
-          <div>
-            <div class="consulting-feature-title">データを自動で集めて見える化する</div>
-            <div class="consulting-feature-body">APIやPower Queryでデータ収集を自動化。Power BIで他部署にも共有できるダッシュボードを構築します。</div>
-          </div>
-        </div>
-        <div class="consulting-feature">
-          <span class="consulting-feature-icon">🎯</span>
-          <div>
-            <div class="consulting-feature-title">「自分でできる」が身につく</div>
-            <div class="consulting-feature-body">ツールを渡して終わりではありません。あなたが自走できるまで1on1で伴走。部下への展開もサポートします。</div>
+          <div style="background:rgba(255,255,255,.08);border-radius:18px;padding:14px;">
+            <div style="font-size:9px;opacity:.5;font-family:var(--font-en);letter-spacing:.1em;margin-bottom:6px;">WATCHMEMO</div>
+            <div style="font-size:12px;line-height:1.5;font-weight:300;margin-bottom:8px;">新しいキャッチコピーのアイデア</div>
+            <div style="font-size:9px;opacity:.4;font-family:var(--font-en);">昨日 14:32</div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="feature__text">
+    <div class="slabel feature__slabel fade">
+      <span class="slabel__num">08 — FEATURE</span>
+      <span class="slabel__rule"></span>
+      <span class="slabel__tag">WIDGET</span>
+    </div>
+    <h2 class="feature__h2 fade" data-delay="1">メモを、<br>ホーム画面に<br>貼っておく。</h2>
+    <p class="feature__body fade" data-delay="2">iPhone のホーム画面にウィジェットを配置すれば、アプリを開かずにメモを確認できます。日時と内容を表示、左右ボタンで前後のメモへ。</p>
+  </div>
+</section>
 
+<!-- ═══════════════════════════════ PRIVACY DARK ═══════════════════════════════ -->
+<section class="privacy-dark" id="privacy">
+  <div class="slabel fade">
+    <span class="slabel__num">09 — PRIVACY</span>
+    <span class="slabel__rule"></span>
+  </div>
+  <h2 class="privacy-dark__h2 fade" data-delay="1">
+    他には、<br>何にも無い。
+  </h2>
+  <p class="privacy-dark__body fade" data-delay="2">
+    当社のサーバーには何も届きません。音声も、テキストも、すべてあなたのデバイスの中だけ。Wi-Fi もクラウドも、必要ない。
+  </p>
+  <div class="privacy-dark__grid fade" data-delay="3">
+    <div class="privacy-dark__item">
+      <div class="pdi-en">NO SERVERS</div>
+      <div class="pdi-jp">サーバーなし</div>
+    </div>
+    <div class="privacy-dark__item">
+      <div class="pdi-en">NO ADS</div>
+      <div class="pdi-jp">広告なし</div>
+    </div>
+    <div class="privacy-dark__item">
+      <div class="pdi-en">NO DATA SALE</div>
+      <div class="pdi-jp">データ販売なし</div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact-section" id="contact">
-  <div class="s-inner">
-    <div class="contact-inner">
-      <div class="s-label reveal"><span class="s-num">— 07</span> 話しかける</div>
-      <h2 class="contact-heading reveal">
-        何か、一緒に<br>
-        <em>作りませんか。</em>
-      </h2>
-      <p class="contact-body reveal">
-        プロダクト開発の相談、コラボレーション、取材など、お気軽にどうぞ。<br>
-        「こういうサービスがあればいいのに」という話は大歓迎です。<br>
-        誰も解いていない問い——そこに、一番面白い仕事があると思っています。
-      </p>
-      <div class="contact-row reveal">
-        <a href="mailto:info@strataix.net" class="contact-mail">info@strataix.net</a>
-        <a href="https://x.com/StratAIX_AI" class="contact-x" target="_blank" rel="noopener">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L2.25 2.25h6.928l4.279 5.652zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          @StratAIX_AI
-        </a>
-        <p class="contact-note">通常2〜3営業日以内にご返信します</p>
-      </div>
+<!-- ═══════════════════════════════ PRICING ═══════════════════════════════ -->
+<section class="pricing" id="pricing">
+  <div>
+    <div class="slabel fade">
+      <span class="slabel__num">10 — PRICING</span>
+      <span class="slabel__rule"></span>
+    </div>
+    <h2 class="pricing__h2 fade" data-delay="1">一度だけ、払う。<br>ずっと、使う。</h2>
+    <p class="pricing__body fade" data-delay="2">サブスクなし、広告なし、追加課金なし。サーバーコストがないから、永続的に維持できる。</p>
+    <a href="https://x.com/StratAIX_AI" class="btn fade" data-delay="3">リリース通知を受け取る</a>
+  </div>
+  <div class="pricing__list fade" data-delay="2">
+    <div class="pricing__item">
+      <span class="pi-en">NO SUBSCRIPTION</span>
+      <span class="pi-jp">サブスクなし</span>
+    </div>
+    <div class="pricing__item">
+      <span class="pi-en">NO ADS</span>
+      <span class="pi-jp">広告なし</span>
+    </div>
+    <div class="pricing__item">
+      <span class="pi-en">NO IN-APP PURCHASE</span>
+      <span class="pi-jp">追加課金なし</span>
+    </div>
+    <div class="pricing__item">
+      <span class="pi-en">NO DATA SALE</span>
+      <span class="pi-jp">データ販売なし</span>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <a class="footer-logo" href="#top">
-      <img src="images/StratAIX_logo_transparent.png" alt="StratAIX">
-    </a>
-    <div class="footer-links">
-      <a href="https://x.com/StratAIX_AI" target="_blank" rel="noopener">X / @StratAIX_AI</a>
-      <a href="https://sinc.strataix.net/trust.html" target="_blank" rel="noopener">安心してご利用いただくために</a>
+<!-- ═══════════════════════════════ POLICY ═══════════════════════════════ -->
+<section class="policy">
+  <div class="fade">
+    <div class="policy__label">11 — POLICY</div>
+    <h2 class="policy__h2">個人情報の<br>取り扱いについて</h2>
+  </div>
+  <div class="fade" data-delay="1">
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">
+        <span>第1条 事業者情報</span><span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body">本アプリ「Watchメモ」は、StratAIX が開発・提供しております。お問い合わせは support@strataix.net まで。</div>
     </div>
-    <span class="footer-copy">© 2026 StratAIX</span>
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">
+        <span>第2条 収集する情報</span><span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body">当社は、本アプリを通じて個人識別情報を収集しません。メモの内容はすべてお客様のデバイス内にのみ保存されます。</div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">
+        <span>第3条 マイクの使用について</span><span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body">音声入力には Apple の音声認識技術を経由します。当社が音声データを収集・保存することはありません。</div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">
+        <span>第4条 データの保管</span><span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body">すべてのメモデータはお客様の iPhone および Apple Watch 内にのみ保存されます。</div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">
+        <span>第5条 第三者への提供</span><span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body">当社はお客様の個人情報を第三者に提供・販売・貸与することは一切ありません。</div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">
+        <span>第6条 ポリシーの変更</span><span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body">本ポリシーは必要に応じて変更される場合があります。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer class="footer">
+  <div class="footer__grid">
+    <div>
+      <div class="footer__brand-name">WATCHMEMO</div>
+      <p class="footer__brand-desc">Apple Watch 専用メモアプリ。iPhone を取り出さず、声だけで記録する。</p>
+    </div>
+    <div>
+      <div class="footer__col-title">PRODUCT</div>
+      <div class="footer__col-item"><a href="#how">How it works</a></div>
+      <div class="footer__col-item"><a href="#features">Features</a></div>
+      <div class="footer__col-item"><a href="#pricing">Pricing</a></div>
+    </div>
+    <div>
+      <div class="footer__col-title">COMPANY</div>
+      <div class="footer__col-item"><a href="https://strataix.net">StratAIX</a></div>
+    </div>
+    <div>
+      <div class="footer__col-title">CONTACT</div>
+      <div class="footer__col-item"><a href="mailto:support@strataix.net">support@strataix.net</a></div>
+      <div class="footer__col-item"><a href="https://x.com/StratAIX_AI">@StratAIX_AI</a></div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div>StratAIX © 2026</div>
+    <div class="footer__legal">
+      Apple、Apple Watch、iPhone は Apple Inc. の商標です。ChatGPT® は OpenAI, Inc.、Claude® は Anthropic, PBC、Google™ は Google LLC の商標です。当アプリはこれらのサービスとの提携・承認関係にありません。
+    </div>
   </div>
 </footer>
-<p class="trademark-note">Apple and the Apple logo are trademarks of Apple Inc. App Store is a service mark of Apple Inc., registered in the U.S. and other countries. Google Play and the Google Play logo are trademarks of Google LLC.</p>
 
 <script>
-// ─── マトリックス雨（軽量版）────────────────────────────
-(function() {
-  const canvas = document.getElementById('matrixCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const FS = 14;
-  // 色テーブルを起動時に一度だけ生成（毎フレームの文字列生成を排除）
-  const BODY_COLORS = Array.from({length: 20}, (_, i) =>
-    'rgba(0,190,220,' + ((1 - i / 20) * 0.28).toFixed(2) + ')'
-  );
-  const HEAD_COLOR = 'rgba(120,235,255,0.82)';
+  // ── BudouX: 日本語自然改行 ──
+  (function(){
+    if(typeof budoux==='undefined') return;
+    var parser=budoux.loadDefaultJapaneseParser();
+    // デバイスモック内部は除外し、LP本文の見出し・本文のみ適用
+    var targets=[
+      '.hero__title','.hero__body',
+      '.howto__h2','.step-title','.step-body',
+      '.feature__h2','.feature__body',
+      '.privacy-dark__h2','.privacy-dark__body',
+      '.pricing__h2','.pricing__body',
+      '.policy__h2',
+      '.acc-btn span:first-child',
+      '.footer__brand-desc',
+    ];
+    targets.forEach(function(sel){
+      document.querySelectorAll(sel).forEach(function(el){
+        parser.applyElement(el);
+      });
+    });
+  })();
 
-  let streams = [], raf = 0, last = 0, visible = false;
+  // ── IntersectionObserver ──
+  (function(){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        }
+      });
+    },{threshold:0.05,rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.fade').forEach(function(el){io.observe(el);});
+  })();
 
-  function resetStream(s, scattered) {
-    s.y      = scattered ? Math.random() * (canvas.height / FS + 40) - 40 : -(Math.random() * 30 + 5);
-    s.len    = 7 + Math.floor(Math.random() * 11);
-    s.speed  = 0.35 + Math.random() * 0.55;
-    for (let k = 0; k < s.chars.length; k++) s.chars[k] = Math.random() > 0.5 ? '1' : '0';
+  // ── Accordion ──
+  function toggleAcc(btn){
+    var icon=btn.querySelector('.acc-icon');
+    var body=btn.nextElementSibling;
+    var open=body.classList.contains('open');
+    document.querySelectorAll('.acc-body.open').forEach(function(b){b.classList.remove('open');});
+    document.querySelectorAll('.acc-icon.open').forEach(function(i){i.classList.remove('open');});
+    if(!open){body.classList.add('open');icon.classList.add('open');}
   }
-
-  function resize() {
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-    const cols = Math.floor(canvas.width / FS);
-    // 既存ストリームを再利用、足りない分だけ追加
-    while (streams.length < cols) {
-      const s = { col: streams.length, y: 0, len: 10, speed: 0.5, chars: new Array(24) };
-      resetStream(s, true);
-      streams.push(s);
-    }
-    streams.length = cols; // 余分をカット
-    ctx.font = FS + 'px monospace'; // サイズ変更後に再設定
-  }
-
-  function tick(t) {
-    if (!visible) return;
-    raf = requestAnimationFrame(tick);
-    if (t - last < 50) return; // 20fps上限
-    last = t;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (const s of streams) {
-      for (let j = 0; j < s.len; j++) {
-        const fy = (s.y - j) * FS;
-        if (fy < -FS || fy > canvas.height) continue;
-        if (Math.random() > 0.92) s.chars[j % 24] = Math.random() > 0.5 ? '1' : '0';
-        ctx.fillStyle = j === 0 ? HEAD_COLOR : BODY_COLORS[Math.min(Math.floor(j / s.len * 20), 19)];
-        ctx.fillText(s.chars[j % 24], s.col * FS, fy);
-      }
-      s.y += s.speed;
-      if ((s.y - s.len) * FS > canvas.height) resetStream(s, false);
-    }
-  }
-
-  // ヒーローが画面外に出たらRAFを停止（スクロール後のCPU消費ゼロ）
-  new IntersectionObserver(entries => {
-    visible = entries[0].isIntersecting;
-    if (visible && !raf) { last = 0; raf = requestAnimationFrame(tick); }
-    else if (!visible)   { cancelAnimationFrame(raf); raf = 0; }
-  }, { threshold: 0 }).observe(canvas);
-
-  // リサイズはデバウンスして200ms後に1回だけ実行
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => { resize(); }, 200);
-  }, { passive: true });
-
-  resize();
-  ctx.font = FS + 'px monospace';
-  visible = true;
-  raf = requestAnimationFrame(tick);
-})();
-
-// ナビ スクロール
-const nav = document.getElementById('mainNav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive:true });
-
-// ハンバーガーメニュー
-const hamburger = document.getElementById('navHamburger');
-const drawer = document.getElementById('navDrawer');
-hamburger.addEventListener('click', () => {
-  const isOpen = drawer.classList.toggle('open');
-  hamburger.classList.toggle('open', isOpen);
-  hamburger.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
-drawer.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    drawer.classList.remove('open');
-    hamburger.classList.remove('open');
-    document.body.style.overflow = '';
-  });
-});
-
-// スクロールリビール
-const revealEls = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-  });
-}, { threshold:.06, rootMargin:'0px 0px -40px 0px' });
-revealEls.forEach(el => io.observe(el));
 </script>
-
-<!-- BudouX: 日本語テキストの自然な折り返し（Google製） -->
-<script src="https://unpkg.com/budoux/bundle/budoux-ja.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded',function(){
-  if(typeof budoux==='undefined') return;
-  var parser=budoux.loadDefaultJapaneseParser();
-  var sel='.hero-desc,.about-body p,.pc-desc,.note-desc,.claude-comment-body p';
-  document.querySelectorAll(sel).forEach(function(el){
-    el.innerHTML=parser.translateHTMLString(el.innerHTML);
-  });
-});
-</script>
-<!-- Google AdSense（レンダリングブロック回避のため body 末尾に配置）-->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7018374006710584" crossorigin="anonymous"></script>
 </body>
 </html>
