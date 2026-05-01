@@ -7,7 +7,7 @@
   <meta name="description" content="Apple Watchに話しかけるだけ。iPhoneは、いらない。あなたの言葉は、すぐにiPhoneへ届いている。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Noto+Sans+JP:wght@200;300&family=Noto+Sans+KR:wght@200;300&family=Noto+Sans+SC:wght@200;300&family=Noto+Sans+TC:wght@200;300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Noto+Sans+Arabic:wght@300;400&family=Noto+Sans+JP:wght@200;300&family=Noto+Sans+KR:wght@200;300&family=Noto+Sans+SC:wght@200;300&family=Noto+Sans+TC:wght@200;300&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/budoux/bundle/budoux.min.js"></script>
   <style>
     /* ── Tokens ── */
@@ -24,6 +24,7 @@
       --font-sc: "Noto Sans SC",sans-serif;
       --font-tc: "Noto Sans TC",sans-serif;
       --font-kr: "Noto Sans KR",sans-serif;
+      --font-ar: "Noto Sans Arabic",sans-serif;
     }
 
     /* ── Reset ── */
@@ -92,7 +93,7 @@
     .lang-panel{
       display:none;position:absolute;top:calc(100% + 12px);right:0;
       background:#fff;border:1px solid var(--hairline);
-      min-width:156px;z-index:200;
+      min-width:156px;z-index:200;max-height:380px;overflow-y:auto;
     }
     .lang-panel.open{display:block;}
     .lang-opt{
@@ -259,6 +260,11 @@
       <button class="lang-opt" data-lang="zh-hans" onclick="setLang('zh-hans')"><span class="lang-opt__code">简</span>简体中文</button>
       <button class="lang-opt" data-lang="zh-hant" onclick="setLang('zh-hant')"><span class="lang-opt__code">繁</span>繁體中文</button>
       <button class="lang-opt" data-lang="ko" onclick="setLang('ko')"><span class="lang-opt__code">KO</span>한국어</button>
+      <button class="lang-opt" data-lang="de" onclick="setLang('de')"><span class="lang-opt__code">DE</span>Deutsch</button>
+      <button class="lang-opt" data-lang="es" onclick="setLang('es')"><span class="lang-opt__code">ES</span>Español</button>
+      <button class="lang-opt" data-lang="fr" onclick="setLang('fr')"><span class="lang-opt__code">FR</span>Français</button>
+      <button class="lang-opt" data-lang="pt-BR" onclick="setLang('pt-BR')"><span class="lang-opt__code">PT</span>Português</button>
+      <button class="lang-opt" data-lang="ar" onclick="setLang('ar')"><span class="lang-opt__code">AR</span>العربية</button>
     </div>
   </div>
 </nav>
@@ -825,6 +831,216 @@ var T = {
     footerCopyright:'StratAIX © 2026',
     footerLegal:'Apple, Apple Watch, iPhone은 Apple Inc.의 상표입니다. ChatGPT®는 OpenAI, Inc., Claude®는 Anthropic, PBC, Google™은 Google LLC의 상표입니다. 본 앱은 이러한 서비스와 제휴·인증 관계에 있지 않습니다.',
   },
+  de: {
+    heroSubLabel:'NUR FÜR APPLE WATCH',
+    heroTitle:'Deine Watch,<br>dein Notizbuch.',
+    heroBody:'Sprich einfach mit deiner Apple Watch. Kein iPhone nötig. Deine Worte kommen sofort auf dem iPhone an.',
+    heroCta:'X folgen & Benachrichtigung erhalten',
+    howH2:'Keine Einarbeitung nötig.',
+    step1Title:'Zifferblatt antippen', step1Body:'Tippe auf die Watch Voice Memo Komplikation deiner Apple Watch. Kein Griff zum Smartphone nötig.',
+    step2Title:'Sprechen', step2Body:'Sprich ins Mikrofon und deine Worte werden automatisch in Text umgewandelt. Freihändig — beim Gehen, Kochen oder überall sonst.',
+    step3Title:'Kommt aufs iPhone', step3Body:'Gespeicherte Notizen werden sofort mit dem iPhone synchronisiert. Immer griffbereit.',
+    f03Title:'Handgelenk heben.<br>Sofort bereit.', f03Body:'Keine Geldbörse, kein Telefon nötig. Starte Watch Voice Memo vom Zifferblatt und der Spracheingabe-Screen öffnet sich sofort.',
+    f04Title:'Sprechen.<br>Wird zu Text.', f04Body:'Apples Spracherkennung wandelt deine Worte in Echtzeit um. Eine Taptic-Bestätigung kommt ans Handgelenk beim Speichern. Nie auf den Bildschirm schauen.',
+    f05Title:'Am Handgelenk erfasst.<br>Am Phone gelesen.', f05Body:'Auf der Watch gespeicherte Notizen kommen automatisch aufs iPhone. Timeline-Ansicht, Anheften und Wischen halten alles einfach.',
+    f06Title:'Sammeln.<br>Sortieren.', f06Body:'Wechsle in eine Haftzettel-Kartenansicht wenn Notizen sich anhäufen. Vier Ordner-Tabs lassen dich nach eigenen Kategorien organisieren.',
+    f07Title:'Erfasst. Jetzt<br>einsetzen.', f07Body:'Sende jede Notiz direkt an eine andere App — in ChatGPT oder Claude einfügen, bei Google suchen, in Obsidian oder Bear speichern.',
+    f08Title:'Notizen ans<br>Startbildschirm heften.', f08Body:'Füge ein Widget zum iPhone-Startbildschirm hinzu um Notizen ohne App-Öffnen zu sehen. Zeigt Datum und Inhalt; navigiere mit Links/Rechts-Tasten.',
+    privacyH2:'Nirgendwo<br>sonst.', privacyBody:'Nichts erreicht unsere Server. Deine Notizen und Einstellungen bleiben nur auf deinem Gerät. Die Spracherkennung wird von Apples System verarbeitet — wir erhalten nie deine Daten.',
+    privacyNoServersSub:'Ohne Server', privacyNoAdsSub:'Ohne Werbung', privacyNoDataSub:'Nie verkauft',
+    pricingH2:'Einmal zahlen.<br>Für immer nutzen.', pricingBody:'Kein Abo, keine Werbung, keine Extrakosten. Keine Serverkosten bedeutet dauerhaft so.', pricingCta:'Beim Launch benachrichtigt werden',
+    pricingNoSubJp:'Kein Abo', pricingNoAdsJp:'Keine Werbung', pricingNoIapJp:'Keine Extrakosten', pricingNoDataJp:'Daten nie verkauft',
+    policyH2:'Datenschutz-<br>richtlinie',
+    art1Title:'Artikel 1 — Entwickler', art1Body:'Watch Voice Memo wird von StratAIX entwickelt und bereitgestellt. Für Anfragen: support@strataix.net.',
+    art2Title:'Artikel 2 — Gesammelte Daten', art2Body:'Wir erheben keine personenbezogenen Daten durch diese App. Alle Notizdaten werden nur auf deinem Gerät gespeichert.',
+    art3Title:'Artikel 3 — Mikrofonnutzung', art3Body:'Die Spracheingabe nutzt Apples Systemspracherkennung. Audiodaten werden von Apples Systemen verarbeitet und nie auf unseren Servern gesammelt oder gespeichert.',
+    art4Title:'Artikel 4 — Datenspeicherung', art4Body:'Alle Notizdaten werden ausschließlich auf deinem iPhone und Apple Watch gespeichert. Wenn du die Teilen-Funktion nutzt, wird Text durch deine eigene Aktion an externe Apps gesendet.',
+    art5Title:'Artikel 5 — Datenweitergabe', art5Body:'Wir geben, verkaufen oder verleihen deine personenbezogenen Daten nie an Dritte. Apples Datenschutzrichtlinie (apple.com/privacy) gilt für die Spracherkennungsverarbeitung.',
+    art6Title:'Artikel 6 — Richtlinienänderungen', art6Body:'Diese Richtlinie kann nach Bedarf aktualisiert werden.',
+    art7Title:'Artikel 7 — Deine Rechte', art7Body:'Du kannst alle gespeicherten Daten durch App-Optionen oder Deinstallation löschen. Da Daten nur auf deinem Gerät existieren, ist kein Löschantrag bei uns nötig.',
+    art8Title:'Artikel 8 — Zuletzt aktualisiert', art8Body:'29. April 2026',
+    footerDesc:'Sprachnotiz-App für Apple Watch. Aufnehmen ohne iPhone herausnehmen zu müssen.',
+    footerProduct:'PRODUKT', footerCompany:'UNTERNEHMEN', footerContact:'KONTAKT',
+    footerHow:'So funktioniert\'s', footerFeatures:'Funktionen', footerPricing:'Preise',
+    mockCopy:'Kopieren',
+    mockWatchPrompt:'Jetzt<br>sprechen',
+    mockDate1:'Heute · 14:32', mockDate2:'Heute · 11:15', mockDate3:'Gestern · 22:47', mockDate4:'Gestern · 09:03',
+    mockMemo1:'Neue Slogan-Ideen ausarbeiten', mockMemo2:'Zum Mittagessen in das Restaurant', mockMemo3:'Buchtitel später suchen', mockMemo4:'Gesprächspunkte fürs Meeting',
+    mockBoardTitle:'Board', mockTabAll:'Alle', mockTabWork:'Arbeit', mockTabIdea:'Idee', mockTabTask:'Aufgabe',
+    mockCard1:'Neue Slogan-Ideen', mockCard2:'Restaurant zum Mittagessen', mockCard3:'Buch suchen', mockCard4:'Meeting-Notizen', mockYesterday:'Gestern',
+    mockShareDate:'Heute 9:38', mockShareMemo:'Nächstes Meeting: KPIs prüfen, Einstellungsplan, Q2-Budget',
+    mockWidget1Memo:'Nächstes Meeting: KPIs prüfen, Einstellungsplan, Q2-Budget', mockWidget1Date:'Heute 9:38', mockWidget2Memo:'Neue Slogan-Ideen', mockWidget2Date:'Gestern 14:32',
+    footerCopyright:'StratAIX © 2026',
+    footerLegal:'Apple, Apple Watch und iPhone sind Marken von Apple Inc. ChatGPT® ist eine Marke von OpenAI, Inc. Claude® ist eine Marke von Anthropic, PBC. Google™ ist eine Marke von Google LLC. Diese App ist nicht mit diesen Diensten verbunden oder von ihnen gebilligt.',
+  },
+  es: {
+    heroSubLabel:'EXCLUSIVO PARA APPLE WATCH',
+    heroTitle:'Tu Watch,<br>tu bloc de notas.',
+    heroBody:'Solo habla a tu Apple Watch. Sin iPhone. Tus palabras llegan al iPhone en el momento en que las guardas.',
+    heroCta:'Seguir en X para novedades',
+    howH2:'Sin curva de aprendizaje.',
+    step1Title:'Toca la carátula', step1Body:'Toca la complicación de Watch Voice Memo en tu Apple Watch. Sin necesidad de sacar el teléfono.',
+    step2Title:'Habla', step2Body:'Habla al micrófono y tus palabras se transcriben automáticamente. Manos libres — caminando, cocinando o en cualquier otra actividad.',
+    step3Title:'Llega al iPhone', step3Body:'Las notas guardadas se sincronizan al iPhone al instante. Listas para usar, siempre accesibles.',
+    f03Title:'Levanta la muñeca.<br>Ya está lista.', f03Body:'Sin billetera, sin teléfono. Abre Watch Voice Memo desde la carátula y la pantalla de voz se abre de inmediato.',
+    f04Title:'Habla.<br>Es texto.', f04Body:'El reconocimiento de voz de Apple convierte tus palabras en texto en tiempo real. Una confirmación Taptic llega a tu muñeca al guardar. Sin mirar la pantalla.',
+    f05Title:'Grabado en la muñeca.<br>Leído en la mano.', f05Body:'Las notas guardadas en Watch llegan al iPhone automáticamente. Vista de línea de tiempo, fijar y deslizar para completar mantienen todo simple.',
+    f06Title:'Recopilar.<br>Ordenar.', f06Body:'Cambia a una vista de tarjetas tipo post-it cuando las notas se acumulen. Cuatro pestañas de carpetas para organizar por tus propias categorías.',
+    f07Title:'Grabado. Ahora<br>ponlo a trabajar.', f07Body:'Envía cualquier nota a otra app — pégala en ChatGPT o Claude, busca en Google, guarda en Obsidian o Bear.',
+    f08Title:'Fija notas en<br>tu pantalla de inicio.', f08Body:'Añade un widget a la pantalla de inicio del iPhone para ver notas sin abrir la app. Muestra fecha y contenido; navega con botones izquierda/derecha.',
+    privacyH2:'Nada más.<br>En ningún otro lugar.', privacyBody:'Nada llega a nuestros servidores. Tus notas y configuración permanecen solo en tu dispositivo. El reconocimiento de voz lo gestiona el sistema de Apple — nunca recibimos tus datos.',
+    privacyNoServersSub:'Sin servidor', privacyNoAdsSub:'Sin anuncios', privacyNoDataSub:'Nunca se vende',
+    pricingH2:'Paga una vez.<br>Úsalo siempre.', pricingBody:'Sin suscripción, sin anuncios, sin cargos extra. Sin costos de servidor significa que puede mantenerse así permanentemente.', pricingCta:'Recibir aviso al lanzamiento',
+    pricingNoSubJp:'Sin suscripción', pricingNoAdsJp:'Sin anuncios', pricingNoIapJp:'Sin cargos extra', pricingNoDataJp:'Datos nunca vendidos',
+    policyH2:'Política de<br>privacidad',
+    art1Title:'Artículo 1 — Desarrollador', art1Body:'Watch Voice Memo es desarrollado y proporcionado por StratAIX. Para consultas: support@strataix.net.',
+    art2Title:'Artículo 2 — Información recopilada', art2Body:'No recopilamos información de identificación personal a través de esta app. Todo el contenido de notas se almacena solo en tu dispositivo.',
+    art3Title:'Artículo 3 — Uso del micrófono', art3Body:'La entrada de voz utiliza el reconocimiento de voz del sistema de Apple. Los datos de audio son procesados por los sistemas de Apple y nunca se recopilan o almacenan en nuestros servidores.',
+    art4Title:'Artículo 4 — Almacenamiento de datos', art4Body:'Todos los datos de notas se almacenan únicamente en tu iPhone y Apple Watch. Al usar la función de compartir, el texto se envía a apps externas por tu propia acción.',
+    art5Title:'Artículo 5 — Divulgación a terceros', art5Body:'Nunca proporcionamos, vendemos ni prestamos tu información personal a terceros. La política de privacidad de Apple (apple.com/privacy) aplica al procesamiento de reconocimiento de voz.',
+    art6Title:'Artículo 6 — Cambios en la política', art6Body:'Esta política puede actualizarse según sea necesario.',
+    art7Title:'Artículo 7 — Tus derechos', art7Body:'Puedes eliminar todos los datos guardados usando las opciones de la app o desinstalándola. Como los datos existen solo en tu dispositivo, no es necesario solicitarnos la eliminación.',
+    art8Title:'Artículo 8 — Última actualización', art8Body:'29 de abril de 2026',
+    footerDesc:'App de notas de voz para Apple Watch. Graba con tu voz, sin sacar el iPhone.',
+    footerProduct:'PRODUCTO', footerCompany:'EMPRESA', footerContact:'CONTACTO',
+    footerHow:'Cómo funciona', footerFeatures:'Funciones', footerPricing:'Precios',
+    mockCopy:'Copiar',
+    mockWatchPrompt:'Habla<br>ahora',
+    mockDate1:'Hoy · 14:32', mockDate2:'Hoy · 11:15', mockDate3:'Ayer · 22:47', mockDate4:'Ayer · 09:03',
+    mockMemo1:'Ideas para nuevo eslogan', mockMemo2:'Ir a ese restaurante para almorzar', mockMemo3:'Buscar título del libro después', mockMemo4:'Organizar puntos para la reunión',
+    mockBoardTitle:'Tablero', mockTabAll:'Todo', mockTabWork:'Trabajo', mockTabIdea:'Idea', mockTabTask:'Tarea',
+    mockCard1:'Ideas para nuevo eslogan', mockCard2:'Ir a ese restaurante', mockCard3:'Buscar el libro', mockCard4:'Notas de la reunión', mockYesterday:'Ayer',
+    mockShareDate:'Hoy 9:38', mockShareMemo:'Próxima reunión: revisar KPIs, plan de contratación, presupuesto Q2',
+    mockWidget1Memo:'Próxima reunión: revisar KPIs, plan de contratación, presupuesto Q2', mockWidget1Date:'Hoy 9:38', mockWidget2Memo:'Ideas para nuevo eslogan', mockWidget2Date:'Ayer 14:32',
+    footerCopyright:'StratAIX © 2026',
+    footerLegal:'Apple, Apple Watch e iPhone son marcas comerciales de Apple Inc. ChatGPT® es marca de OpenAI, Inc. Claude® es marca de Anthropic, PBC. Google™ es marca de Google LLC. Esta app no está afiliada ni respaldada por ninguno de estos servicios.',
+  },
+  fr: {
+    heroSubLabel:'POUR APPLE WATCH',
+    heroTitle:'Ta Watch,<br>ton carnet de notes.',
+    heroBody:'Parle simplement à ta Apple Watch. Pas besoin d\'iPhone. Tes mots arrivent sur iPhone au moment où tu les sauvegardes.',
+    heroCta:'Suivre sur X pour les mises à jour',
+    howH2:'Pas de courbe d\'apprentissage.',
+    step1Title:'Appuie sur le cadran', step1Body:'Appuie sur la complication Watch Voice Memo de ton Apple Watch. Inutile de prendre ton téléphone.',
+    step2Title:'Parle', step2Body:'Parle dans le micro et tes mots sont transcrits automatiquement. Les mains libres — en marchant, en cuisinant ou n\'importe où.',
+    step3Title:'Arrive sur iPhone', step3Body:'Les mémos sauvegardés se synchronisent instantanément sur iPhone. Prêts à l\'emploi, toujours accessibles.',
+    f03Title:'Lève le poignet.<br>C\'est prêt.', f03Body:'Sans portefeuille, sans téléphone. Lance Watch Voice Memo depuis le cadran et l\'écran de saisie vocale s\'ouvre immédiatement.',
+    f04Title:'Parle.<br>C\'est du texte.', f04Body:'La reconnaissance vocale d\'Apple convertit tes mots en texte en temps réel. Une confirmation Taptic arrive au poignet lors de la sauvegarde. Plus besoin de regarder l\'écran.',
+    f05Title:'Capturé au poignet.<br>Lu en main.', f05Body:'Les mémos sauvegardés sur Watch arrivent automatiquement sur iPhone. Vue chronologique, épinglage et balayage pour terminer gardent tout simple.',
+    f06Title:'Collecter.<br>Trier.', f06Body:'Passe à une vue en cartes style post-it quand les mémos s\'accumulent. Quatre onglets de dossiers pour organiser par tes propres catégories.',
+    f07Title:'Capturé. Maintenant<br>mets-le à profit.', f07Body:'Envoie n\'importe quel mémo directement à une autre app — colle dans ChatGPT ou Claude, recherche sur Google, sauvegarde dans Obsidian ou Bear.',
+    f08Title:'Épingle les mémos<br>à l\'écran d\'accueil.', f08Body:'Ajoute un widget à l\'écran d\'accueil iPhone pour voir les mémos sans ouvrir l\'app. Affiche date et contenu ; navigue avec les boutons gauche/droite.',
+    privacyH2:'Rien d\'autre.<br>Nulle part ailleurs.', privacyBody:'Rien n\'atteint nos serveurs. Tes mémos et paramètres restent uniquement sur ton appareil. La reconnaissance vocale est gérée par le système Apple — nous ne recevons jamais tes données.',
+    privacyNoServersSub:'Sans serveur', privacyNoAdsSub:'Sans pub', privacyNoDataSub:'Jamais vendu',
+    pricingH2:'Paye une fois.<br>Utilise pour toujours.', pricingBody:'Sans abonnement, sans pub, sans frais supplémentaires. Sans coûts de serveur, ça peut rester ainsi en permanence.', pricingCta:'Être notifié au lancement',
+    pricingNoSubJp:'Sans abonnement', pricingNoAdsJp:'Sans publicité', pricingNoIapJp:'Sans frais supplémentaires', pricingNoDataJp:'Données jamais vendues',
+    policyH2:'Politique de<br>confidentialité',
+    art1Title:'Article 1 — Développeur', art1Body:'Watch Voice Memo est développé et fourni par StratAIX. Pour toute demande : support@strataix.net.',
+    art2Title:'Article 2 — Informations collectées', art2Body:'Nous ne collectons pas d\'informations personnellement identifiables via cette app. Tout le contenu des mémos est stocké uniquement sur ton appareil.',
+    art3Title:'Article 3 — Utilisation du micro', art3Body:'La saisie vocale utilise la reconnaissance vocale du système Apple. Les données audio sont traitées par les systèmes Apple et ne sont jamais collectées ou stockées sur nos serveurs.',
+    art4Title:'Article 4 — Stockage des données', art4Body:'Toutes les données de mémos sont stockées uniquement sur ton iPhone et Apple Watch. Lorsque tu utilises la fonction de partage, le texte est envoyé à des apps externes par ta propre action.',
+    art5Title:'Article 5 — Divulgation à des tiers', art5Body:'Nous ne fournissons, vendons ni prêtons jamais tes informations personnelles à des tiers. La politique de confidentialité d\'Apple (apple.com/privacy) s\'applique au traitement de la reconnaissance vocale.',
+    art6Title:'Article 6 — Modifications de la politique', art6Body:'Cette politique peut être mise à jour selon les besoins.',
+    art7Title:'Article 7 — Tes droits', art7Body:'Tu peux supprimer toutes les données sauvegardées en utilisant les options de l\'app ou en la désinstallant. Les données existant uniquement sur ton appareil, aucune demande de suppression auprès de nous n\'est nécessaire.',
+    art8Title:'Article 8 — Dernière mise à jour', art8Body:'29 avril 2026',
+    footerDesc:'App de mémos vocaux pour Apple Watch. Enregistre avec ta voix, sans sortir l\'iPhone.',
+    footerProduct:'PRODUIT', footerCompany:'SOCIÉTÉ', footerContact:'CONTACT',
+    footerHow:'Comment ça marche', footerFeatures:'Fonctionnalités', footerPricing:'Tarifs',
+    mockCopy:'Copier',
+    mockWatchPrompt:'Parle<br>maintenant',
+    mockDate1:'Auj. · 14:32', mockDate2:'Auj. · 11:15', mockDate3:'Hier · 22:47', mockDate4:'Hier · 09:03',
+    mockMemo1:'Réfléchir à de nouveaux slogans', mockMemo2:'Déjeuner dans ce restaurant', mockMemo3:'Chercher le titre du livre plus tard', mockMemo4:'Préparer l\'ordre du jour de la réunion',
+    mockBoardTitle:'Tableau', mockTabAll:'Tout', mockTabWork:'Travail', mockTabIdea:'Idée', mockTabTask:'Tâche',
+    mockCard1:'Idées de nouveau slogan', mockCard2:'Déjeuner dans ce restaurant', mockCard3:'Chercher le livre', mockCard4:'Préparer la réunion', mockYesterday:'Hier',
+    mockShareDate:'Auj. 9:38', mockShareMemo:'Prochaine réunion : réviser KPIs, plan de recrutement, budget Q2',
+    mockWidget1Memo:'Prochaine réunion : réviser KPIs, plan de recrutement, budget Q2', mockWidget1Date:'Auj. 9:38', mockWidget2Memo:'Idées de nouveau slogan', mockWidget2Date:'Hier 14:32',
+    footerCopyright:'StratAIX © 2026',
+    footerLegal:'Apple, Apple Watch et iPhone sont des marques d\'Apple Inc. ChatGPT® est une marque d\'OpenAI, Inc. Claude® est une marque d\'Anthropic, PBC. Google™ est une marque de Google LLC. Cette app n\'est pas affiliée à ces services ni approuvée par eux.',
+  },
+  'pt-BR': {
+    heroSubLabel:'EXCLUSIVO PARA APPLE WATCH',
+    heroTitle:'Seu Watch,<br>seu bloco de notas.',
+    heroBody:'Só fale com o seu Apple Watch. Sem iPhone. Suas palavras chegam ao iPhone no momento em que você as salva.',
+    heroCta:'Seguir no X para atualizações',
+    howH2:'Sem curva de aprendizado.',
+    step1Title:'Toque no mostrador', step1Body:'Toque na complicação Watch Voice Memo do seu Apple Watch. Sem precisar tirar o celular do bolso.',
+    step2Title:'Fale', step2Body:'Fale no microfone e suas palavras são transcritas automaticamente. Mãos livres — caminhando, cozinhando ou em qualquer outra situação.',
+    step3Title:'Chega no iPhone', step3Body:'As notas salvas sincronizam para o iPhone instantaneamente. Prontas para usar, sempre acessíveis.',
+    f03Title:'Levante o pulso.<br>Já está pronto.', f03Body:'Sem carteira, sem telefone. Abra o Watch Voice Memo pelo mostrador e a tela de voz abre imediatamente.',
+    f04Title:'Fale.<br>Vira texto.', f04Body:'O reconhecimento de voz da Apple converte suas palavras em texto em tempo real. Uma confirmação Taptic chega ao pulso ao salvar. Sem olhar para a tela.',
+    f05Title:'Capturado no pulso.<br>Lido na mão.', f05Body:'Notas salvas no Watch chegam ao iPhone automaticamente. Vista em linha do tempo, fixar e deslizar para concluir mantêm tudo simples.',
+    f06Title:'Coletar.<br>Organizar.', f06Body:'Mude para uma vista de cartões estilo post-it quando as notas se acumularem. Quatro abas de pastas para organizar por suas próprias categorias.',
+    f07Title:'Capturado. Agora<br>coloque para trabalhar.', f07Body:'Envie qualquer nota diretamente para outro app — cole no ChatGPT ou Claude, pesquise no Google, salve no Obsidian ou Bear.',
+    f08Title:'Fixe notas na<br>tela inicial.', f08Body:'Adicione um widget à tela inicial do iPhone para ver notas sem abrir o app. Mostra data e conteúdo; navegue com os botões esquerda/direita.',
+    privacyH2:'Nada mais.<br>Em nenhum outro lugar.', privacyBody:'Nada chega aos nossos servidores. Suas notas e configurações ficam apenas no seu dispositivo. O reconhecimento de voz é processado pelo sistema da Apple — nunca recebemos seus dados.',
+    privacyNoServersSub:'Sem servidor', privacyNoAdsSub:'Sem anúncios', privacyNoDataSub:'Nunca vendido',
+    pricingH2:'Pague uma vez.<br>Use para sempre.', pricingBody:'Sem assinatura, sem anúncios, sem cobranças extras. Sem custos de servidor significa que pode ser assim permanentemente.', pricingCta:'Receber aviso no lançamento',
+    pricingNoSubJp:'Sem assinatura', pricingNoAdsJp:'Sem anúncios', pricingNoIapJp:'Sem cobranças extras', pricingNoDataJp:'Dados nunca vendidos',
+    policyH2:'Política de<br>privacidade',
+    art1Title:'Artigo 1 — Desenvolvedor', art1Body:'Watch Voice Memo é desenvolvido e fornecido pela StratAIX. Para contato: support@strataix.net.',
+    art2Title:'Artigo 2 — Informações coletadas', art2Body:'Não coletamos informações de identificação pessoal por meio deste app. Todo o conteúdo de notas é armazenado apenas no seu dispositivo.',
+    art3Title:'Artigo 3 — Uso do microfone', art3Body:'A entrada de voz usa o reconhecimento de voz do sistema da Apple. Os dados de áudio são processados pelos sistemas da Apple e nunca são coletados ou armazenados em nossos servidores.',
+    art4Title:'Artigo 4 — Armazenamento de dados', art4Body:'Todos os dados de notas são armazenados somente no seu iPhone e Apple Watch. Ao usar a função de compartilhar, o texto é enviado para apps externos pela sua própria ação.',
+    art5Title:'Artigo 5 — Divulgação a terceiros', art5Body:'Nunca fornecemos, vendemos ou emprestamos suas informações pessoais a terceiros. A política de privacidade da Apple (apple.com/privacy) se aplica ao processamento de reconhecimento de voz.',
+    art6Title:'Artigo 6 — Alterações na política', art6Body:'Esta política pode ser atualizada conforme necessário.',
+    art7Title:'Artigo 7 — Seus direitos', art7Body:'Você pode excluir todos os dados salvos usando as opções do app ou desinstalando-o. Como os dados existem apenas no seu dispositivo, nenhuma solicitação de exclusão para nós é necessária.',
+    art8Title:'Artigo 8 — Última atualização', art8Body:'29 de abril de 2026',
+    footerDesc:'App de notas de voz para Apple Watch. Grave com sua voz, sem tirar o iPhone do bolso.',
+    footerProduct:'PRODUTO', footerCompany:'EMPRESA', footerContact:'CONTATO',
+    footerHow:'Como funciona', footerFeatures:'Funcionalidades', footerPricing:'Preços',
+    mockCopy:'Copiar',
+    mockWatchPrompt:'Fale<br>agora',
+    mockDate1:'Hoje · 14:32', mockDate2:'Hoje · 11:15', mockDate3:'Ontem · 22:47', mockDate4:'Ontem · 09:03',
+    mockMemo1:'Criar novas ideias de slogan', mockMemo2:'Almoçar naquele restaurante', mockMemo3:'Pesquisar o título do livro depois', mockMemo4:'Organizar pauta da reunião',
+    mockBoardTitle:'Quadro', mockTabAll:'Tudo', mockTabWork:'Trabalho', mockTabIdea:'Ideia', mockTabTask:'Tarefa',
+    mockCard1:'Novas ideias de slogan', mockCard2:'Almoçar naquele restaurante', mockCard3:'Pesquisar o livro', mockCard4:'Organizar reunião', mockYesterday:'Ontem',
+    mockShareDate:'Hoje 9:38', mockShareMemo:'Próxima reunião: revisar KPIs, plano de contratação, orçamento Q2',
+    mockWidget1Memo:'Próxima reunião: revisar KPIs, plano de contratação, orçamento Q2', mockWidget1Date:'Hoje 9:38', mockWidget2Memo:'Novas ideias de slogan', mockWidget2Date:'Ontem 14:32',
+    footerCopyright:'StratAIX © 2026',
+    footerLegal:'Apple, Apple Watch e iPhone são marcas registradas da Apple Inc. ChatGPT® é marca da OpenAI, Inc. Claude® é marca da Anthropic, PBC. Google™ é marca da Google LLC. Este app não é afiliado nem endossado por esses serviços.',
+  },
+  ar: {
+    heroSubLabel:'لساعة Apple Watch فقط',
+    heroTitle:'ساعتك،<br>دفتر ملاحظاتك.',
+    heroBody:'فقط تحدث إلى Apple Watch. لا حاجة لـ iPhone. تصل كلماتك إلى iPhone في اللحظة التي تحفظها.',
+    heroCta:'تابعنا على X لمعرفة المستجدات',
+    howH2:'لا حاجة للتعلم.',
+    step1Title:'انقر على واجهة الساعة', step1Body:'انقر على تعقيد Watch Voice Memo في Apple Watch. لا حاجة لإخراج هاتفك من جيبك.',
+    step2Title:'تحدث', step2Body:'تحدث إلى الميكروفون وسيتم تحويل كلامك إلى نص تلقائياً. بدون استخدام اليدين — أثناء المشي أو الطهي أو في أي وقت.',
+    step3Title:'يصل إلى iPhone', step3Body:'تتزامن الملاحظات المحفوظة مع iPhone على الفور. جاهزة للاستخدام، متاحة دائماً.',
+    f03Title:'ارفع معصمك.<br>جاهز فوراً.', f03Body:'لا محفظة، لا هاتف. شغّل Watch Voice Memo من واجهة الساعة وستفتح شاشة الإدخال الصوتي فوراً.',
+    f04Title:'تحدث.<br>يصبح نصاً.', f04Body:'يحوّل التعرف على الصوت من Apple كلامك إلى نص في الوقت الفعلي. تصل تأكيدية Taptic إلى معصمك عند الحفظ. لا حاجة للنظر إلى الشاشة.',
+    f05Title:'مسجّل في المعصم.<br>مقروء في اليد.', f05Body:'الملاحظات المحفوظة على Watch تصل إلى iPhone تلقائياً. عرض الجدول الزمني والتثبيت والإتمام بالتمرير يبقي كل شيء بسيطاً.',
+    f06Title:'اجمع.<br>رتّب.', f06Body:'انتقل إلى عرض بطاقات بأسلوب الملاحظات اللاصقة عندما تتراكم الملاحظات. أربع تبويبات مجلدات لتنظيمها بفئاتك الخاصة.',
+    f07Title:'مسجّل. الآن<br>استخدمه.', f07Body:'أرسل أي ملاحظة مباشرة إلى تطبيق آخر — الصقها في ChatGPT أو Claude، ابحث في Google، احفظ في Obsidian أو Bear.',
+    f08Title:'ثبّت الملاحظات<br>على الشاشة الرئيسية.', f08Body:'أضف ودجت إلى الشاشة الرئيسية لـ iPhone لعرض الملاحظات دون فتح التطبيق. يعرض التاريخ والمحتوى؛ تنقل بأزرار اليسار/اليمين.',
+    privacyH2:'لا شيء آخر.<br>لا مكان آخر.', privacyBody:'لا شيء يصل إلى خوادمنا. تبقى ملاحظاتك وإعداداتك على جهازك فقط. يعالج نظام Apple التعرف على الصوت — نحن لا نستلم بياناتك أبداً.',
+    privacyNoServersSub:'بدون خادم', privacyNoAdsSub:'بدون إعلانات', privacyNoDataSub:'لا تُباع أبداً',
+    pricingH2:'ادفع مرة واحدة.<br>استخدم للأبد.', pricingBody:'بدون اشتراك، بدون إعلانات، بدون رسوم إضافية. بدون تكاليف خادم تعني الاستدامة الدائمة.', pricingCta:'الحصول على إشعار عند الإطلاق',
+    pricingNoSubJp:'بدون اشتراك', pricingNoAdsJp:'بدون إعلانات', pricingNoIapJp:'بدون رسوم إضافية', pricingNoDataJp:'البيانات لا تُباع أبداً',
+    policyH2:'سياسة<br>الخصوصية',
+    art1Title:'المادة 1 — المطوّر', art1Body:'تطبيق Watch Voice Memo مطوَّر ومقدَّم من StratAIX. للاستفسارات: support@strataix.net.',
+    art2Title:'المادة 2 — المعلومات المجمَّعة', art2Body:'لا نجمع معلومات تعريف شخصية من خلال هذا التطبيق. يُخزَّن محتوى الملاحظات على جهازك فقط.',
+    art3Title:'المادة 3 — استخدام الميكروفون', art3Body:'يستخدم الإدخال الصوتي التعرف على الكلام من نظام Apple. تُعالَج بيانات الصوت بواسطة أنظمة Apple ولا تُجمَّع أو تُخزَّن على خوادمنا.',
+    art4Title:'المادة 4 — تخزين البيانات', art4Body:'تُخزَّن جميع بيانات الملاحظات حصرياً على iPhone و Apple Watch. عند استخدام ميزة المشاركة، يُرسَل النص إلى التطبيقات الخارجية بواسطة إجراءاتك الخاصة.',
+    art5Title:'المادة 5 — الإفصاح لأطراف ثالثة', art5Body:'نحن لا نقدم أو نبيع أو نقرض معلوماتك الشخصية لأطراف ثالثة. تنطبق سياسة خصوصية Apple (apple.com/privacy) على معالجة التعرف على الكلام.',
+    art6Title:'المادة 6 — تغييرات السياسة', art6Body:'قد تُحدَّث هذه السياسة حسب الحاجة.',
+    art7Title:'المادة 7 — حقوقك', art7Body:'يمكنك حذف جميع البيانات المحفوظة باستخدام خيارات التطبيق أو إلغاء تثبيته. نظراً لأن البيانات موجودة فقط على جهازك، لا حاجة لطلب الحذف منا.',
+    art8Title:'المادة 8 — آخر تحديث', art8Body:'٢٩ أبريل ٢٠٢٦',
+    footerDesc:'تطبيق الملاحظات الصوتية لـ Apple Watch. سجّل بصوتك دون إخراج iPhone.',
+    footerProduct:'المنتج', footerCompany:'الشركة', footerContact:'التواصل',
+    footerHow:'كيف يعمل', footerFeatures:'الميزات', footerPricing:'الأسعار',
+    mockCopy:'نسخ',
+    mockWatchPrompt:'تحدث<br>الآن',
+    mockDate1:'اليوم · 14:32', mockDate2:'اليوم · 11:15', mockDate3:'أمس · 22:47', mockDate4:'أمس · 09:03',
+    mockMemo1:'التفكير في شعارات جديدة', mockMemo2:'الغداء في ذلك المطعم', mockMemo3:'البحث عن عنوان الكتاب لاحقاً', mockMemo4:'تنظيم نقاط الاجتماع',
+    mockBoardTitle:'اللوحة', mockTabAll:'الكل', mockTabWork:'عمل', mockTabIdea:'فكرة', mockTabTask:'مهمة',
+    mockCard1:'شعارات جديدة', mockCard2:'الغداء في ذلك المطعم', mockCard3:'البحث عن الكتاب', mockCard4:'تنظيم الاجتماع', mockYesterday:'أمس',
+    mockShareDate:'اليوم 9:38', mockShareMemo:'الاجتماع القادم: مراجعة KPIs، خطة التوظيف، ميزانية Q2',
+    mockWidget1Memo:'الاجتماع القادم: مراجعة KPIs، خطة التوظيف، ميزانية Q2', mockWidget1Date:'اليوم 9:38', mockWidget2Memo:'أفكار لشعارات جديدة', mockWidget2Date:'أمس 14:32',
+    footerCopyright:'StratAIX © 2026',
+    footerLegal:'Apple وApple Watch وiPhone علامات تجارية لـ Apple Inc. ChatGPT® علامة تجارية لـ OpenAI, Inc. Claude® علامة تجارية لـ Anthropic, PBC. Google™ علامة تجارية لـ Google LLC. هذا التطبيق غير مرتبط أو معتمد من أي من هذه الخدمات.',
+  },
 };
 
 /* ═══════════════════════════════════════════
@@ -836,11 +1052,16 @@ var fontMap = {
   'zh-hans': '"Noto Sans SC",sans-serif',
   'zh-hant': '"Noto Sans TC",sans-serif',
   ko:        '"Noto Sans KR",sans-serif',
+  de:        '"Inter",-apple-system,BlinkMacSystemFont,sans-serif',
+  es:        '"Inter",-apple-system,BlinkMacSystemFont,sans-serif',
+  fr:        '"Inter",-apple-system,BlinkMacSystemFont,sans-serif',
+  'pt-BR':   '"Inter",-apple-system,BlinkMacSystemFont,sans-serif',
+  ar:        '"Noto Sans Arabic",sans-serif',
 };
 
-var htmlLangMap = { ja:'ja', en:'en', 'zh-hans':'zh-Hans', 'zh-hant':'zh-Hant', ko:'ko' };
+var htmlLangMap = { ja:'ja', en:'en', 'zh-hans':'zh-Hans', 'zh-hant':'zh-Hant', ko:'ko', de:'de', es:'es', fr:'fr', 'pt-BR':'pt-BR', ar:'ar' };
 
-var labelMap = { ja:'JA', en:'EN', 'zh-hans':'简', 'zh-hant':'繁', ko:'KO' };
+var labelMap = { ja:'JA', en:'EN', 'zh-hans':'简', 'zh-hant':'繁', ko:'KO', de:'DE', es:'ES', fr:'FR', 'pt-BR':'PT', ar:'AR' };
 
 /* ═══════════════════════════════════════════
    setLang
@@ -868,9 +1089,12 @@ function setLang(lang) {
   // font family
   document.body.style.fontFamily = fontMap[lang];
 
-  // letter-spacing: tighten for ja/zh, relax for en/ko
-  var ls = (lang === 'en') ? '0' : '-0.01em';
+  // letter-spacing: tighten for CJK only
+  var ls = (['ja','zh-hans','zh-hant','ko'].indexOf(lang) !== -1) ? '-0.01em' : '0';
   document.body.style.letterSpacing = ls;
+
+  // RTL for Arabic
+  document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
 
   // language button label
   document.getElementById('lang-label').textContent = labelMap[lang];
