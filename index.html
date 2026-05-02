@@ -172,6 +172,22 @@ nav.top .links a:hover{color:var(--blood)}
 
 /* BudouX: 日本語改行を自然な単位で */
 .budoux-applied{word-break:keep-all;overflow-wrap:break-word;line-break:strict}
+
+/* ===== MOBILE RESPONSIVE ===== */
+body{overflow-x:hidden}
+/* Building: スマホは1カラム・全幅イメージ・説明テキスト非表示 */
+@media(max-width:760px){
+  .building-grid{grid-template-columns:1fr!important;gap:0!important}
+  .building-floor-li{grid-template-columns:56px 1fr!important;padding:10px 0!important;gap:12px!important}
+  .building-floor-desc{display:none!important}
+}
+/* Stats: 2×2 グリッド */
+@media(max-width:760px){.stats-grid{grid-template-columns:1fr 1fr!important}}
+/* Consulting: 1カラム */
+@media(max-width:760px){
+  .consulting-grid{grid-template-columns:1fr!important}
+  .consulting-card{padding:22px 20px!important}
+}
 </style>
 <script src="https://unpkg.com/budoux@0.6.2/bundle/budoux-ja.min.js"></script>
 </head>
@@ -201,8 +217,7 @@ nav.top .links a:hover{color:var(--blood)}
     <h1>The <span class="red">Punk</span><br>Entrepreneurship.</h1>
     <p class="sub">Building Culture.<br>Creating Value.</p>
     <p class="hero-jp">
-      <strong>プログラムは一行も書けません。</strong><br>
-      それでも、AIとともに「欲しかったもの」を作り続けています。<br>
+      AIとともに「欲しかったもの」を作り続けています。<br>
       大手が見落としてきた余白に、本物の需要が眠っている。
     </p>
     <div class="hero-ctas">
@@ -308,32 +323,32 @@ nav.top .links a:hover{color:var(--blood)}
         <p class="lede" style="color:#bbb">渋谷・原宿のどこかに、いつか建てたいビルがある。<br>地下にライブハウス、1階にショップ、上階にスタジオと住居。<br>StratAIXの世界観は、この一棟の建物に集約されている。</p>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:start">
-      <img src="images/building.png" alt="StratAIX Building" style="max-width:420px;width:100%;height:auto;border:2px solid var(--paper)">
+    <div class="building-grid" style="display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:start">
+      <img src="images/building.png" alt="StratAIX Building" class="building-img" style="max-width:420px;width:100%;height:auto;border:2px solid var(--paper)">
       <ol style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0;border-top:1px solid #333">
-        <li style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
+        <li class="building-floor-li" style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
           <span class="display" style="color:var(--blood);font-size:1.4rem">RF</span>
-          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">Executive Residence</strong><br><span style="color:#999;font-size:.88rem;line-height:1.7">家族とハワイの空気と、本気の仕事が混ざる場所</span></div>
+          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">Executive Residence</strong><br><span class="building-floor-desc" style="color:#999;font-size:.88rem;line-height:1.7">家族とハワイの空気と、本気の仕事が混ざる場所</span></div>
         </li>
-        <li style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
+        <li class="building-floor-li" style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
           <span class="display" style="color:var(--blood);font-size:1.4rem">4F</span>
-          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">SOHO Floor</strong><br><span style="color:#999;font-size:.88rem;line-height:1.7">クリエイターたちの自由なアトリエ</span></div>
+          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">SOHO Floor</strong><br><span class="building-floor-desc" style="color:#999;font-size:.88rem;line-height:1.7">クリエイターたちの自由なアトリエ</span></div>
         </li>
-        <li style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
+        <li class="building-floor-li" style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
           <span class="display" style="color:var(--blood);font-size:1.4rem">3F</span>
-          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">SOHO Floor</strong><br><span style="color:#999;font-size:.88rem;line-height:1.7">音楽・映像・スタートアップのシェアスペース</span></div>
+          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">SOHO Floor</strong><br><span class="building-floor-desc" style="color:#999;font-size:.88rem;line-height:1.7">音楽・映像・スタートアップのシェアスペース</span></div>
         </li>
-        <li style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
+        <li class="building-floor-li" style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
           <span class="display" style="color:var(--blood);font-size:1.4rem">2F</span>
-          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">SOHO Floor</strong><br><span style="color:#999;font-size:.88rem;line-height:1.7">アイデアをカタチにする基地</span></div>
+          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">SOHO Floor</strong><br><span class="building-floor-desc" style="color:#999;font-size:.88rem;line-height:1.7">アイデアをカタチにする基地</span></div>
         </li>
-        <li style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
+        <li class="building-floor-li" style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
           <span class="display" style="color:var(--blood);font-size:1.4rem">1F</span>
-          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">Street Brand Shop</strong><br><span style="color:#999;font-size:.88rem;line-height:1.7">音楽・アート・スケートを混ぜたオリジナルブランド</span></div>
+          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">Street Brand Shop</strong><br><span class="building-floor-desc" style="color:#999;font-size:.88rem;line-height:1.7">音楽・アート・スケートを混ぜたオリジナルブランド</span></div>
         </li>
-        <li style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
+        <li class="building-floor-li" style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
           <span class="display" style="color:var(--blood);font-size:1.4rem">B1F</span>
-          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">Live Venue + Studio</strong><br><span style="color:#999;font-size:.88rem;line-height:1.7">ライブハウスとレコスタを併設した音楽の聖地</span></div>
+          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">Live Venue + Studio</strong><br><span class="building-floor-desc" style="color:#999;font-size:.88rem;line-height:1.7">ライブハウスとレコスタを併設した音楽の聖地</span></div>
         </li>
       </ol>
     </div>
@@ -360,10 +375,10 @@ nav.top .links a:hover{color:var(--blood)}
     <style>
       @media(max-width:880px){
         .studio-head{grid-template-columns:1fr!important;gap:24px!important}
-        .studio-pom{justify-self:start!important;max-width:280px!important}
+        .studio-pom{justify-self:center!important;margin:0 auto!important;max-width:280px!important}
       }
     </style>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:2px solid var(--ink);border-left:2px solid var(--ink)">
+    <div class="stats-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:2px solid var(--ink);border-left:2px solid var(--ink)">
       <div style="border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:32px 24px;background:var(--paper-pure)">
         <div class="display" style="color:var(--blood);font-size:3rem;line-height:1;margin-bottom:8px">10y+</div>
         <div style="font-family:'Anton',sans-serif;letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;color:var(--ink-dim)">Strategy & Marketing</div>
@@ -388,7 +403,7 @@ nav.top .links a:hover{color:var(--blood)}
       </div>
       <div>
         <h3 class="display" style="font-size:1.6rem;margin-bottom:16px">Why "Punk"?</h3>
-        <p style="font-size:.95rem;line-height:1.95;color:var(--ink-dim)">DIYで道を作る精神。組織のロジックではなく、自分の信じるものを形にする。それが私のパンク観です。プログラムは書けません。でもAIを相棒にすれば、欲しかったものは自分の手で作れる時代になった。</p>
+        <p style="font-size:.95rem;line-height:1.95;color:var(--ink-dim)">DIYで道を作る精神。組織のロジックではなく、自分の信じるものを形にする。それが私のパンク観です。AIを相棒にすれば、欲しかったものは自分の手で作れる時代になった。</p>
       </div>
     </div>
   </div>
@@ -401,7 +416,7 @@ nav.top .links a:hover{color:var(--blood)}
       <span class="eyebrow">— 04 Writings</span>
       <div>
         <h2>No Code.<br><span style="color:var(--blood)">Ship</span> Anyway.</h2>
-        <p class="lede">プログラム知識ゼロのPMが、AIとともにどうやってサービスを作ったか。<br>その過程と知見を、noteで公開しています。</p>
+        <p class="lede">AIとともに、どうやってサービスを作ったか。<br>その過程と知見を、noteで公開しています。</p>
       </div>
     </div>
 
@@ -459,24 +474,24 @@ nav.top .links a:hover{color:var(--blood)}
         <p class="lede" style="color:#bbb">WEBサービス・アプリの個人開発経験、ストリート/パンクカルチャーへの造詣、エンタメ領域での戦略経験——<br>これらを掛け合わせたAI活用の知見を、必要な方にだけ、お分けしています。</p>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#333;border:1px solid #333">
-      <div style="background:var(--ink);padding:36px 28px">
+    <div class="consulting-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#333;border:1px solid #333">
+      <div class="consulting-card" style="background:var(--ink);padding:36px 28px">
         <div class="display" style="color:var(--blood);font-size:.85rem;letter-spacing:.24em;margin-bottom:12px">01 / Build</div>
         <h4 class="display" style="font-size:1.5rem;margin-bottom:14px">AIで自社プロダクトを作りたい</h4>
         <p style="font-size:.92rem;line-height:1.85;color:#bbb">Claude Code等を活用した個人開発の知見。要件定義から実装方針、AIツール選定までを伴走します。</p>
       </div>
-      <div style="background:var(--ink);padding:36px 28px">
+      <div class="consulting-card" style="background:var(--ink);padding:36px 28px">
         <div class="display" style="color:var(--blood);font-size:.85rem;letter-spacing:.24em;margin-bottom:12px">02 / Workflow</div>
         <h4 class="display" style="font-size:1.5rem;margin-bottom:14px">AIを活用した業務効率化</h4>
         <p style="font-size:.92rem;line-height:1.85;color:#bbb">Chat-GPTやClaude Codeを活用することで、既存業務の効率が5-10倍に向上。効率的にミスなく進める新時代のAI活用法をお伝えします。</p>
       </div>
-      <div style="background:var(--ink);padding:36px 28px">
+      <div class="consulting-card" style="background:var(--ink);padding:36px 28px">
         <div class="display" style="color:var(--blood);font-size:.85rem;letter-spacing:.24em;margin-bottom:12px">03 / API</div>
         <h4 class="display" style="font-size:1.5rem;margin-bottom:14px">AIで業務の幅を広げコスト削減</h4>
         <p style="font-size:.92rem;line-height:1.85;color:#bbb">APIをAIと組み合わせることで、様々なツールの調査を低コストで実現可能。SaaSに支払っていた月額費用を0円にしつつ、必要なデータを取得する方法があります。</p>
       </div>
     </div>
-    <div style="margin-top:96px;position:relative;border-top:1px solid #333;padding-top:64px;overflow:visible">
+    <div style="margin-top:96px;position:relative;border-top:1px solid #333;padding-top:64px;overflow:hidden">
       <!-- 巨大なステンシル風の背景タイポ -->
       <div aria-hidden="true" style="position:absolute;left:-2%;bottom:-30px;font-family:'Anton',sans-serif;font-size:clamp(7rem,18vw,16rem);line-height:.85;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:2px #222;white-space:nowrap;pointer-events:none;user-select:none">RUN.RUN.RUN.</div>
 
@@ -532,7 +547,7 @@ nav.top .links a:hover{color:var(--blood)}
       <div style="font-family:'Anton',sans-serif;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);line-height:2.2">
         <div style="color:var(--ink);font-size:1rem;margin-bottom:14px">StratAIX</div>
         <div><a href="https://x.com/StratAIX_AI" target="_blank" rel="noopener">X / @StratAIX_AI</a></div>
-        <div style="margin-top:18px;font-family:'Inter',sans-serif;letter-spacing:.02em;text-transform:none;font-size:.85rem;color:var(--ink-soft);line-height:1.7">安心してご利用いただくために</div>
+        <div style="margin-top:18px;font-family:'Inter',sans-serif;letter-spacing:.02em;text-transform:none;font-size:.85rem;color:var(--ink-soft);line-height:1.7"><a href="https://sinc.strataix.net/trust" target="_blank" rel="noopener" style="color:var(--ink-soft);text-decoration:underline;text-underline-offset:.2em">安心してご利用いただくために</a></div>
         <div style="margin-top:24px;color:var(--ink-soft)">© 2026 StratAIX. All in. No regrets.</div>
       </div>
     </div>
