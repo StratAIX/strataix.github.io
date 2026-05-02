@@ -2,24 +2,22 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StratAIX — AI × Human Studio</title>
-<meta name="description" content="AIを相棒に、自分が欲しかったサービスを作り続ける個人スタジオ。StratAIX。">
-<meta property="og:title" content="StratAIX — AI × Human Studio">
-<meta property="og:description" content="アイデアは、もう眠らせない。AIと組んで、誰も届けていない余白を形にする。">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StratAIX — The Punk Entrepreneurship</title>
+<meta name="description" content="プログラムは一行も書けません。それでも、AIとともに欲しかったものを作り続けています。StratAIX — The Punk Entrepreneurship.">
+<meta property="og:title" content="StratAIX — The Punk Entrepreneurship">
+<meta property="og:description" content="プログラムは一行も書けません。それでも、AIとともに欲しかったものを作り続けています。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://strataix.net/">
 <meta property="og:image" content="https://strataix.net/images/ogp-strataix.png">
 <meta property="og:site_name" content="StratAIX">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@StratAIX_AI">
-<meta name="twitter:title" content="StratAIX — AI × Human Studio">
-<meta name="twitter:description" content="AIを相棒に、自分が欲しかったサービスを作り続ける個人スタジオ。StratAIX。">
+<meta name="twitter:title" content="StratAIX — The Punk Entrepreneurship">
+<meta name="twitter:description" content="プログラムは一行も書けません。それでも、AIとともに欲しかったものを作り続けています。">
 <meta name="twitter:image" content="https://strataix.net/images/ogp-strataix.png">
 <link rel="canonical" href="https://strataix.net/">
 <link rel="icon" href="https://strataix.net/favicon.ico">
-
-<!-- 構造化データ（Schema.org）-->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -29,1927 +27,547 @@
       "@id": "https://strataix.net/#website",
       "url": "https://strataix.net/",
       "name": "StratAIX",
-      "description": "AIを相棒に、自分が欲しかったサービスを作り続ける個人開発スタジオ",
+      "description": "AIを相棒に、自分が欲しかったサービスを作り続ける個人スタジオ",
       "inLanguage": "ja",
       "publisher": { "@id": "https://strataix.net/#person" }
     },
     {
       "@type": "Person",
       "@id": "https://strataix.net/#person",
-      "name": "しんくさん",
+      "name": "StratAIX",
       "url": "https://strataix.net/",
-      "sameAs": [
-        "https://twitter.com/StratAIX_AI",
-        "https://note.com/strataix"
-      ],
+      "sameAs": ["https://twitter.com/StratAIX_AI","https://note.com/strataix"],
       "jobTitle": "個人開発者 / AI × 個人開発スタジオ StratAIX",
-      "knowsAbout": ["AI", "個人開発", "Claude Code", "プロダクト開発"]
+      "knowsAbout": ["AI","個人開発","Claude Code","プロダクト開発","App開発"]
     }
   ]
 }
 </script>
-
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-12BFEWVRN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-12BFEWVRN3');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* =============================================
-   RESET & BASE
-============================================= */
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; font-size:16px; }
-@supports(word-break:auto-phrase){
-  .hero-desc,.about-body p,.pc-desc,.note-desc,.claude-comment-body p{word-break:auto-phrase}
-}
-
-:root {
-  /* ライトモード カラーパレット */
-  --bg:          #fdfcfa;
-  --bg-alt:      #f4f2ee;
-  --bg-surface:  #ffffff;
-  --bg-dark:     #1c1917;
-  --bg-dark-alt: #231f1c;
-
-  --line:        rgba(26,24,22,.14);
-  --line-bright: rgba(26,24,22,.22);
-
-  --text:        #1c1917;
-  --text-dim:    rgba(28,25,23,.72);
-  --text-muted:  rgba(28,25,23,.48);
-  --text-inv:    #fdfcfa;
-  --text-inv-dim: rgba(253,252,250,.6);
-
-  /* アクセントカラー */
-  --orange:      #e8611a;
-  --orange-dim:  rgba(232,97,26,.1);
-  --orange-glow: rgba(232,97,26,.22);
-  --orange-light:#fff3ec;
-  --teal:        #0a9280;
-  --teal-dim:    rgba(10,146,128,.1);
-  --purple:      #7c3aed;
-  --purple-dim:  rgba(124,58,237,.1);
-  --warm:        #c2730a;
-  --warm-dim:    rgba(194,115,10,.12);
-
-  --label-size:  .68rem;
-  --label-space: .14em;
-
-  --font-display: 'Syne', 'Noto Sans JP', sans-serif;
-  --font-body:    'Noto Sans JP', sans-serif;
-
-  --shadow-sm:   0 1px 3px rgba(26,24,22,.08), 0 1px 2px rgba(26,24,22,.06);
-  --shadow-md:   0 4px 16px rgba(26,24,22,.08), 0 2px 6px rgba(26,24,22,.05);
-  --shadow-lg:   0 12px 40px rgba(26,24,22,.1), 0 4px 12px rgba(26,24,22,.06);
-  --shadow-card: 0 2px 8px rgba(26,24,22,.07), 0 0 1px rgba(26,24,22,.1);
-}
-
-body {
-  font-family: var(--font-body);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.9;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  word-break: auto-phrase;
-}
-
-h1, h2, h3, p, li {
-  text-wrap: pretty;
-  overflow-wrap: break-word;
-}
-
-/* =============================================
-   NAV
-============================================= */
-nav {
-  position: fixed; top:0; left:0; right:0; z-index:500;
-  display: flex; align-items:center; justify-content:space-between;
-  padding: 20px 64px;
-  transition: all .4s ease;
-}
-nav.scrolled {
-  padding: 14px 64px;
-  background: rgba(16,10,8,.94);
-  backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(255,255,255,.08);
-}
-.nav-logo { display:flex; align-items:center; }
-.nav-logo img {
-  height:72px; width:auto; transition:height .4s ease;
-}
-nav.scrolled .nav-logo img { height:44px; }
-.nav-menu {
-  display: flex; align-items:center; gap:48px;
-}
-.nav-menu a {
-  font-family: var(--font-display);
-  font-size: .78rem; font-weight:500;
-  color: rgba(253,252,250,.65); text-decoration:none;
-  letter-spacing: var(--label-space);
-  text-transform: uppercase;
-  transition: color .3s;
-}
-.nav-menu a:hover { color: #fdfcfa; }
-.nav-contact {
-  font-family: var(--font-display);
-  font-size: .75rem; font-weight:600;
-  color: var(--orange) !important;
-  border: 1.5px solid rgba(232,97,26,.3);
-  padding: 9px 22px; border-radius:4px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  transition: background .3s, color .3s, border-color .3s !important;
-}
-.nav-contact:hover {
-  background: var(--orange-dim);
-  border-color: rgba(232,97,26,.5);
-  color: var(--orange) !important;
-}
-.nav-hamburger {
-  display:none;
-  flex-direction:column; justify-content:center; gap:5px;
-  width:36px; height:36px; cursor:pointer;
-  background:none; border:none; padding:4px;
-}
-.nav-hamburger span {
-  display:block; width:22px; height:1.5px;
-  background:rgba(253,252,250,.65);
-  transition:all .3s;
-}
-.nav-hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
-.nav-hamburger.open span:nth-child(2) { opacity:0; }
-.nav-hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
-
-.nav-drawer {
-  display:none;
-  position:fixed; inset:0; top:0; z-index:499;
-  background:rgba(253,252,250,.97);
-  backdrop-filter:blur(24px);
-  flex-direction:column; align-items:center; justify-content:center;
-  gap:40px;
-}
-.nav-drawer.open { display:flex; }
-.nav-drawer a {
-  font-family:var(--font-display);
-  font-size:1.1rem; font-weight:600;
-  color:var(--text-dim); text-decoration:none;
-  letter-spacing:.1em; text-transform:uppercase;
-  transition:color .3s;
-}
-.nav-drawer a:hover { color:var(--text); }
-.nav-drawer .nav-contact {
-  color:var(--orange) !important;
-  border:1.5px solid rgba(232,97,26,.3);
-  padding:12px 32px; border-radius:4px;
-}
-
-@media(max-width:768px){
-  nav { padding:14px 20px; }
-  nav.scrolled { padding:11px 20px; }
-  .nav-logo img { height:40px; } /* 72px → 40px：モバイルで横幅を圧迫しないよう縮小 */
-  nav.scrolled .nav-logo img { height:36px; }
-  .nav-menu a:not(.nav-contact) { display:none; }
-  .nav-hamburger { display:flex; }
-}
-
-/* =============================================
-   HERO
-============================================= */
-.hero {
-  min-height: 100vh;
-  display: flex; flex-direction:column;
-  justify-content: flex-end;
-  padding: 0 64px 88px;
-  position: relative; overflow:hidden;
-  background: #141210;
-}
-
-/* グリッドライン背景 */
-.hero-grid {
-  position:absolute; inset:0; z-index:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 40%, transparent 100%);
-}
-
-/* グラデーションblob（dark bg なので screen で光らせる） */
-.hero-blob {
-  position:absolute; z-index:0;
-  border-radius:50%; filter:blur(90px);
-  pointer-events:none; mix-blend-mode:screen;
-  will-change: transform; /* GPUレイヤーに昇格し、メインスレッドをブロックしない */
-}
-.hero-blob-1 {
-  width:700px; height:700px;
-  background: radial-gradient(circle, rgba(232,97,26,.22), transparent 65%);
-  top:-180px; right:-120px;
-  animation: blob-drift-1 14s ease-in-out infinite;
-}
-.hero-blob-2 {
-  width:600px; height:600px;
-  background: radial-gradient(circle, rgba(10,146,128,.18), transparent 65%);
-  bottom:-120px; left:-60px;
-  animation: blob-drift-2 18s ease-in-out infinite;
-}
-.hero-blob-3 {
-  width:400px; height:400px;
-  background: radial-gradient(circle, rgba(124,58,237,.12), transparent 65%);
-  top:30%; left:40%;
-  animation: blob-drift-3 22s ease-in-out infinite;
-}
-@keyframes blob-drift-1 {
-  0%,100% { transform: translate(0,0) scale(1); }
-  33%      { transform: translate(-40px,30px) scale(1.06); }
-  66%      { transform: translate(20px,-20px) scale(.96); }
-}
-@keyframes blob-drift-2 {
-  0%,100% { transform: translate(0,0) scale(1); }
-  40%      { transform: translate(50px,-40px) scale(1.08); }
-  70%      { transform: translate(-20px,20px) scale(.94); }
-}
-@keyframes blob-drift-3 {
-  0%,100% { transform: translate(0,0) scale(1); }
-  50%      { transform: translate(-30px,50px) scale(1.1); }
-}
-
-/* ノイズテクスチャ */
-.hero-noise {
-  position: absolute; inset: 0; z-index: 0;
-  pointer-events: none; opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 200px 200px; background-repeat: repeat;
-}
-
-/* マトリックス雨 canvas */
-.hero-matrix {
-  position: absolute; inset: 0; z-index: 0;
-  pointer-events: none; display: block;
-  width: 100%; height: 100%;
-  opacity: 0.55;
-}
-
-/* ロゴ背景 */
-.hero-logo-bg {
-  position: absolute; top: 12%; left: 50%;
-  transform: translateX(-50%); z-index: 1;
-  pointer-events: none; width: min(700px, 80vw);
-  overflow: hidden;
-}
-.hero-logo-bg img {
-  width: 100%; opacity: 0.85; display: block;
-  filter: brightness(1.4);
-  -webkit-mask-image: radial-gradient(ellipse 90% 75% at 50% 50%, black 50%, transparent 88%);
-  mask-image: radial-gradient(ellipse 90% 75% at 50% 50%, black 50%, transparent 88%);
-}
-
-.hero-content { position:relative; z-index:2; max-width:1200px; }
-
-.hero-badge {
-  display: inline-flex; align-items:center; gap:8px;
-  background: rgba(232,97,26,.18);
-  border: 1px solid rgba(232,97,26,.35);
-  border-radius: 100px;
-  padding: 6px 16px; margin-bottom:36px;
-  font-family: var(--font-display);
-  font-size: .7rem; font-weight:600;
-  color: #f4a06a; letter-spacing:.06em;
-  text-transform: uppercase;
-}
-.hero-badge-dot {
-  width:6px; height:6px; border-radius:50%;
-  background: var(--orange);
-  box-shadow: 0 0 0 3px rgba(232,97,26,.2);
-  animation: pulse-dot 2s ease infinite;
-}
-
-.hero-label {
-  font-family: var(--font-body);
-  font-size: 1.05rem; font-weight:400;
-  color: rgba(253,252,250,.55); letter-spacing: .04em;
-  text-transform: none; margin-bottom:36px;
-  display: flex; align-items:center; gap:16px;
-}
-.hero-label::before {
-  content:''; display:block; width:32px; height:2px;
-  background: var(--orange); border-radius:2px;
-}
-
-.hero-h1 {
-  font-family: var(--font-display);
-  font-size: clamp(3.6rem, 9vw, 8rem);
-  font-weight: 800; line-height: 1.0;
-  letter-spacing: -.04em;
-  margin-bottom: 40px;
-}
-.hero-h1 .line-1 { display:block; color:#fdfcfa; }
-.hero-h1 .line-2 {
-  display:block;
-  color: #fdfcfa;
-}
-
-.hero-bottom {
-  display:flex; align-items:flex-end;
-  justify-content:space-between; gap:40px; flex-wrap:wrap;
-}
-.hero-desc {
-  font-size:1.05rem; color:rgba(253,252,250,.58);
-  line-height:1.85; max-width:480px; font-weight:400;
-}
-.hero-desc strong { color:rgba(253,252,250,.88); font-weight:500; }
-.hero-cta-group {
-  display:flex; align-items:center; gap:20px; flex-shrink:0;
-}
-.hero-cta {
-  font-family:var(--font-display);
-  font-size:.8rem; font-weight:600;
-  letter-spacing:.08em; text-transform:uppercase;
-  text-decoration:none; transition:color .3s;
-}
-.hero-cta-primary {
-  color:#fff; background:var(--orange);
-  padding:14px 36px; border-radius:6px;
-  transition:opacity .3s, transform .3s, box-shadow .3s;
-  box-shadow: 0 4px 16px rgba(232,97,26,.3);
-}
-.hero-cta-primary:hover { opacity:.9; transform:translateY(-2px); box-shadow: 0 8px 24px rgba(232,97,26,.35); }
-.hero-cta-secondary { color:rgba(253,252,250,.55); }
-.hero-cta-secondary:hover { color:rgba(253,252,250,.9); }
-.hero-cta-secondary::after { content:' →'; transition:letter-spacing .3s; }
-.hero-cta-secondary:hover::after { letter-spacing:.2em; }
-
-.hero-scroll-hint {
-  position:absolute; right:64px; bottom:88px; z-index:1;
-  font-family:var(--font-display);
-  font-size:.62rem; color:rgba(253,252,250,.3);
-  letter-spacing:.2em; text-transform:uppercase;
-  writing-mode:vertical-rl;
-  display:flex; align-items:center; gap:16px;
-}
-.hero-scroll-hint::after {
-  content:''; display:block; width:1px; height:60px;
-  background:linear-gradient(rgba(253,252,250,.3), transparent);
-}
-
-@media(max-width:768px){
-  .hero { padding:80px 24px 64px; }
-  .hero-h1 { font-size:clamp(2.4rem,10.5vw,4rem); letter-spacing:-.03em; }
-  .hero-h1 .line-1,
-  .hero-h1 .line-2 { white-space:normal; word-break:keep-all; }
-  .hero-desc { font-size:.9rem; max-width:100%; }
-  .hero-bottom { flex-direction:column; align-items:flex-start; gap:20px; }
-  .hero-scroll-hint { display:none; }
-  .hero-blob-1 { width:360px; height:360px; }
-  .hero-blob-2 { width:300px; height:300px; }
-  .hero-blob-3 { display:none; }
-  .hero-logo-bg { display:none; } /* モバイルは装飾ロゴ非表示。テキストと被るため */
-  .hero-matrix { opacity:0.3; }
-}
-
-/* =============================================
-   MARQUEE
-============================================= */
-.marquee-wrap {
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  padding:18px 0; overflow:hidden;
-  background:var(--bg-alt);
-}
-.marquee-track {
-  display:flex; gap:0;
-  animation:marquee 32s linear infinite;
-  white-space:nowrap;
-  will-change: transform;
-}
-.marquee-item {
-  font-family:var(--font-display);
-  font-size:.72rem; font-weight:600;
-  color:var(--text-muted); letter-spacing:.18em; text-transform:uppercase;
-  padding:0 48px;
-  display:flex; align-items:center; gap:48px;
-  flex-shrink:0;
-}
-.marquee-item span {
-  display:inline-block; width:4px; height:4px;
-  border-radius:50%; background:var(--orange); opacity:.6;
-}
-@keyframes marquee {
-  from { transform:translateX(0); }
-  to   { transform:translateX(-50%); }
-}
-
-/* =============================================
-   SECTION BASE
-============================================= */
-section { position:relative; z-index:1; }
-.s-inner {
-  max-width:1200px; margin:0 auto;
-  padding:120px 64px;
-}
-.s-label {
-  font-family:var(--font-display);
-  font-size:var(--label-size); font-weight:500;
-  color:var(--orange); letter-spacing:.06em;
-  text-transform:none; margin-bottom:64px;
-  display:flex; align-items:center; gap:16px;
-}
-.s-label::before {
-  content:''; display:block; width:32px; height:2px;
-  background:var(--orange); border-radius:2px; flex-shrink:0;
-}
-.s-num {
-  font-family:var(--font-display);
-  font-size:.65rem; color:var(--text-muted);
-  letter-spacing:.12em;
-}
-@media(max-width:768px){
-  .s-inner { padding:80px 20px; }
-  .s-label { margin-bottom:40px; }
-}
-
-/* =============================================
-   PHILOSOPHY
-============================================= */
-.philosophy { background:var(--bg); }
-
-.philosophy-statement {
-  border-top:2px solid var(--orange-dim);
-  padding:72px 0 80px; max-width:900px;
-}
-.philosophy-statement p {
-  font-family:var(--font-display);
-  font-size:clamp(1.6rem,3.5vw,2.6rem);
-  font-weight:700; line-height:1.4;
-  letter-spacing:-.025em; color:var(--text);
-}
-.philosophy-statement p em {
-  font-style:normal;
-  color: var(--text);
-}
-
-.philosophy-pillars {
-  display:grid; grid-template-columns:repeat(3,1fr);
-  gap:24px;
-}
-.pillar {
-  background: var(--bg-surface);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding:40px 32px;
-  box-shadow: var(--shadow-card);
-  transition: transform .3s, box-shadow .3s;
-  position:relative; overflow:hidden;
-}
-.pillar::before {
-  content:''; position:absolute;
-  top:0; left:0; right:0; height:3px;
-  background:linear-gradient(90deg,var(--orange),var(--purple));
-  transform:scaleX(0); transform-origin:left;
-  transition:transform .4s ease;
-}
-.pillar:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
-.pillar:hover::before { transform:scaleX(1); }
-
-.pillar-num {
-  font-family:var(--font-display);
-  font-size:.65rem; color:var(--text-muted);
-  letter-spacing:.14em; margin-bottom:28px;
-}
-.pillar-title {
-  font-family:var(--font-display);
-  font-size:1.05rem; font-weight:700;
-  line-height:1.35; margin-bottom:14px;
-  letter-spacing:-.01em; color:var(--text);
-}
-.pillar-desc {
-  font-size:.83rem; color:var(--text-dim);
-  line-height:1.8; font-weight:400;
-}
-
-@media(max-width:768px){
-  .philosophy-pillars { grid-template-columns:1fr; gap:16px; }
-}
-
-/* =============================================
-   ABOUT
-============================================= */
-.about { background:var(--bg-alt); }
-
-.about-layout {
-  display:grid; grid-template-columns:1fr 1.4fr;
-  gap:120px; align-items:start;
-}
-.about-left { position:sticky; top:120px; }
-.about-title {
-  font-family:var(--font-display);
-  font-size:clamp(2rem,4vw,3.2rem);
-  font-weight:800; line-height:1.1;
-  letter-spacing:-.04em; margin-bottom:24px; color:var(--text);
-}
-.about-title em {
-  font-style:normal; display:block;
-  color: var(--text);
-}
-.about-aside {
-  font-size:.8rem; color:var(--text-muted);
-  line-height:1.7; border-top:1px solid var(--line);
-  padding-top:20px; margin-top:32px;
-}
-
-.about-body { }
-.about-body p {
-  font-size:1.05rem; color:var(--text-dim);
-  line-height:1.9; font-weight:400;
-  margin-bottom:32px;
-}
-.about-body p:last-child { margin-bottom:0; }
-.about-body strong { color:var(--text); font-weight:500; }
-
-.about-cta {
-  display:flex; align-items:center; gap:24px;
-  margin-top:48px; flex-wrap:wrap;
-}
-.about-cta-btn {
-  font-family:var(--font-display);
-  font-size:.8rem; font-weight:600;
-  letter-spacing:.08em; text-transform:uppercase;
-  text-decoration:none;
-  color:#fff; background:var(--orange);
-  padding:14px 32px; border-radius:6px;
-  transition:opacity .3s, transform .3s;
-  box-shadow:0 4px 14px rgba(232,97,26,.25);
-}
-.about-cta-btn:hover { opacity:.9; transform:translateY(-2px); }
-.about-cta-link {
-  font-family:var(--font-display);
-  font-size:.8rem; font-weight:500;
-  letter-spacing:.06em; text-transform:uppercase;
-  text-decoration:none; color:var(--text-dim);
-  transition:color .3s;
-}
-.about-cta-link:hover { color:var(--text); }
-
-.about-metrics {
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:16px; margin-top:56px;
-}
-.metric {
-  background: var(--bg-surface);
-  padding:28px 24px; border-radius:10px;
-  border:1px solid var(--line);
-  box-shadow:var(--shadow-card);
-  transition:transform .3s, box-shadow .3s;
-}
-.metric:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); }
-.metric-val {
-  font-family:var(--font-display);
-  font-size:2.2rem; font-weight:800;
-  color:var(--orange); letter-spacing:-.04em;
-  margin-bottom:6px; line-height:1;
-}
-.metric-label {
-  font-size:.75rem; color:var(--text-dim); letter-spacing:.04em;
-}
-
-@media(max-width:960px){
-  .about-layout { grid-template-columns:1fr; gap:48px; }
-  .about-left { position:static; }
-}
-
-/* =============================================
-   PROCESS
-============================================= */
-.process { background:var(--bg); }
-.process-item {
-  display:grid; grid-template-columns:80px 1fr auto;
-  align-items:center; gap:48px;
-  padding:40px 0;
-  border-bottom:1px solid var(--line);
-  transition:background .3s;
-  cursor:default;
-}
-.process-item:first-child { border-top:1px solid var(--line); }
-.process-item:hover { background:rgba(232,97,26,.03); }
-.process-item:hover .process-arrow { opacity:1; transform:translateX(0); }
-
-.process-num {
-  font-family:var(--font-display);
-  font-size:2.8rem; font-weight:800;
-  color:rgba(232,97,26,.2); letter-spacing:-.04em;
-  line-height:1; user-select:none;
-}
-.process-title {
-  font-family:var(--font-display);
-  font-size:1.15rem; font-weight:700;
-  letter-spacing:-.02em; margin-bottom:6px; color:var(--text);
-}
-.process-desc {
-  font-size:.83rem; color:var(--text-dim);
-  line-height:1.75; font-weight:400; max-width:520px;
-}
-.process-tag {
-  font-family:var(--font-display);
-  font-size:.65rem; font-weight:600;
-  color:var(--orange); letter-spacing:.12em;
-  text-transform:uppercase; border:1px solid rgba(232,97,26,.25);
-  padding:6px 14px; border-radius:4px; white-space:nowrap;
-  background:var(--orange-dim);
-}
-.process-arrow {
-  font-size:1.2rem; color:var(--orange);
-  opacity:0; transform:translateX(-8px);
-  transition:opacity .3s, transform .3s; margin-left:16px;
-}
-
-@media(max-width:768px){
-  .process-item { grid-template-columns:48px 1fr; gap:20px; }
-  .process-tag, .process-arrow { display:none; }
-  .process-num { font-size:2rem; }
-}
-
-/* =============================================
-   PORTFOLIO — BENTO GRID
-============================================= */
-.portfolio { background:var(--bg-alt); }
-
-.portfolio-section-title {
-  font-size:.62rem; font-weight:700; letter-spacing:.14em;
-  text-transform:uppercase; color:var(--text-muted);
-  margin-bottom:16px; margin-top:48px;
-  display:flex; align-items:center; gap:12px;
-}
-.portfolio-section-title:first-child { margin-top:0; }
-.portfolio-section-title::after {
-  content:''; flex:1; height:1px; background:var(--line);
-}
-
-/* ベントーグリッド（アプリ） */
-.portfolio-bento-apps {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  grid-template-rows:auto auto;
-  gap:16px;
-  margin-bottom:0;
-}
-.bento-sinc       { grid-column:span 2; }
-.bento-kondate    { grid-column:span 1; }
-.bento-watchmemo  { grid-column:span 1; }
-.bento-soukan     { grid-column:span 2; }
-
-/* Webツールグリッド */
-.portfolio-grid-tools {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-}
-
-/* カード共通 */
-.portfolio-card {
-  background:var(--bg-surface);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:40px 36px;
-  box-shadow:var(--shadow-card);
-  transition:transform .35s, box-shadow .35s, border-color .3s;
-  position:relative; overflow:hidden;
-}
-.portfolio-card::after {
-  content:''; position:absolute;
-  top:0; left:0; right:0; height:3px;
-  background:linear-gradient(90deg,var(--orange),var(--purple));
-  opacity:0; transition:opacity .3s;
-  border-radius:16px 16px 0 0;
-}
-.portfolio-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-lg); border-color:rgba(232,97,26,.2); }
-.portfolio-card:hover::after { opacity:1; }
-.portfolio-card.coming { opacity:.5; }
-.portfolio-card.coming:hover { transform:none; box-shadow:var(--shadow-card); border-color:var(--line); }
-.portfolio-card.coming::after { display:none; }
-
-/* Sincのフィーチャードカード */
-.bento-sinc.portfolio-card {
-  background: linear-gradient(135deg, #ffffff 0%, var(--orange-light) 100%);
-}
-
-/* こんだて番長のカード */
-.bento-kondate.portfolio-card {
-  background: linear-gradient(135deg, #ffffff 0%, #f0faf8 100%);
-}
-
-/* カード内ロゴエリア */
-.pc-logo-row {
-  display:flex; align-items:center; gap:16px;
-  margin-bottom:28px;
-}
-.pc-logo-img {
-  height:52px; width:auto; display:block; flex-shrink:0;
-}
-.pc-logo-svg {
-  height:52px; width:auto; flex-shrink:0;
-}
-/* Sincロゴ（インラインSVG） */
-.sinc-logo-mark {
-  width:52px; height:52px; flex-shrink:0;
-}
-
-.pc-status {
-  font-family:var(--font-display);
-  font-size:.62rem; font-weight:600;
-  letter-spacing:.14em; text-transform:uppercase;
-  margin-bottom:0; display:flex; align-items:center; gap:8px;
-}
-.pc-status.live { color:var(--teal); }
-.pc-status.soon { color:var(--text-muted); }
-.pc-status-dot {
-  width:5px; height:5px; border-radius:50%;
-  background:currentColor; flex-shrink:0;
-}
-.pc-status.live .pc-status-dot {
-  box-shadow: 0 0 0 3px rgba(10,146,128,.2);
-  animation: pulse-dot 2s ease infinite;
-}
-@keyframes pulse-dot {
-  0%,100%{box-shadow:0 0 0 3px rgba(10,146,128,.2)}
-  50%{box-shadow:0 0 0 6px rgba(10,146,128,.06)}
-}
-
-.pc-title {
-  font-family:var(--font-display);
-  font-size:1.5rem; font-weight:800;
-  letter-spacing:-.03em; margin-bottom:8px;
-  line-height:1.2; color:var(--text);
-}
-.bento-sinc .pc-title { font-size:2rem; }
-.pc-category {
-  font-size:.75rem; color:var(--text-muted);
-  letter-spacing:.06em; margin-bottom:20px;
-}
-.pc-desc {
-  font-size:.84rem; color:var(--text-dim);
-  line-height:1.8; font-weight:400; margin-bottom:28px;
-}
-.pc-tags {
-  display:flex; flex-wrap:wrap; gap:6px; margin-bottom:28px;
-}
-.pc-tag {
-  font-family:var(--font-display);
-  font-size:.6rem; color:var(--text-muted);
-  letter-spacing:.08em; text-transform:uppercase;
-  border:1px solid var(--line-bright);
-  padding:4px 12px; border-radius:100px;
-  background:var(--bg-alt);
-}
-.pc-tag-accent {
-  font-family:var(--font-display);
-  font-size:.6rem; color:var(--orange);
-  letter-spacing:.08em; text-transform:uppercase;
-  border:1px solid rgba(232,97,26,.25);
-  padding:4px 12px; border-radius:100px;
-  background:var(--orange-dim);
-}
-.pc-link {
-  font-family:var(--font-display);
-  font-size:.75rem; font-weight:600;
-  color:var(--orange); text-decoration:none;
-  letter-spacing:.06em; text-transform:uppercase;
-  display:inline-flex; align-items:center; gap:8px;
-  transition:gap .3s;
-}
-.pc-link:hover { gap:14px; }
-.pc-link-icon { font-size:.9rem; }
-
-/* ストアバッジ */
-.store-badges {
-  display: flex; flex-direction: row;
-  justify-content: flex-start; gap: 10px; margin-top: 20px;
-}
-.store-badge {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 8px 16px; border: 1px solid var(--line-bright);
-  border-radius: 8px; background: var(--bg-alt);
-  opacity: 0.55; cursor: not-allowed; user-select: none;
-}
-.store-badge-text { display: flex; flex-direction: column; }
-.store-badge-soon {
-  font-family: var(--font-display); font-size: .55rem;
-  font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
-  color: var(--text-muted);
-}
-.store-badge-name {
-  font-family: var(--font-display); font-size: .8rem;
-  font-weight: 700; color: var(--text-dim); letter-spacing: -.01em;
-}
-
-@media(max-width:960px){
-  .portfolio-bento-apps { grid-template-columns:1fr 1fr; }
-  .bento-sinc    { grid-column:span 2; }
-  .bento-kondate { grid-column:span 1; }
-  .bento-watchmemo { grid-column:span 1; }
-  .bento-soukan  { grid-column:span 2; }
-  .portfolio-grid-tools { grid-template-columns:1fr 1fr; }
-}
-@media(max-width:640px){
-  .portfolio-bento-apps { grid-template-columns:1fr; }
-  .bento-sinc,
-  .bento-kondate,
-  .bento-watchmemo,
-  .bento-soukan { grid-column:span 1; }
-  .portfolio-grid-tools { grid-template-columns:1fr; }
-  .bento-sinc .pc-title { font-size:1.5rem; }
-  .portfolio-card { padding:28px 24px; }
-}
-
-/* =============================================
-   NOTE
-============================================= */
-.note-section { background:var(--bg); }
-
-.note-layout {
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:80px; align-items:center;
-}
-.note-title {
-  font-family:var(--font-display);
-  font-size:clamp(2rem,4vw,3.2rem);
-  font-weight:800; line-height:1.1;
-  letter-spacing:-.04em; margin-bottom:24px; color:var(--text);
-}
-.note-title em {
-  font-style:normal; display:block;
-  color: var(--text);
-}
-.note-desc {
-  font-size:.95rem; color:var(--text-dim);
-  line-height:1.85; font-weight:400; margin-bottom:36px;
-}
-.note-all-link {
-  display:inline-flex; align-items:center; gap:10px;
-  font-family:var(--font-display);
-  font-size:.75rem; font-weight:600;
-  color:var(--orange); letter-spacing:.1em; text-transform:uppercase;
-  text-decoration:none; transition:opacity .2s;
-}
-.note-all-link:hover { opacity:.7; }
-
-.note-cards {
-  display:grid; grid-template-columns:1fr 1fr; gap:16px;
-}
-.note-card {
-  display:flex; flex-direction:column;
-  background: var(--bg-surface);
-  border:1px solid var(--line);
-  border-radius:12px; overflow:hidden;
-  text-decoration:none;
-  box-shadow:var(--shadow-card);
-  transition:border-color .3s, transform .3s, box-shadow .3s;
-}
-.note-card:hover {
-  border-color:rgba(232,97,26,.25);
-  transform:translateY(-3px);
-  box-shadow:var(--shadow-md);
-}
-.note-card-thumb {
-  width:100%; aspect-ratio:1200/630;
-  object-fit:cover; display:block;
-  background:var(--bg-alt);
-}
-.note-card-body {
-  padding:18px 22px;
-  display:flex; flex-direction:column; gap:8px;
-}
-.note-card-badges {
-  display:flex; gap:8px; align-items:center;
-}
-.note-badge {
-  font-family:var(--font-display);
-  font-size:.58rem; font-weight:700;
-  letter-spacing:.1em; text-transform:uppercase;
-  padding:3px 10px; border-radius:100px;
-}
-.note-badge-free {
-  background:rgba(10,146,128,.12);
-  color:var(--teal); border:1px solid rgba(10,146,128,.25);
-}
-.note-badge-coming {
-  background:var(--bg-alt); color:var(--text-muted);
-  border:1px solid var(--line-bright);
-}
-.note-badge-writing {
-  background:rgba(94,207,220,.1); color:var(--teal);
-  border:1px solid rgba(94,207,220,.25);
-}
-.note-card-title {
-  font-size:.9rem; font-weight:500;
-  color:var(--text); line-height:1.6;
-}
-.note-card-link-label {
-  font-family:var(--font-display);
-  font-size:.63rem; font-weight:700;
-  color:var(--orange); letter-spacing:.1em; margin-top:4px;
-}
-.note-card.is-coming { opacity:.55; pointer-events:none; }
-
-@media(max-width:768px){
-  .note-layout { grid-template-columns:1fr; gap:48px; }
-  .note-cards { grid-template-columns:1fr; }
-}
-
-/* =============================================
-   CONTACT — ダーク反転セクション
-============================================= */
-.contact-section {
-  background: var(--bg-dark);
-  position:relative; overflow:hidden;
-}
-.contact-section::before {
-  content:''; position:absolute; inset:0;
-  background:
-    radial-gradient(ellipse 60% 80% at 80% 50%, rgba(232,97,26,.12), transparent),
-    radial-gradient(ellipse 40% 60% at 20% 50%, rgba(124,58,237,.08), transparent);
-  pointer-events:none;
-}
-.contact-inner { max-width:800px; position:relative; z-index:1; }
-
-.contact-heading {
-  font-family:var(--font-display);
-  font-size:clamp(2.4rem,6vw,5rem);
-  font-weight:800; line-height:1.05;
-  letter-spacing:-.05em; margin-bottom:48px;
-  color:var(--text-inv);
-}
-.contact-heading em {
-  font-style:normal;
-  color: #fdfcfa;
-}
-
-.contact-body {
-  font-size:1rem; color:var(--text-inv-dim);
-  line-height:1.85; font-weight:400;
-  max-width:560px; margin-bottom:56px;
-}
-
-.contact-row {
-  display:flex; align-items:center; gap:28px; flex-wrap:wrap;
-}
-.contact-mail {
-  font-family:var(--font-display);
-  font-size:1.1rem; font-weight:700;
-  color:var(--text-inv); text-decoration:none;
-  letter-spacing:-.01em;
-  border-bottom:1px solid rgba(253,252,250,.2);
-  padding-bottom:4px;
-  transition:border-color .3s, color .3s;
-}
-.contact-mail:hover { color:var(--orange); border-color:var(--orange); }
-
-.contact-note {
-  font-size:.78rem; color:rgba(253,252,250,.35); line-height:1.6;
-}
-.contact-x {
-  display:inline-flex; align-items:center; gap:8px;
-  font-family:var(--font-display);
-  font-size:.8rem; font-weight:600;
-  color:var(--text-inv-dim); text-decoration:none;
-  letter-spacing:.04em;
-  border:1px solid rgba(253,252,250,.15);
-  padding:10px 20px; border-radius:6px;
-  transition:color .3s, border-color .3s, background .3s;
-}
-.contact-x:hover {
-  color:var(--text-inv);
-  border-color:rgba(253,252,250,.3);
-  background:rgba(253,252,250,.06);
-}
-
-/* =============================================
-   FOOTER
-============================================= */
-footer {
-  background:var(--bg-dark-alt);
-  border-top:1px solid rgba(253,252,250,.08);
-  padding:40px 64px;
-}
-.footer-inner {
-  max-width:1200px; margin:0 auto;
-  display:flex; align-items:center;
-  justify-content:space-between; gap:24px; flex-wrap:wrap;
-}
-.footer-logo img { height:80px; opacity:1; }
-.footer-links {
-  display:flex; gap:32px;
-}
-.footer-links a {
-  font-size:.72rem; color:rgba(253,252,250,.52);
-  text-decoration:none; letter-spacing:.04em;
-  transition:color .3s;
-}
-.footer-links a:hover { color:rgba(253,252,250,.85); }
-.footer-copy {
-  font-size:.7rem; color:rgba(253,252,250,.38);
-  font-family:var(--font-display); letter-spacing:.04em;
-}
-@media(max-width:768px){
-  footer { padding:32px 20px; }
-  .footer-links { gap:16px; }
-}
-
-/* =============================================
-   CLAUDE CODE COMMENT
-============================================= */
-.claude-comment {
-  border-left: 3px solid var(--warm);
-  padding: 28px 0 28px 32px;
-  margin-top: 56px;
-  background:linear-gradient(90deg, var(--warm-dim), transparent);
-  border-radius:0 8px 8px 0;
-}
-.claude-comment-label {
-  font-family: var(--font-display);
-  font-size: .7rem; font-weight: 500;
-  color: var(--warm); letter-spacing: .1em;
-  margin-bottom: 20px;
-  display: flex; align-items: center; gap: 12px;
-}
-.claude-comment-label::before {
-  content: ''; display: block; width: 20px; height: 1px;
-  background: var(--warm); flex-shrink: 0;
-}
-.claude-comment-body {
-  font-size: .95rem; color: var(--text-dim);
-  line-height: 1.95; font-weight: 300;
-}
-.claude-comment-body p { margin-bottom: 14px; }
-.claude-comment-body p:last-child { margin-bottom: 0; }
-.claude-comment-footer {
-  font-family: var(--font-display);
-  font-size: .65rem; color: var(--text-muted);
-  letter-spacing: .08em; margin-top: 20px;
-}
-
-/* =============================================
-   TRADEMARK NOTE
-============================================= */
-.trademark-note {
-  font-size: .68rem; color: rgba(253,252,250,.2);
-  line-height: 1.7; padding: 24px 64px 40px;
-  border-top: 1px solid rgba(253,252,250,.06);
-  background: var(--bg-dark-alt);
-}
-@media(max-width:768px){
-  .trademark-note { padding: 20px 20px 32px; }
-}
-
-/* =============================================
-   REVEAL ANIMATION
-============================================= */
-.reveal {
-  opacity:0; transform:translateY(28px);
-  transition:opacity .7s cubic-bezier(.25,.46,.45,.94),
-              transform .7s cubic-bezier(.25,.46,.45,.94);
-}
-.reveal.visible { opacity:1; transform:translateY(0); }
-.reveal-delay-1 { transition-delay:.1s; }
-.reveal-delay-2 { transition-delay:.2s; }
-.reveal-delay-3 { transition-delay:.3s; }
-
-/* =============================================
-   CONSULTING
-============================================= */
-.consulting-section { background:var(--bg-alt); }
-
-.consulting-layout {
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:80px; align-items:start;
-}
-
-.consulting-title {
-  font-family:var(--font-display);
-  font-size:clamp(1.7rem,3vw,2.6rem);
-  font-weight:800;
-  letter-spacing:-.03em;
-  line-height:1.3;
-  color:var(--text);
-  margin-bottom:24px;
-}
-.consulting-title em {
-  font-style:normal;
-  background:linear-gradient(90deg,var(--teal),#0ec9b0);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-
-.consulting-desc {
-  font-size:.88rem; color:var(--text-dim);
-  line-height:1.9; margin-bottom:28px;
-}
-
-.consulting-proof {
-  display:inline-flex; align-items:center; gap:8px;
-  background:rgba(10,146,128,.08);
-  border:1px solid rgba(10,146,128,.2);
-  border-radius:6px; padding:9px 16px;
-  font-family:var(--font-display);
-  font-size:.72rem; font-weight:700;
-  color:var(--teal); letter-spacing:.06em;
-  margin-bottom:36px;
-}
-
-.consulting-cta {
-  display:inline-flex; align-items:center; gap:10px;
-  background:var(--text); color:var(--text-inv);
-  font-family:var(--font-display);
-  font-size:.78rem; font-weight:600;
-  letter-spacing:.08em; text-transform:uppercase;
-  text-decoration:none;
-  padding:14px 32px; border-radius:6px;
-  transition:background .3s, transform .3s;
-}
-.consulting-cta:hover {
-  background:var(--bg-dark-alt); transform:translateY(-2px);
-}
-
-.consulting-sub {
-  font-size:.75rem; color:var(--text-muted);
-  margin-top:14px; line-height:1.6;
-}
-
-.consulting-features {
-  display:flex; flex-direction:column; gap:16px;
-}
-
-.consulting-feature {
-  background:var(--bg-surface);
-  border:1px solid var(--line);
-  border-radius:14px; padding:24px 26px;
-  box-shadow:var(--shadow-card);
-  display:flex; gap:16px; align-items:flex-start;
-  transition:transform .3s, box-shadow .3s, border-color .3s;
-}
-.consulting-feature:hover {
-  transform:translateY(-3px);
-  box-shadow:var(--shadow-md);
-  border-color:rgba(10,146,128,.2);
-}
-.consulting-feature-icon {
-  font-size:1.5rem; flex-shrink:0;
-  line-height:1; margin-top:1px;
-}
-.consulting-feature-title {
-  font-family:var(--font-display);
-  font-size:.88rem; font-weight:700;
-  color:var(--text); margin-bottom:5px;
-}
-.consulting-feature-body {
-  font-size:.78rem; color:var(--text-muted);
-  line-height:1.75;
-}
-
-@media(max-width:768px){
-  .consulting-layout { grid-template-columns:1fr; gap:48px; }
-}
-
-/* =============================================
-   CONTACT内 s-label の文字色（ダーク背景）
-============================================= */
-.contact-section .s-label {
-  color:rgba(232,97,26,.8);
-}
-.contact-section .s-label::before {
-  background:var(--orange);
-}
-.contact-section .s-num {
-  color:rgba(253,252,250,.3);
-}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0A0A0A; --paper:#FAFAF7; --paper-pure:#FFF;
+  --blood:#E10600; --ink-dim:#3A3A3A; --ink-soft:#9A9A95;
+  --line:rgba(10,10,10,.12);
+  --pad:clamp(20px,5vw,64px);
+  --max:1280px;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Inter","Noto Sans JP",system-ui,sans-serif;
+  font-feature-settings:"palt" 1;
+  line-height:1.7; -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.shell{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.display{font-family:"Anton",sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-.01em;line-height:.95}
+.eyebrow{font-family:"Anton",sans-serif;font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-dim)}
+
+/* NAV */
+nav.top{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:18px var(--pad);background:rgba(250,250,247,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+nav.top .brand{font-family:"Anton",sans-serif;font-size:1.2rem;letter-spacing:.02em;text-transform:uppercase}
+nav.top .links{display:flex;gap:28px;font-family:"Anton",sans-serif;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase}
+nav.top .links a{color:var(--ink-dim);transition:color .2s}
+nav.top .links a:hover{color:var(--blood)}
+@media(max-width:720px){nav.top .links{display:none}}
+
+/* HERO */
+.hero{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:120px var(--pad) 80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;top:0;right:0;bottom:0;width:42%;pointer-events:none;overflow:hidden;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center;filter:contrast(1.05) saturate(.95);mask-image:linear-gradient(to left,#000 70%,transparent 100%);-webkit-mask-image:linear-gradient(to left,#000 70%,transparent 100%)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(250,250,247,.15) 0%,rgba(250,250,247,0) 30%,rgba(250,250,247,0) 70%,rgba(250,250,247,.6) 100%);pointer-events:none}
+.hero .shell{position:relative;z-index:2;max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.hero h1, .hero .sub, .hero-jp, .hero-ctas, .hero-meta{max-width:min(620px,52vw)}
+@media(max-width:820px){.hero-bg{width:100%;opacity:.18}.hero h1,.hero .sub,.hero-jp,.hero-ctas{max-width:100%}}
+.pom-sticker{position:absolute;right:clamp(0px,2vw,40px);bottom:clamp(20px,4vw,80px);width:clamp(140px,18vw,260px);z-index:2;transition:transform .35s var(--ease,cubic-bezier(.22,.61,.36,1));filter:drop-shadow(4px 6px 0 rgba(10,10,10,.18))}
+.pom-sticker img{width:100%;height:auto;display:block}
+.pom-sticker:hover{transform:translate(-4px,-4px)}
+.pom-sticker:hover::after{transform:translate(3px,3px) rotate(-3deg)}
+.pom-sticker::after{content:"CMO • CHIEF MOCHI OFFICER";position:absolute;left:8%;bottom:12%;padding:6px 12px;background:var(--blood);color:#fff;font-family:"Anton",sans-serif;font-size:.72rem;letter-spacing:.2em;transform:rotate(-4deg);transition:transform .35s var(--ease,cubic-bezier(.22,.61,.36,1));white-space:nowrap}
+.hero-tag{display:inline-flex;align-items:center;gap:10px;font-family:"Anton",sans-serif;font-size:.8rem;letter-spacing:.28em;text-transform:uppercase;color:var(--blood);margin-bottom:32px}
+.hero-tag::before{content:"";width:32px;height:2px;background:var(--blood)}
+.hero h1{font-family:"Anton",sans-serif;text-transform:uppercase;font-size:clamp(3rem,9vw,7.6rem);line-height:.9;letter-spacing:-.015em;margin-bottom:24px;text-shadow:0 1px 0 rgba(250,250,247,.4),0 0 24px rgba(250,250,247,.6)}
+.hero h1 .red{color:var(--blood)}
+.hero .sub{font-family:"Anton",sans-serif;font-size:clamp(1.4rem,3vw,2.4rem);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:48px;max-width:24ch;line-height:1.15}
+.hero-jp{font-size:.95rem;color:var(--ink-dim);max-width:30em;line-height:1.95;margin-bottom:48px}
+.hero-jp strong{font-weight:700;color:var(--ink)}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:64px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;font-family:"Anton",sans-serif;font-size:.95rem;letter-spacing:.16em;text-transform:uppercase;border-radius:0;border:1px solid var(--ink);transition:all .2s;cursor:pointer}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-primary:hover{background:var(--blood);border-color:var(--blood)}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+.btn .arr{display:inline-block;transition:transform .2s}
+.btn:hover .arr{transform:translateX(4px)}
+.hero-meta{display:flex;gap:32px;flex-wrap:wrap;padding-top:32px;border-top:1px solid var(--line);font-family:"Anton",sans-serif;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
+.hero-meta b{color:var(--ink);font-weight:400;margin-right:8px;font-size:1.1em}
+
+/* SECTION */
+.sec{padding:clamp(96px,12vw,160px) 0}
+.sec.dark{background:var(--ink);color:var(--paper)}
+.sec.dark .eyebrow{color:var(--paper)}
+.sec-head{display:grid;grid-template-columns:200px 1fr;gap:48px;margin-bottom:72px;align-items:end}
+.sec-head h2{font-family:"Anton",sans-serif;text-transform:uppercase;font-size:clamp(2.4rem,6vw,5rem);line-height:.95;letter-spacing:-.01em;max-width:18ch;word-break:keep-all;overflow-wrap:normal}
+.sec-head h2 .red{color:var(--blood)}
+.sec-head .lede{max-width:32em;color:var(--ink-dim);font-size:1rem;line-height:1.85;margin-top:24px}
+@media(max-width:760px){.sec-head{grid-template-columns:1fr;gap:16px}}
+
+/* APPS GRID */
+.apps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(max-width:960px){.apps{grid-template-columns:1fr}}
+
+/* NOTES GRID */
+.notes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+@media(max-width:1100px){.notes-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.notes-grid{grid-template-columns:1fr}}
+.note-card{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);text-decoration:none;color:var(--ink);transition:transform .25s var(--ease,cubic-bezier(.22,.61,.36,1)),box-shadow .25s,border-color .25s}
+.note-card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);border-color:var(--ink)}
+.note-card.is-coming{opacity:.6;cursor:default;pointer-events:none}
+.note-thumb{aspect-ratio:1200/630;background:var(--line);overflow:hidden;position:relative}
+.note-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.note-thumb.is-fallback{background:repeating-linear-gradient(45deg,#eee,#eee 8px,#f4f4f4 8px,#f4f4f4 16px)}
+.note-thumb.is-fallback img{display:none}
+.note-thumb.is-fallback::before{content:"NO IMAGE";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:"Anton",sans-serif;letter-spacing:.2em;color:#bbb;font-size:.85rem}
+.note-body{padding:18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.note-badge{display:inline-block;align-self:flex-start;font-family:"Anton",sans-serif;font-size:.65rem;letter-spacing:.2em;padding:3px 8px;background:var(--blood);color:#fff}
+.note-badge.coming{background:var(--ink-soft);color:#fff}
+.note-title{font-size:.92rem;line-height:1.6;font-weight:500;flex:1}
+.note-link{font-family:"Anton",sans-serif;font-size:.72rem;letter-spacing:.18em;color:var(--blood);text-transform:uppercase}
+.note-link.muted{color:var(--ink-soft)}
+.app{background:var(--paper-pure);padding:36px 32px 36px;display:flex;flex-direction:column;gap:18px;min-height:520px;position:relative;transition:background .25s}
+.app-head{display:flex;align-items:flex-start;gap:14px;min-height:104px}
+.app-mini-icon{width:54px;height:54px;display:grid;place-items:center;font-family:"Anton",sans-serif;font-size:1.2rem;letter-spacing:-.02em;flex-shrink:0;background:transparent;overflow:hidden;border-radius:12px}
+.app-visual{display:block;aspect-ratio:1/1;width:88%;margin:8px auto 0;border:2px solid var(--ink);overflow:hidden;background:#f4f4f0;position:relative;transition:transform .25s var(--ease,cubic-bezier(.22,.61,.36,1))}
+.app-visual img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease,cubic-bezier(.22,.61,.36,1))}
+.app-visual::after{content:"View →";position:absolute;inset:auto 0 0 0;padding:10px 14px;background:var(--ink);color:#fff;font-family:"Anton",sans-serif;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;transform:translateY(0);transition:background .2s}
+.app-visual:hover img{transform:scale(1.04)}
+.app-visual:hover::after{background:var(--blood)}
+.app-visual.is-disabled{cursor:default;opacity:.85}
+.app-visual.is-disabled::after{content:"Coming Soon";background:var(--ink-soft)}
+.app-visual.is-disabled:hover::after{background:var(--ink-soft)}
+.app:hover{background:var(--paper)}
+.app-status{font-family:"Anton",sans-serif;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--blood);display:inline-flex;align-items:center;gap:8px}
+.app-status::before{content:"";width:8px;height:8px;background:var(--blood);border-radius:50%}
+.app-status.dev{color:var(--ink-soft)}
+.app-status.dev::before{background:var(--ink-soft)}
+.app-icon{width:88px;height:88px;border:2px solid var(--ink);display:grid;place-items:center;font-family:"Anton",sans-serif;font-size:2.4rem;text-transform:uppercase;letter-spacing:-.04em;background:var(--paper)}
+.app-name{font-family:"Anton",sans-serif;font-size:2.4rem;text-transform:uppercase;line-height:1.05;letter-spacing:-.01em;margin-bottom:6px}
+.app-tagline{font-family:"Anton",sans-serif;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);margin-top:0}
+.app-desc{font-size:.92rem;line-height:1.85;color:var(--ink-dim);flex:1}
+.app-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.app-tag{font-family:"Anton",sans-serif;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;padding:5px 10px;border:1px solid var(--line);color:var(--ink-dim)}
+.app-link{display:inline-flex;align-items:center;gap:8px;font-family:"Anton",sans-serif;font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);border-bottom:2px solid var(--ink);padding-bottom:4px;align-self:flex-start;margin-top:8px;transition:color .2s,border-color .2s}
+.app-link:hover{color:var(--blood);border-color:var(--blood)}
+
+/* PLACEHOLDER FOR NEXT SECTIONS */
+.coming{padding:80px var(--pad);text-align:center;border-top:1px solid var(--line)}
+.coming p{font-family:"Anton",sans-serif;font-size:.85rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft)}
+
+/* BudouX: 日本語改行を自然な単位で */
+.budoux-applied{word-break:keep-all;overflow-wrap:break-word;line-break:strict}
 </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-12BFEWVRN3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-12BFEWVRN3');
-</script>
+<script src="https://unpkg.com/budoux@0.6.2/bundle/budoux-ja.min.js"></script>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="mainNav">
-  <a class="nav-logo" href="#top">
-    <img src="images/StratAIX_logo_transparent.png" alt="StratAIX">
+<nav class="top">
+  <a href="#top" class="brand" aria-label="StratAIX">
+    <img src="logo.svg" alt="StratAIX" style="height:28px;width:auto;display:block">
   </a>
-  <div class="nav-menu">
-    <a href="#philosophy">考え方</a>
-    <a href="#portfolio">つくったもの</a>
-    <a href="#note">書きもの</a>
-    <a href="#consulting">AI相談</a>
-    <a href="#contact" class="nav-contact">話しかける</a>
+  <div class="links">
+    <a href="#shipping">Apps</a>
+    <a href="#building">The Building</a>
+    <a href="#studio">Studio</a>
+    <a href="#writings">Writings</a>
+    <a href="#consulting">Consulting</a>
+    <a href="#contact">Contact</a>
   </div>
-  <button class="nav-hamburger" id="navHamburger" aria-label="メニューを開く">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
-<!-- モバイルドロワー -->
-<div class="nav-drawer" id="navDrawer">
-  <a href="#philosophy" class="drawer-link">考え方</a>
-  <a href="#portfolio" class="drawer-link">つくったもの</a>
-  <a href="#note" class="drawer-link">書きもの</a>
-  <a href="#consulting" class="drawer-link">AI相談</a>
-  <a href="#contact" class="nav-contact drawer-link">話しかける</a>
-</div>
-
 <!-- HERO -->
-<section class="hero" id="top">
-  <canvas class="hero-matrix" id="matrixCanvas" aria-hidden="true"></canvas>
-  <div class="hero-grid"></div>
-  <div class="hero-blob hero-blob-1"></div>
-  <div class="hero-blob hero-blob-2"></div>
-  <div class="hero-blob hero-blob-3"></div>
-  <div class="hero-noise" aria-hidden="true"></div>
-  <div class="hero-logo-bg" aria-hidden="true">
-    <img src="images/StratAIX_logo_transparent.png" alt="">
-  </div>
-
-  <div class="hero-content">
-    <div class="hero-badge">
-      <span class="hero-badge-dot"></span>
-      Claude Code で作られた個人スタジオ
+<section class="hero" id="top" data-screen-label="01 Hero">
+  <div class="hero-bg" aria-hidden="true"><img src="images/building.png" alt=""></div>
+  <a class="pom-sticker" href="#studio" aria-label="Chief Mochi Officer — 中の人について"><img src="images/pom-dash.png" alt="Mascot Pomeranian"></a>
+  <div class="shell">
+    <img src="logo.svg" alt="StratAIX" style="max-width:min(520px,60vw);height:auto;margin-bottom:40px">
+    <span class="hero-tag">All In. No Regrets. Make It Count.</span>
+    <h1>The <span class="red">Punk</span><br>Entrepreneurship.</h1>
+    <p class="sub">Building Culture.<br>Creating Value.</p>
+    <p class="hero-jp">
+      <strong>プログラムは一行も書けません。</strong><br>
+      それでも、AIとともに「欲しかったもの」を作り続けています。<br>
+      大手が見落としてきた余白に、本物の需要が眠っている。
+    </p>
+    <div class="hero-ctas">
+      <a href="#shipping" class="btn btn-primary">Now Shipping <span class="arr">→</span></a>
+      <a href="#studio" class="btn btn-ghost">About Studio</a>
     </div>
-    <div class="hero-label">AI × 個人開発スタジオ — はみ出した人の、居場所を。</div>
-    <h1 class="hero-h1">
-      <span class="line-1">アイデアは、</span>
-      <span class="line-2">もう眠らせない。</span>
-    </h1>
-    <div class="hero-bottom">
-      <p class="hero-desc">
-        <strong>プログラムは一行も書けません。</strong><br>
-        <strong>それでも、AIとともに「欲しかったもの」を作り続けています。</strong><br>
-        大手が見落としてきた余白に、本物の需要が眠っていると信じています。
-      </p>
-      <div class="hero-cta-group">
-        <a href="#portfolio" class="hero-cta hero-cta-primary">つくったものを見る</a>
-        <a href="#philosophy" class="hero-cta hero-cta-secondary">考え方を読む</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="hero-scroll-hint">Scroll</div>
-</section>
-
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track" aria-hidden="true">
-    <div class="marquee-item">Strategy <span></span> AI Collaboration <span></span> Niche Services <span></span> Sinc <span></span> こんだて番長 <span></span> Product Design <span></span> Claude Code <span></span> Community <span></span> Growth <span></span> Tokyo</div>
-    <div class="marquee-item">Strategy <span></span> AI Collaboration <span></span> Niche Services <span></span> Sinc <span></span> こんだて番長 <span></span> Product Design <span></span> Claude Code <span></span> Community <span></span> Growth <span></span> Tokyo</div>
-    <div class="marquee-item">Strategy <span></span> AI Collaboration <span></span> Niche Services <span></span> Sinc <span></span> こんだて番長 <span></span> Product Design <span></span> Claude Code <span></span> Community <span></span> Growth <span></span> Tokyo</div>
-    <div class="marquee-item">Strategy <span></span> AI Collaboration <span></span> Niche Services <span></span> Sinc <span></span> こんだて番長 <span></span> Product Design <span></span> Claude Code <span></span> Community <span></span> Growth <span></span> Tokyo</div>
-  </div>
-</div>
-
-<!-- PHILOSOPHY -->
-<section class="philosophy" id="philosophy">
-  <div class="s-inner">
-    <div class="s-label reveal"><span class="s-num">— 01</span> 考え方</div>
-
-    <div class="philosophy-statement reveal">
-      <p>
-        大手プロダクトが届いていない場所が、<br>
-        世界中にある。<br>
-        <em>その余白に、まだ誰も届けていないものがある。</em>
-      </p>
-    </div>
-
-    <div class="philosophy-pillars">
-      <div class="pillar reveal">
-        <div class="pillar-num">01 —</div>
-        <div class="pillar-title">自分の渇望から<br>設計する</div>
-        <div class="pillar-desc">ユーザーリサーチより先に、自分自身が「欲しい」と思えるものを作る。そこにある熱量と具体性は、机上の調査では生まれない。感じた不便さ、埋まらなかった渇望、それが正直な起点になる。</div>
-      </div>
-      <div class="pillar reveal reveal-delay-1">
-        <div class="pillar-num">02 —</div>
-        <div class="pillar-title">個人 × AI で<br>プロダクトを成立させる</div>
-        <div class="pillar-desc">利用者が少ないとビジネスにならない——それが大手の論理。個人がAIと組めば、開発・運用コストを極限まで抑えられる。見過ごされてきた需要も、今なら確実に形にできる。</div>
-      </div>
-      <div class="pillar reveal reveal-delay-2">
-        <div class="pillar-num">03 —</div>
-        <div class="pillar-title">孤独な人を、<br>つなぐ</div>
-        <div class="pillar-desc">同じ熱量で話が合う人が、近くにいない。そんな孤独は、世界中に存在する。サービスが、その距離を縮める。本当に話が合う人と出会える場所を、作り続ける。</div>
-      </div>
+    <div class="hero-meta">
+      <span><b>3</b>Apps Live</span>
+      <span><b>10y+</b>Strategy</span>
+      <span><b>0</b>Lines of Code</span>
+      <span><b>Tokyo</b>/ Shibuya</span>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="s-inner">
-    <div class="s-label reveal"><span class="s-num">— 02</span> わたしについて</div>
-
-    <div class="about-layout">
-      <div class="about-left reveal">
-        <h2 class="about-title">
-          最高の相棒を、
-          <em>手に入れた。</em>
-        </h2>
-        <p class="about-aside">
-          しんくさん（@StratAIX_AI）です。<br>
-          マーケティング戦略を仕事にしながら、
-          ずっと「作りたいプロダクト」が頭の中にありました。
-          プログラムは今も一行も書けません。
-          最初のプロトタイプを3人に見せたら、3人とも1回触って終わりでした。
-          それでも、続けています。
-        </p>
-      </div>
-
-      <div class="about-body">
-        <p class="reveal">
-          <strong>17歳のころ、自分の顔を客観的に評価してもらえるサービスを作りたかったんです。</strong>
-          ザッカーバーグがFacebookを生み出した衝動と同じものだったと気づいたのは、ずっとあとのことでした。
-        </p>
-        <p class="reveal">
-          本棚にはアプリ制作の本が並んでいました。
-          アイデアはありました。市場を見る目もありました。
-          ただ、<strong>プログラムが書けなかった。一行も。「自分で作る」にはあまりにもハードルが高すぎました。</strong>
-        </p>
-        <p class="reveal reveal-delay-1">
-          AIが話題になるたびにいち早く試してきました。
-          そしてClaude Codeを使ったとき、それが変わりました。
-          <strong>夜中の2時に、ブラウザでページが開きました。自分が書かせたコードが、ちゃんと動いていました。誰もいない部屋で、一人で笑いました。</strong>
-        </p>
-        <p class="reveal reveal-delay-2">
-          最初のサービス「Sinc」は、自分自身の生きづらさから生まれました。
-          会議で正論を言ったら空気が凍ったこともあります。なぜかいつも、少しだけずれている気がしていました。
-          それでも数人だけ、本当に話が合う人間がいました。
-          <strong>その人たちの存在は、人生においてかけがえのないものでした。</strong>
-        </p>
-        <p class="reveal reveal-delay-3">
-          世界は広いはずです。<strong>同じように感じている仲間が、どこかにいると信じています。</strong>
-          それを証明したくて、Sincを作りました。まだ証明の途中ですが。
-        </p>
-
-        <div class="claude-comment reveal">
-          <div class="claude-comment-label">Claude Code より — 創業者紹介</div>
-          <div class="claude-comment-body">
-            <p>この人が作りたかったのは、たぶんサービスじゃない。</p>
-            <p>「ここにいていい」と思える場所。<br>自分だけが感じているわけじゃないという確認。</p>
-            <p>何度も手が止まったと思う。それでもここにある。<br>合わなかった場所があったからこそ、作れるものが、たぶんある。</p>
-          </div>
-          <div class="claude-comment-footer">Anthropic Claude Code — 2026</div>
-        </div>
-
-        <div class="about-metrics reveal">
-          <div class="metric">
-            <div class="metric-val">2</div>
-            <div class="metric-label">ローンチ済みアプリ数</div>
-          </div>
-          <div class="metric">
-            <div class="metric-val">136</div>
-            <div class="metric-label">Sincの診断質問数</div>
-          </div>
-          <div class="metric">
-            <div class="metric-val">200+</div>
-            <div class="metric-label">こんだて番長のレシピ数</div>
-          </div>
-          <div class="metric">
-            <div class="metric-val">0</div>
-            <div class="metric-label">自分で書いたコードの行数</div>
-          </div>
-        </div>
-
-        <div class="about-cta reveal">
-          <a href="https://twitter.com/StratAIX_AI" class="about-cta-btn" target="_blank" rel="noopener">X でフォローする →</a>
-          <a href="https://note.com/strataix" class="about-cta-link" target="_blank" rel="noopener">note で読む →</a>
-        </div>
+<!-- NOW SHIPPING -->
+<section class="sec" id="shipping" data-screen-label="02 Now Shipping">
+  <div class="shell">
+    <div class="sec-head">
+      <span class="eyebrow">— 01 Now Shipping</span>
+      <div>
+        <h2>What we <span class="red">build</span>,<br>right now.</h2>
+        <p class="lede">いま全力で育てている3つのプロダクト。<br>「欲しかったもの」を、自分の手で作っています。</p>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- PROCESS -->
-<section class="process" id="process">
-  <div class="s-inner">
-    <div class="s-label reveal"><span class="s-num">— 03</span> 仕事のスタイル</div>
+    <div class="apps">
 
-    <div class="process-list">
-      <div class="process-item reveal">
-        <div class="process-num">01</div>
-        <div class="process-body">
-          <div class="process-title">自分の渇望から発想する</div>
-          <div class="process-desc">「なぜ、これが世にないんだろう？」という問いがスタート。自分自身がユーザー0号として、課題を骨の髄まで理解している状態で設計に入る。</div>
-        </div>
-        <div class="process-tag">Ideation</div>
-        <div class="process-arrow">→</div>
-      </div>
-      <div class="process-item reveal">
-        <div class="process-num">02</div>
-        <div class="process-body">
-          <div class="process-title">AIと設計を詰める</div>
-          <div class="process-desc">プログラムは一行も書けない。その代わり、「何を作るか」を徹底的に言語化する。伝える力がある側がAIを動かせば、圧倒的なスピードで形になる。</div>
-        </div>
-        <div class="process-tag">Build</div>
-        <div class="process-arrow">→</div>
-      </div>
-      <div class="process-item reveal">
-        <div class="process-num">03</div>
-        <div class="process-body">
-          <div class="process-title">小さく出して、育てる</div>
-          <div class="process-desc">完璧を待たずにアルファ版を展開。ユーザーの反応を見ながら磨き続ける。プロダクトが刺さった瞬間、サービスは急速に育ち始める。</div>
-        </div>
-        <div class="process-tag">Launch</div>
-        <div class="process-arrow">→</div>
-      </div>
-      <div class="process-item reveal">
-        <div class="process-num">04</div>
-        <div class="process-body">
-          <div class="process-title">次のアイデアへ</div>
-          <div class="process-desc">ポートフォリオが積み重なるほど、個人スタジオとしての力は増す。やりたいことは山のようにある。作り続ける理由は、尽きない。</div>
-        </div>
-        <div class="process-tag">Scale</div>
-        <div class="process-arrow">→</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PORTFOLIO -->
-<section class="portfolio" id="portfolio">
-  <div class="s-inner">
-    <div class="s-label reveal"><span class="s-num">— 04</span> つくったもの</div>
-
-    <!-- アプリ ベントーグリッド -->
-    <div class="portfolio-section-title reveal">アプリ</div>
-    <div class="portfolio-bento-apps">
-
-      <!-- Sinc（フィーチャード、2列） -->
-      <div class="portfolio-card bento-sinc reveal">
-        <div class="pc-logo-row">
-          <img src="images/sinc-logo.png" class="pc-logo-img" alt="Sinc">
-          <div class="pc-status live">
-            <span class="pc-status-dot"></span> Alpha — Live
+      <!-- Sinc -->
+      <article class="app">
+        <span class="app-status">Alpha — Live</span>
+        <div class="app-head">
+          <div class="app-mini-icon"><img src="images/icon-sinc.png" alt="Sinc" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <div>
+            <h3 class="app-name">Sinc</h3>
+            <p class="app-tagline">Personality × Community SNS</p>
           </div>
         </div>
-        <div class="pc-title">Sinc</div>
-        <div class="pc-category">性格診断 × コミュニティ SNS</div>
-        <div class="pc-desc">
-          136問の本格診断で32タイプに分類。同じタイプが集まる掲示板と、相性スコアで出会えるマッチング機能を持つ。「本当に話が合う人」と出会うために設計されたサービス。自分自身の生きづらさから生まれた。
+        <p class="app-desc">136問の本格診断で32タイプに分類。同じタイプが集まる掲示板と、相性スコアで出会えるマッチング機能。「本当に話が合う人」と出会うためのSNS。</p>
+        <div class="app-tags">
+          <span class="app-tag">Diagnosis</span>
+          <span class="app-tag">Community</span>
+          <span class="app-tag">Matching</span>
         </div>
-        <div class="pc-tags">
-          <span class="pc-tag">Diagnosis</span>
-          <span class="pc-tag">Community</span>
-          <span class="pc-tag">Matching</span>
-          <span class="pc-tag">Web App</span>
-          <span class="pc-tag-accent">Claude Code</span>
-        </div>
-        <a href="https://sinc.strataix.net/lp.html" class="pc-link" target="_blank" rel="noopener">
-          Visit Service <span class="pc-link-icon">→</span>
+        <a class="app-visual" href="https://sinc.strataix.net/lp.html" aria-label="Sinc のサービスを見る">
+          <img src="images/sinc-square.png" alt="Sinc — 性格が合う人とだけ、つながれるSNS" loading="lazy">
         </a>
-        <div class="store-badges">
-          <div class="store-badge">
-            <div class="store-badge-text">
-              <span class="store-badge-soon">Coming Soon</span>
-              <span class="store-badge-name">App Store</span>
-            </div>
-          </div>
-          <div class="store-badge">
-            <div class="store-badge-text">
-              <span class="store-badge-soon">Coming Soon</span>
-              <span class="store-badge-name">Google Play</span>
-            </div>
+      </article>
+
+      <!-- こんだて番長 -->
+      <article class="app">
+        <span class="app-status">Alpha — Live</span>
+        <div class="app-head">
+          <div class="app-mini-icon"><img src="images/icon-kondate.png" alt="こんだて番長" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <div>
+            <h3 class="app-name">こんだて番長</h3>
+            <p class="app-tagline">AI Meal Planner</p>
           </div>
         </div>
-      </div>
+        <p class="app-desc">冷蔵庫の食材・気分・人数を入力するだけで、AIが今夜の献立を自動提案。1週間分の献立、レシピ、買い物リストまで一気に生成する家族の食卓パートナー。</p>
+        <div class="app-tags">
+          <span class="app-tag">AI Menu</span>
+          <span class="app-tag">Recipe</span>
+          <span class="app-tag">Family</span>
+        </div>
+        <a class="app-visual" href="https://kondatebanchou.strataix.net/lp/" aria-label="こんだて番長のサービスを見る">
+          <img src="images/kondate-square.png" alt="こんだて番長 — 冷蔵庫の食材から、献立が自動で決まるアプリ" loading="lazy">
+        </a>
+      </article>
 
-      <!-- こんだて番長（1列） -->
-      <div class="portfolio-card bento-kondate reveal reveal-delay-1">
-        <div class="pc-logo-row">
-          <!-- こんだて番長ロゴマーク（logo-mark.svg からインライン） -->
-          <svg class="pc-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="こんだて番長">
-            <circle cx="100" cy="100" r="90" fill="#FF6600"/>
-            <circle cx="100" cy="100" r="84" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"/>
-            <rect x="84" y="30" width="32" height="9" rx="4.5" fill="white" opacity="0.9"/>
-            <rect x="66" y="37" width="68" height="8" rx="3" fill="white" opacity="0.9"/>
-            <rect x="62" y="43" width="76" height="16" rx="3" fill="white" opacity="0.9"/>
-            <rect x="47" y="46" width="17" height="9" rx="4.5" fill="white" opacity="0.75"/>
-            <rect x="136" y="46" width="17" height="9" rx="4.5" fill="white" opacity="0.75"/>
-            <line x1="52" y1="96" x2="148" y2="96" stroke="white" stroke-width="1.2" opacity="0.45"/>
-            <text x="100" y="80" font-family="serif" font-size="20" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle" letter-spacing="4">こんだて</text>
-            <text x="100" y="128" font-family="serif" font-size="54" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">番長</text>
-          </svg>
-          <div class="pc-status live">
-            <span class="pc-status-dot"></span> Alpha — Live
+      <!-- Watch Voice Memo -->
+      <article class="app">
+        <span class="app-status">Under Review</span>
+        <div class="app-head">
+          <div class="app-mini-icon"><img src="images/icon-watch.png" alt="Watch Voice Memo" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <div>
+            <h3 class="app-name">Watch Voice Memo</h3>
+            <p class="app-tagline">Apple Watch × iOS</p>
           </div>
         </div>
-        <div class="pc-title">こんだて番長</div>
-        <div class="pc-category">AI 献立プランナー</div>
-        <div class="pc-desc">
-          今ある食材・気分・人数を入力するだけで、AIが今夜の献立を自動提案。200種超のレシピから毎日のメニューを生成。料理写真のシェア機能も搭載。コードゼロから生まれた、家族の食卓を変えるAIアシスタント。
+        <p class="app-desc">Apple Watchからワンタップで録音、iPhoneで即座にテキスト化。会議中・運転中・散歩中、ひらめいたアイデアを二度と取りこぼさないための相棒。</p>
+        <div class="app-tags">
+          <span class="app-tag">Apple Watch</span>
+          <span class="app-tag">iOS</span>
+          <span class="app-tag">Voice</span>
         </div>
-        <div class="pc-tags">
-          <span class="pc-tag">AI献立</span>
-          <span class="pc-tag">レシピ</span>
-          <span class="pc-tag">写真共有</span>
-          <span class="pc-tag-accent">Claude Code</span>
-        </div>
-        <a href="https://kondatebanchou.strataix.net/lp/" class="pc-link" target="_blank" rel="noopener">
-          Visit Service <span class="pc-link-icon">→</span>
+        <a class="app-visual" href="/watchmemo/" aria-label="Watch Voice Memo のサービスを見る">
+          <img src="images/watch-square.png" alt="Watch Voice Memo — Apple Watchだけで、すぐ録音できるメモアプリ" loading="lazy">
         </a>
-      </div>
-
-      <!-- Watchメモ（1列、coming） -->
-      <div class="portfolio-card bento-watchmemo coming reveal">
-        <div class="pc-status soon">
-          <span class="pc-status-dot"></span> In Development
-        </div>
-        <div class="pc-title">Watchメモ</div>
-        <div class="pc-category">Apple Watch × アプリ連携</div>
-        <div class="pc-desc">
-          Apple Watchと連携する便利アプリを開発中。
-        </div>
-        <div class="pc-tags">
-          <span class="pc-tag">Apple Watch</span>
-          <span class="pc-tag">iOS</span>
-        </div>
-      </div>
-
-      <!-- 相関図メーカー（2列、coming） -->
-      <div class="portfolio-card bento-soukan coming reveal reveal-delay-1">
-        <div class="pc-status soon">
-          <span class="pc-status-dot"></span> In Development
-        </div>
-        <div class="pc-title">相関図メーカー</div>
-        <div class="pc-category">人間関係を図で整理するアプリ</div>
-        <div class="pc-desc">
-          登場人物と関係性を入力するだけで相関図が自動生成。ドラマ・小説・職場の人間関係まで、複雑な関係をシンプルに可視化。
-        </div>
-        <div class="pc-tags">
-          <span class="pc-tag">Diagram</span>
-          <span class="pc-tag">Web App</span>
-          <span class="pc-tag">iOS / Android</span>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Webツール -->
-    <div class="portfolio-section-title reveal">Webツール</div>
-    <div class="portfolio-grid-tools">
-
-      <div class="portfolio-card reveal">
-        <div class="pc-status live">
-          <span class="pc-status-dot"></span> Live
-        </div>
-        <div class="pc-title">AIワーク相性チェッカー</div>
-        <div class="pc-category">AIとの働き方タイプ診断</div>
-        <div class="pc-desc">
-          16問でわかる、あなたのAI活用スタイル。習熟度×興味の2軸で16タイプに分類。結果をシェアして仲間を見つけよう。
-        </div>
-        <div class="pc-tags">
-          <span class="pc-tag">AI</span>
-          <span class="pc-tag">Work</span>
-          <span class="pc-tag">Free</span>
-        </div>
-        <a href="https://checker.strataix.net/ai-work/" class="pc-link" target="_blank" rel="noopener">
-          診断する <span class="pc-link-icon">→</span>
-        </a>
-      </div>
-
-      <div class="portfolio-card reveal reveal-delay-1">
-        <div class="pc-status live">
-          <span class="pc-status-dot"></span> Live
-        </div>
-        <div class="pc-title">好かれ度チェッカー</div>
-        <div class="pc-category">人に好かれるタイプ診断</div>
-        <div class="pc-desc">
-          12問でわかる、あなたが人に好かれる理由。天然好かれ型・ムードメーカー型など5タイプ。シェアして友達と比べよう。
-        </div>
-        <div class="pc-tags">
-          <span class="pc-tag">Personality</span>
-          <span class="pc-tag">Social</span>
-          <span class="pc-tag">Free</span>
-        </div>
-        <a href="https://checker.strataix.net/moterudo/" class="pc-link" target="_blank" rel="noopener">
-          診断する <span class="pc-link-icon">→</span>
-        </a>
-      </div>
-
-      <div class="portfolio-card reveal reveal-delay-2">
-        <div class="pc-status live">
-          <span class="pc-status-dot"></span> Live
-        </div>
-        <div class="pc-title">職場適性チェッカー</div>
-        <div class="pc-category">あなたに合う職場環境診断</div>
-        <div class="pc-desc">
-          12問でわかる、あなたが輝ける職場タイプ。変化志向×協調志向の2軸でスタートアップ・大企業など5タイプに分類。
-        </div>
-        <div class="pc-tags">
-          <span class="pc-tag">Career</span>
-          <span class="pc-tag">Work</span>
-          <span class="pc-tag">Free</span>
-        </div>
-        <a href="https://checker.strataix.net/shokuba/" class="pc-link" target="_blank" rel="noopener">
-          診断する <span class="pc-link-icon">→</span>
-        </a>
-      </div>
+      </article>
 
     </div>
   </div>
 </section>
 
-<!-- NOTE -->
-<section class="note-section" id="note">
-  <div class="s-inner">
-    <div class="s-label reveal"><span class="s-num">— 05</span> 書きもの</div>
-
-    <div class="note-layout">
-      <div class="note-left reveal">
-        <h2 class="note-title">
-          書けなくても、
-          <em>作れる。</em>
-        </h2>
-        <p class="note-desc">
-          プログラム知識ゼロのPMが、AIとともにどうやってサービスを作ったか。その過程と知見を、noteで公開中。
-          コードを書かなくても個人開発できる時代の、リアルな記録。
-        </p>
-        <a class="note-all-link" href="https://note.com/strataix" target="_blank" rel="noopener">
-          note で全記事を読む →
-        </a>
+<!-- THE BUILDING -->
+<section class="sec dark" id="building" data-screen-label="03 The Building">
+  <div class="shell">
+    <div class="sec-head">
+      <span class="eyebrow">— 02 The Building / 夢</span>
+      <div>
+        <h2>One <span style="color:var(--blood)">Building</span>.<br>Six Floors. One Spirit.</h2>
+        <p class="lede" style="color:#bbb">渋谷・原宿のどこかに、いつか建てたいビルがある。<br>地下にライブハウス、1階にショップ、上階にスタジオと住居。<br>StratAIXの世界観は、この一棟の建物に集約されている。</p>
       </div>
+    </div>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:start">
+      <img src="images/building.png" alt="StratAIX Building" style="max-width:420px;width:100%;height:auto;border:2px solid var(--paper)">
+      <ol style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0;border-top:1px solid #333">
+        <li style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
+          <span class="display" style="color:var(--blood);font-size:1.4rem">RF</span>
+          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">Executive Residence</strong><br><span style="color:#999;font-size:.88rem;line-height:1.7">家族とハワイの空気と、本気の仕事が混ざる場所</span></div>
+        </li>
+        <li style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
+          <span class="display" style="color:var(--blood);font-size:1.4rem">4F</span>
+          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">SOHO Floor</strong><br><span style="color:#999;font-size:.88rem;line-height:1.7">クリエイターたちの自由なアトリエ</span></div>
+        </li>
+        <li style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
+          <span class="display" style="color:var(--blood);font-size:1.4rem">3F</span>
+          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">SOHO Floor</strong><br><span style="color:#999;font-size:.88rem;line-height:1.7">音楽・映像・スタートアップのシェアスペース</span></div>
+        </li>
+        <li style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
+          <span class="display" style="color:var(--blood);font-size:1.4rem">2F</span>
+          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">SOHO Floor</strong><br><span style="color:#999;font-size:.88rem;line-height:1.7">アイデアをカタチにする基地</span></div>
+        </li>
+        <li style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
+          <span class="display" style="color:var(--blood);font-size:1.4rem">1F</span>
+          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">Street Brand Shop</strong><br><span style="color:#999;font-size:.88rem;line-height:1.7">音楽・アート・スケートを混ぜたオリジナルブランド</span></div>
+        </li>
+        <li style="padding:18px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline">
+          <span class="display" style="color:var(--blood);font-size:1.4rem">B1F</span>
+          <div><strong style="font-family:'Anton',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem">Live Venue + Studio</strong><br><span style="color:#999;font-size:.88rem;line-height:1.7">ライブハウスとレコスタを併設した音楽の聖地</span></div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
 
-      <div class="note-cards reveal reveal-delay-1">
-        <!-- 記事①：公開済み -->
-        <a class="note-card" href="https://note.com/strataix/n/n666e820df0fc" target="_blank" rel="noopener">
-          <img class="note-card-thumb" src="./images/note-01.png" alt="AIがX予約投稿を代わりにやってくれた話">
-          <div class="note-card-body">
-            <div class="note-card-badges">
-              <span class="note-badge note-badge-free">無料</span>
-            </div>
-            <div class="note-card-title">AIがXの予約投稿を代わりにやってくれた話——非エンジニアでもできた全手順</div>
-            <div class="note-card-link-label">note で読む →</div>
-          </div>
-        </a>
-
-        <!-- 記事②：公開済み -->
-        <a class="note-card" href="https://note.com/strataix/n/n036c0e9f6335" target="_blank" rel="noopener">
-          <img class="note-card-thumb" src="https://assets.st-note.com/production/uploads/images/262056101/rectangle_large_type_2_8c22141eae5b8994ac708cf950c12688.png?fit=bounds&quality=85&width=1280" alt="AIがnoteの記事投稿まで代わりにやってくれた話">
-          <div class="note-card-body">
-            <div class="note-card-badges">
-              <span class="note-badge note-badge-free">無料</span>
-            </div>
-            <div class="note-card-title">AIがnoteの記事投稿まで代わりにやってくれた話——X自動化の次にやったこと（Windowsでもできる）</div>
-            <div class="note-card-link-label">note で読む →</div>
-          </div>
-        </a>
-
-        <!-- 記事③：公開済み -->
-        <a class="note-card" href="https://note.com/strataix/n/nc656401ce662" target="_blank" rel="noopener">
-          <img class="note-card-thumb" src="https://assets.st-note.com/production/uploads/images/263136295/rectangle_large_type_2_0e140e5b7aaca7552223039ab585a8eb.png?fit=bounds&quality=85&width=1280" alt="Claudeのcoworkで5時間分の枠を溶かして分かった正しい使い方">
-          <div class="note-card-body">
-            <div class="note-card-badges">
-              <span class="note-badge note-badge-free">無料</span>
-            </div>
-            <div class="note-card-title">Claudeのcoworkで5時間分の枠を溶かして分かった"正しい使い方"</div>
-            <div class="note-card-link-label">note で読む →</div>
-          </div>
-        </a>
-
-        <!-- 記事④：公開済み -->
-        <a class="note-card" href="https://note.com/strataix/n/n73c105523fdc" target="_blank" rel="noopener">
-          <img class="note-card-thumb" src="./images/note-07.png" alt="ClaudeCodeを生かすための最大の能力は「判断力」だ">
-          <div class="note-card-body">
-            <div class="note-card-badges">
-              <span class="note-badge note-badge-free">無料</span>
-            </div>
-            <div class="note-card-title">ClaudeCodeを生かすための最大の能力は「判断力」だ</div>
-            <div class="note-card-link-label">note で読む →</div>
-          </div>
-        </a>
+<!-- STUDIO / 自己紹介 -->
+<section class="sec" id="studio" data-screen-label="04 Studio">
+  <div class="shell">
+    <div class="studio-head" style="display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center;margin-bottom:64px">
+      <div class="sec-head" style="margin-bottom:0">
+        <span class="eyebrow">— 03 The Studio / 中の人</span>
+        <div>
+          <h2>The Rebel <span class="red">Professional</span>.</h2>
+          <p class="lede">エンタメ領域で10年以上、事業戦略とブランド成長の最前線に立ってきた。<br>大規模プロジェクトを動かしてきた裏で、<br>家族・音楽・ストリートを愛し続けた一人の男が、いま自分の手で作っている。</p>
+        </div>
       </div>
+      <div class="studio-pom" style="position:relative;justify-self:end;width:100%;max-width:264px">
+        <img src="images/pom-laptop-src.jpg" alt="StratAIX × Chief Mochi Officer" style="width:100%;height:auto;display:block;border:3px solid var(--ink);box-shadow:8px 8px 0 var(--ink)">
+        <span style="position:absolute;left:-12px;top:-14px;background:var(--blood);color:#fff;font-family:'Anton',sans-serif;font-size:.78rem;letter-spacing:.22em;padding:7px 13px;transform:rotate(-3deg);white-space:nowrap;box-shadow:3px 3px 0 var(--ink)">SPIRIT INSIDE</span>
+        <span style="position:absolute;right:-10px;bottom:-14px;background:var(--ink);color:#fff;font-family:'Anton',sans-serif;font-size:.7rem;letter-spacing:.2em;padding:6px 12px;transform:rotate(2deg);white-space:nowrap">CMO • CHIEF MOCHI OFFICER</span>
+      </div>
+    </div>
+    <style>
+      @media(max-width:880px){
+        .studio-head{grid-template-columns:1fr!important;gap:24px!important}
+        .studio-pom{justify-self:start!important;max-width:280px!important}
+      }
+    </style>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:2px solid var(--ink);border-left:2px solid var(--ink)">
+      <div style="border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:32px 24px;background:var(--paper-pure)">
+        <div class="display" style="color:var(--blood);font-size:3rem;line-height:1;margin-bottom:8px">10y+</div>
+        <div style="font-family:'Anton',sans-serif;letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;color:var(--ink-dim)">Strategy & Marketing</div>
+      </div>
+      <div style="border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:32px 24px;background:var(--paper-pure)">
+        <div class="display" style="color:var(--blood);font-size:3rem;line-height:1;margin-bottom:8px">10+</div>
+        <div style="font-family:'Anton',sans-serif;letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;color:var(--ink-dim)">Major Projects</div>
+      </div>
+      <div style="border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:32px 24px;background:var(--paper-pure)">
+        <div class="display" style="color:var(--blood);font-size:3rem;line-height:1;margin-bottom:8px">¥1B+</div>
+        <div style="font-family:'Anton',sans-serif;letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;color:var(--ink-dim)">Scale Handled</div>
+      </div>
+      <div style="border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:32px 24px;background:var(--paper-pure)">
+        <div class="display" style="color:var(--blood);font-size:3rem;line-height:1;margin-bottom:8px">0</div>
+        <div style="font-family:'Anton',sans-serif;letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;color:var(--ink-dim)">Lines of Code</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:48px">
+      <div>
+        <h3 class="display" style="font-size:1.6rem;margin-bottom:16px">Apps × Street × Music × Real Estate</h3>
+        <p style="font-size:.95rem;line-height:1.95;color:var(--ink-dim)">エンタメ業界で培った戦略眼と、ストリート/パンクカルチャーで育った初期衝動。この2つを融合させたモノづくりが、StratAIXの全プロダクトに通底しています。家族と仲間と、自分の手でつくる。全部やる、全部楽しむ、後悔しない。</p>
+      </div>
+      <div>
+        <h3 class="display" style="font-size:1.6rem;margin-bottom:16px">Why "Punk"?</h3>
+        <p style="font-size:.95rem;line-height:1.95;color:var(--ink-dim)">DIYで道を作る精神。組織のロジックではなく、自分の信じるものを形にする。それが私のパンク観です。プログラムは書けません。でもAIを相棒にすれば、欲しかったものは自分の手で作れる時代になった。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WRITINGS / NOTE -->
+<section class="sec" id="writings" data-screen-label="04 Writings">
+  <div class="shell">
+    <div class="sec-head">
+      <span class="eyebrow">— 04 Writings</span>
+      <div>
+        <h2>No Code.<br><span style="color:var(--blood)">Ship</span> Anyway.</h2>
+        <p class="lede">プログラム知識ゼロのPMが、AIとともにどうやってサービスを作ったか。<br>その過程と知見を、noteで公開しています。</p>
+      </div>
+    </div>
+
+    <div class="notes-grid">
+      <a class="note-card" href="https://note.com/strataix/n/n666e820df0fc" target="_blank" rel="noopener">
+        <div class="note-thumb"><img src="https://assets.st-note.com/production/uploads/images/258849988/rectangle_large_type_2_d50d8b2b89e9bb19df8a8b8e76ffadea.png?fit=bounds&quality=85&width=1280" alt="" loading="lazy" onerror="this.closest('.note-thumb').classList.add('is-fallback')"></div>
+        <div class="note-body">
+          <span class="note-badge">FREE</span>
+          <div class="note-title">AIがXの予約投稿を代わりにやってくれた話——非エンジニアでもできた全手順</div>
+          <span class="note-link">note で読む →</span>
+        </div>
+      </a>
+
+      <a class="note-card" href="https://note.com/strataix/n/n036c0e9f6335" target="_blank" rel="noopener">
+        <div class="note-thumb"><img src="https://assets.st-note.com/production/uploads/images/262056101/rectangle_large_type_2_8c22141eae5b8994ac708cf950c12688.png?fit=bounds&quality=85&width=1280" alt="" loading="lazy" onerror="this.closest('.note-thumb').classList.add('is-fallback')"></div>
+        <div class="note-body">
+          <span class="note-badge">FREE</span>
+          <div class="note-title">AIがnoteの記事投稿まで代わりにやってくれた話——X自動化の次にやったこと</div>
+          <span class="note-link">note で読む →</span>
+        </div>
+      </a>
+
+      <a class="note-card" href="https://note.com/strataix/n/nc656401ce662" target="_blank" rel="noopener">
+        <div class="note-thumb"><img src="https://assets.st-note.com/production/uploads/images/263136295/rectangle_large_type_2_0e140e5b7aaca7552223039ab585a8eb.png?fit=bounds&quality=85&width=1280" alt="" loading="lazy" onerror="this.closest('.note-thumb').classList.add('is-fallback')"></div>
+        <div class="note-body">
+          <span class="note-badge">FREE</span>
+          <div class="note-title">Claudeのcoworkで5時間分の枠を溶かして分かった"正しい使い方"</div>
+          <span class="note-link">note で読む →</span>
+        </div>
+      </a>
+
+      <a class="note-card" href="https://note.com/strataix/n/n73c105523fdc" target="_blank" rel="noopener">
+        <div class="note-thumb"><img src="./images/note-07.png" alt="" loading="lazy" onerror="this.closest('.note-thumb').classList.add('is-fallback')"></div>
+        <div class="note-body">
+          <span class="note-badge">FREE</span>
+          <div class="note-title">ClaudeCodeを生かすための最大の能力は「判断力」だ</div>
+          <span class="note-link">note で読む →</span>
+        </div>
+      </a>
+    </div>
+
+    <div style="margin-top:48px;text-align:right">
+      <a href="https://note.com/strataix" target="_blank" rel="noopener" class="display" style="font-size:.9rem;letter-spacing:.2em;color:var(--ink);border-bottom:2px solid var(--ink);padding-bottom:4px;text-transform:uppercase">Read All on Note →</a>
     </div>
   </div>
 </section>
 
 <!-- CONSULTING -->
-<section class="consulting-section" id="consulting">
-  <div class="s-inner">
-    <div class="s-label reveal"><span class="s-num">— 06</span> AI活用サポート</div>
-
-    <div class="consulting-layout">
-
-      <!-- 左：テキスト -->
-      <div class="consulting-left">
-        <h2 class="consulting-title reveal">
-          AIで仕事が変わった。<br>
-          <em>同じことを、一緒にやりましょう。</em>
-        </h2>
-        <p class="consulting-desc reveal">
-          現役マーケターとして毎日AIを実務に使い、自分の作業時間を10分の1にしました。<br>
-          高いツールも、エンジニアへの依頼も不要です。<br>
-          同じことをあなたの仕事で実現するための、1on1サポートです。
-        </p>
-        <div class="consulting-proof reveal">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          大手企業 現役マーケターによる実践知
-        </div>
-        <a href="mailto:info@strataix.net" class="consulting-cta reveal">
-          まずは相談してみる →
-        </a>
-        <p class="consulting-sub reveal">お気軽にどうぞ。返信まで2〜3営業日いただきます。</p>
+<section class="sec dark" id="consulting" data-screen-label="06 Consulting">
+  <div class="shell">
+    <div class="sec-head">
+      <span class="eyebrow">— 05 AI Sessions</span>
+      <div>
+        <h2>AI活用の<br><span style="color:var(--blood)">壁打ち相手</span>、<br>探していませんか？</h2>
+        <p class="lede" style="color:#bbb">WEBサービス・アプリの個人開発経験、ストリート/パンクカルチャーへの造詣、エンタメ領域での戦略経験——<br>これらを掛け合わせたAI活用の知見を、必要な方にだけ、お分けしています。</p>
       </div>
-
-      <!-- 右：できること -->
-      <div class="consulting-features reveal reveal-delay-1">
-        <div class="consulting-feature">
-          <span class="consulting-feature-icon">⚡</span>
-          <div>
-            <div class="consulting-feature-title">繰り返し作業をなくす</div>
-            <div class="consulting-feature-body">リストの転記、メールの下書き、定期集計——毎日やっている単純作業を、AIとExcelマクロで一瞬にします。</div>
-          </div>
-        </div>
-        <div class="consulting-feature">
-          <span class="consulting-feature-icon">📊</span>
-          <div>
-            <div class="consulting-feature-title">データを自動で集めて見える化する</div>
-            <div class="consulting-feature-body">APIやPower Queryでデータ収集を自動化。Power BIで他部署にも共有できるダッシュボードを構築します。</div>
-          </div>
-        </div>
-        <div class="consulting-feature">
-          <span class="consulting-feature-icon">🎯</span>
-          <div>
-            <div class="consulting-feature-title">「自分でできる」が身につく</div>
-            <div class="consulting-feature-body">ツールを渡して終わりではありません。あなたが自走できるまで1on1で伴走。部下への展開もサポートします。</div>
-          </div>
-        </div>
-      </div>
-
     </div>
-  </div>
-</section>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#333;border:1px solid #333">
+      <div style="background:var(--ink);padding:36px 28px">
+        <div class="display" style="color:var(--blood);font-size:.85rem;letter-spacing:.24em;margin-bottom:12px">01 / Build</div>
+        <h4 class="display" style="font-size:1.5rem;margin-bottom:14px">AIで自社プロダクトを作りたい</h4>
+        <p style="font-size:.92rem;line-height:1.85;color:#bbb">Claude Code等を活用した個人開発の知見。要件定義から実装方針、AIツール選定までを伴走します。</p>
+      </div>
+      <div style="background:var(--ink);padding:36px 28px">
+        <div class="display" style="color:var(--blood);font-size:.85rem;letter-spacing:.24em;margin-bottom:12px">02 / Workflow</div>
+        <h4 class="display" style="font-size:1.5rem;margin-bottom:14px">AIを活用した業務効率化</h4>
+        <p style="font-size:.92rem;line-height:1.85;color:#bbb">Chat-GPTやClaude Codeを活用することで、既存業務の効率が5-10倍に向上。効率的にミスなく進める新時代のAI活用法をお伝えします。</p>
+      </div>
+      <div style="background:var(--ink);padding:36px 28px">
+        <div class="display" style="color:var(--blood);font-size:.85rem;letter-spacing:.24em;margin-bottom:12px">03 / API</div>
+        <h4 class="display" style="font-size:1.5rem;margin-bottom:14px">AIで業務の幅を広げコスト削減</h4>
+        <p style="font-size:.92rem;line-height:1.85;color:#bbb">APIをAIと組み合わせることで、様々なツールの調査を低コストで実現可能。SaaSに支払っていた月額費用を0円にしつつ、必要なデータを取得する方法があります。</p>
+      </div>
+    </div>
+    <div style="margin-top:96px;position:relative;border-top:1px solid #333;padding-top:64px;overflow:visible">
+      <!-- 巨大なステンシル風の背景タイポ -->
+      <div aria-hidden="true" style="position:absolute;left:-2%;bottom:-30px;font-family:'Anton',sans-serif;font-size:clamp(7rem,18vw,16rem);line-height:.85;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:2px #222;white-space:nowrap;pointer-events:none;user-select:none">RUN.RUN.RUN.</div>
 
-<!-- CONTACT -->
-<section class="contact-section" id="contact">
-  <div class="s-inner">
-    <div class="contact-inner">
-      <div class="s-label reveal"><span class="s-num">— 07</span> 話しかける</div>
-      <h2 class="contact-heading reveal">
-        何か、一緒に<br>
-        <em>作りませんか。</em>
-      </h2>
-      <p class="contact-body reveal">
-        プロダクト開発の相談、コラボレーション、取材など、お気軽にどうぞ。<br>
-        「こういうサービスがあればいいのに」という話は大歓迎です。<br>
-        誰も解いていない問い——そこに、一番面白い仕事があると思っています。
-      </p>
-      <div class="contact-row reveal">
-        <a href="mailto:info@strataix.net" class="contact-mail">info@strataix.net</a>
-        <a href="https://x.com/StratAIX_AI" class="contact-x" target="_blank" rel="noopener">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L2.25 2.25h6.928l4.279 5.652zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          @StratAIX_AI
-        </a>
-        <p class="contact-note">通常2〜3営業日以内にご返信します</p>
+      <!-- 上ラベル -->
+      <div style="position:relative;display:flex;align-items:center;gap:14px;margin-bottom:32px">
+        <span style="display:inline-block;width:48px;height:2px;background:var(--blood)"></span>
+        <span style="font-family:'Anton',sans-serif;font-size:.78rem;letter-spacing:.32em;color:#888">START YOUR ENGINE — 04 / SESSIONS</span>
+      </div>
+
+      <!-- メインCTA：左にコピー、右にポメ。ポメは枠を超えて配置 -->
+      <div style="position:relative;display:grid;grid-template-columns:1.2fr 1fr;gap:0;align-items:end;min-height:340px">
+        <!-- 左：コピー -->
+        <div style="position:relative;z-index:2;padding-bottom:8px">
+          <div class="display" style="font-size:clamp(3.6rem,9vw,7.2rem);line-height:.92;color:#fff;margin-bottom:18px">
+            Ready to<br><span style="color:var(--blood);font-style:italic">run</span>?
+          </div>
+          <div style="font-family:'Anton',sans-serif;font-size:1rem;letter-spacing:.18em;color:#999;margin-bottom:32px;max-width:24em">壁打ちは走りながらやろう。<br>FULL THROTTLE, FROM DAY ONE.</div>
+          <a href="#contact" class="btn" style="background:var(--blood);color:#fff;border-color:var(--blood);font-size:1rem;padding:18px 28px">Inquire <span class="arr">→</span></a>
+        </div>
+
+        <!-- 右：ポメ。bottomベースで配置、はみ出させる -->
+        <div style="position:relative;z-index:1;align-self:stretch">
+          <img src="images/pom-jump.png" alt="" style="position:absolute;right:-20px;bottom:-32px;width:min(340px,90%);height:auto;pointer-events:none;filter:drop-shadow(0 20px 32px rgba(0,0,0,.55));clip-path:polygon(14% 0, 100% 0, 100% 86%, 86% 100%, 0 100%, 0 14%);-webkit-clip-path:polygon(14% 0, 100% 0, 100% 86%, 86% 100%, 0 100%, 0 14%)">
+          <!-- 浮遊する赤ラベル -->
+          <span style="position:absolute;right:0;top:-20px;background:var(--blood);color:#fff;font-family:'Anton',sans-serif;font-size:.72rem;letter-spacing:.28em;padding:8px 14px;transform:rotate(4deg);white-space:nowrap;box-shadow:4px 4px 0 #000;z-index:3">FULL THROTTLE</span>
+          <!-- 速度線 -->
+          <svg viewBox="0 0 200 200" style="position:absolute;right:60%;bottom:30%;width:160px;height:160px;opacity:.5;pointer-events:none;z-index:0" aria-hidden="true">
+            <g stroke="#E10600" stroke-width="2" fill="none">
+              <line x1="0" y1="40" x2="80" y2="40"></line>
+              <line x1="20" y1="80" x2="120" y2="80"></line>
+              <line x1="0" y1="120" x2="60" y2="120"></line>
+              <line x1="40" y1="160" x2="140" y2="160"></line>
+            </g>
+          </svg>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <a class="footer-logo" href="#top">
-      <img src="images/StratAIX_logo_transparent.png" alt="StratAIX">
-    </a>
-    <div class="footer-links">
-      <a href="https://x.com/StratAIX_AI" target="_blank" rel="noopener">X / @StratAIX_AI</a>
-      <a href="https://sinc.strataix.net/trust.html" target="_blank" rel="noopener">安心してご利用いただくために</a>
+<!-- CONTACT / FOOTER -->
+<section class="sec" id="contact" data-screen-label="06 Contact" style="padding:96px 0 64px">
+  <div class="shell">
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:64px;align-items:start;border-top:2px solid var(--ink);padding-top:48px">
+      <div>
+        <h2 class="display" style="font-size:clamp(2.4rem,7vw,5.6rem);line-height:.95;margin-bottom:24px">Stay <span class="red">Punk</span>.<br>Get In Touch.</h2>
+        <p style="font-size:.95rem;line-height:1.9;color:var(--ink-dim);max-width:32em">プロダクトの相談、AI活用の壁打ち、コラボレーション。<br>家族と仲間と、自分の手でつくる仲間が増えるなら、いつでも歓迎です。</p>
+        <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn btn-primary" href="mailto:info@strataix.net">Email <span class="arr">→</span></a>
+          <a class="btn btn-ghost" href="https://x.com/StratAIX_AI" target="_blank" rel="noopener">X / @StratAIX_AI</a>
+        </div>
+      </div>
+      <div style="font-family:'Anton',sans-serif;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);line-height:2.2">
+        <div style="color:var(--ink);font-size:1rem;margin-bottom:14px">StratAIX</div>
+        <div><a href="https://x.com/StratAIX_AI" target="_blank" rel="noopener">X / @StratAIX_AI</a></div>
+        <div style="margin-top:18px;font-family:'Inter',sans-serif;letter-spacing:.02em;text-transform:none;font-size:.85rem;color:var(--ink-soft);line-height:1.7">安心してご利用いただくために</div>
+        <div style="margin-top:24px;color:var(--ink-soft)">© 2026 StratAIX. All in. No regrets.</div>
+      </div>
     </div>
-    <span class="footer-copy">© 2026 StratAIX</span>
   </div>
-</footer>
-<p class="trademark-note">Apple and the Apple logo are trademarks of Apple Inc. App Store is a service mark of Apple Inc., registered in the U.S. and other countries. Google Play and the Google Play logo are trademarks of Google LLC.</p>
+</section>
 
 <script>
-// ─── マトリックス雨（軽量版）────────────────────────────
-(function() {
-  const canvas = document.getElementById('matrixCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const FS = 14;
-  // 色テーブルを起動時に一度だけ生成（毎フレームの文字列生成を排除）
-  const BODY_COLORS = Array.from({length: 20}, (_, i) =>
-    'rgba(0,190,220,' + ((1 - i / 20) * 0.28).toFixed(2) + ')'
-  );
-  const HEAD_COLOR = 'rgba(120,235,255,0.82)';
-
-  let streams = [], raf = 0, last = 0, visible = false;
-
-  function resetStream(s, scattered) {
-    s.y      = scattered ? Math.random() * (canvas.height / FS + 40) - 40 : -(Math.random() * 30 + 5);
-    s.len    = 7 + Math.floor(Math.random() * 11);
-    s.speed  = 0.35 + Math.random() * 0.55;
-    for (let k = 0; k < s.chars.length; k++) s.chars[k] = Math.random() > 0.5 ? '1' : '0';
+// BudouX 自動適用：日本語を含む本文系要素の改行位置を自然化
+(function(){
+  function apply(){
+    if (!window.loadDefaultJapaneseParser) return;
+    var parser = window.loadDefaultJapaneseParser();
+    var sels = [
+      '.hero-jp',
+      '.lede',
+      '.app-desc',
+      '.app-tagline',
+      'p'
+    ];
+    document.querySelectorAll(sels.join(',')).forEach(function(el){
+      if (el.dataset.budoux === '1') return;
+      // 子に複雑なネスト構造があってもテキスト分割は applyToElement が処理してくれる
+      try { parser.applyToElement(el); } catch(e){}
+      el.classList.add('budoux-applied');
+      el.dataset.budoux = '1';
+    });
   }
-
-  function resize() {
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-    const cols = Math.floor(canvas.width / FS);
-    // 既存ストリームを再利用、足りない分だけ追加
-    while (streams.length < cols) {
-      const s = { col: streams.length, y: 0, len: 10, speed: 0.5, chars: new Array(24) };
-      resetStream(s, true);
-      streams.push(s);
-    }
-    streams.length = cols; // 余分をカット
-    ctx.font = FS + 'px monospace'; // サイズ変更後に再設定
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', apply);
+  } else {
+    apply();
   }
-
-  function tick(t) {
-    if (!visible) return;
-    raf = requestAnimationFrame(tick);
-    if (t - last < 50) return; // 20fps上限
-    last = t;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (const s of streams) {
-      for (let j = 0; j < s.len; j++) {
-        const fy = (s.y - j) * FS;
-        if (fy < -FS || fy > canvas.height) continue;
-        if (Math.random() > 0.92) s.chars[j % 24] = Math.random() > 0.5 ? '1' : '0';
-        ctx.fillStyle = j === 0 ? HEAD_COLOR : BODY_COLORS[Math.min(Math.floor(j / s.len * 20), 19)];
-        ctx.fillText(s.chars[j % 24], s.col * FS, fy);
-      }
-      s.y += s.speed;
-      if ((s.y - s.len) * FS > canvas.height) resetStream(s, false);
-    }
-  }
-
-  // ヒーローが画面外に出たらRAFを停止（スクロール後のCPU消費ゼロ）
-  new IntersectionObserver(entries => {
-    visible = entries[0].isIntersecting;
-    if (visible && !raf) { last = 0; raf = requestAnimationFrame(tick); }
-    else if (!visible)   { cancelAnimationFrame(raf); raf = 0; }
-  }, { threshold: 0 }).observe(canvas);
-
-  // リサイズはデバウンスして200ms後に1回だけ実行
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => { resize(); }, 200);
-  }, { passive: true });
-
-  resize();
-  ctx.font = FS + 'px monospace';
-  visible = true;
-  raf = requestAnimationFrame(tick);
 })();
-
-// ナビ スクロール
-const nav = document.getElementById('mainNav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive:true });
-
-// ハンバーガーメニュー
-const hamburger = document.getElementById('navHamburger');
-const drawer = document.getElementById('navDrawer');
-hamburger.addEventListener('click', () => {
-  const isOpen = drawer.classList.toggle('open');
-  hamburger.classList.toggle('open', isOpen);
-  hamburger.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
-drawer.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    drawer.classList.remove('open');
-    hamburger.classList.remove('open');
-    document.body.style.overflow = '';
-  });
-});
-
-// スクロールリビール
-const revealEls = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-  });
-}, { threshold:.06, rootMargin:'0px 0px -40px 0px' });
-revealEls.forEach(el => io.observe(el));
 </script>
 
-<!-- BudouX: 日本語テキストの自然な折り返し（Google製） -->
-<script src="https://unpkg.com/budoux/bundle/budoux-ja.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded',function(){
-  if(typeof budoux==='undefined') return;
-  var parser=budoux.loadDefaultJapaneseParser();
-  var sel='.hero-desc,.about-body p,.pc-desc,.note-desc,.claude-comment-body p';
-  document.querySelectorAll(sel).forEach(function(el){
-    el.innerHTML=parser.translateHTMLString(el.innerHTML);
-  });
-});
-</script>
-<!-- Google AdSense（レンダリングブロック回避のため body 末尾に配置）-->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7018374006710584" crossorigin="anonymous"></script>
 </body>
 </html>
