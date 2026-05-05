@@ -124,9 +124,10 @@ nav.top .links a:hover{color:var(--blood)}
 @media(max-width:960px){.apps{grid-template-columns:1fr}}
 
 /* NOTES GRID */
-.notes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-@media(max-width:1100px){.notes-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.notes-grid{grid-template-columns:1fr}}
+.notes-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:24px}
+@media(max-width:1100px){.notes-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.notes-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:420px){.notes-grid{grid-template-columns:1fr}}
 .note-card{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);text-decoration:none;color:var(--ink);transition:transform .25s var(--ease,cubic-bezier(.22,.61,.36,1)),box-shadow .25s,border-color .25s}
 .note-card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);border-color:var(--ink)}
 .note-card.is-coming{opacity:.6;cursor:default;pointer-events:none}
@@ -422,7 +423,7 @@ body{overflow-x:hidden}
 
     <div class="notes-grid">
       <a class="note-card" href="https://note.com/strataix/n/n666e820df0fc" target="_blank" rel="noopener">
-        <div class="note-thumb"><img src="https://assets.st-note.com/production/uploads/images/258849988/rectangle_large_type_2_d50d8b2b89e9bb19df8a8b8e76ffadea.png?fit=bounds&quality=85&width=1280" alt="" loading="lazy" onerror="this.closest('.note-thumb').classList.add('is-fallback')"></div>
+        <div class="note-thumb"><img src="https://assets.st-note.com/production/uploads/images/272849900/rectangle_large_type_2_6c79bb6a4cb6f64217bffe2c868d9d49.png?width=1280" alt="" loading="lazy" onerror="this.closest('.note-thumb').classList.add('is-fallback')"></div>
         <div class="note-body">
           <span class="note-badge">FREE</span>
           <div class="note-title">AIがXの予約投稿を代わりにやってくれた話——非エンジニアでもできた全手順</div>
@@ -453,6 +454,15 @@ body{overflow-x:hidden}
         <div class="note-body">
           <span class="note-badge">FREE</span>
           <div class="note-title">ClaudeCodeを生かすための最大の能力は「判断力」だ</div>
+          <span class="note-link">note で読む →</span>
+        </div>
+      </a>
+
+      <a class="note-card" href="https://note.com/strataix/n/n9ddb0e2712c4" target="_blank" rel="noopener">
+        <div class="note-thumb"><img src="https://assets.st-note.com/production/uploads/images/273165727/rectangle_large_type_2_bc50cb581b0aabb4145d02597cacd199.png?width=1280" alt="" loading="lazy" onerror="this.closest('.note-thumb').classList.add('is-fallback')"></div>
+        <div class="note-body">
+          <span class="note-badge">FREE</span>
+          <div class="note-title">Claude CodeでApple Watchアプリを開発・申請した5週間の全記録</div>
           <span class="note-link">note で読む →</span>
         </div>
       </a>
