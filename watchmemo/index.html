@@ -1126,6 +1126,11 @@ function toggleAcc(btn) {
     else if (bl.startsWith('zh-tw') || bl.startsWith('zh-hk')) saved = 'zh-hant';
     else if (bl.startsWith('zh')) saved = 'zh-hans';
     else if (bl.startsWith('en')) saved = 'en';
+    else if (bl.startsWith('de')) saved = 'de';
+    else if (bl.startsWith('ar')) saved = 'ar';
+    else if (bl.startsWith('es')) saved = 'es';
+    else if (bl.startsWith('fr')) saved = 'fr';
+    else if (bl.startsWith('pt')) saved = 'pt-BR';
     else saved = 'ja';
   }
   setLang(saved);
