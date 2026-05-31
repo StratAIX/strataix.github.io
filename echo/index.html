@@ -747,10 +747,10 @@
       </div>
       <div class="fade-in">
         <span class="inline-block meta-eyebrow mb-5">— Share</span>
-        <h3 class="text-2xl md:text-3xl font-light text-stone-900 mb-5 leading-tight" data-i18n="f3.h3">SNSに動画として、家族に映像として。</h3>
+        <h3 class="text-2xl md:text-3xl font-light text-stone-900 mb-5 leading-tight" data-i18n="f3.h3">写真と音が動画になる。あとはシェアするだけ。</h3>
         <p class="text-stone-500 font-light leading-[1.95]" data-i18n-html="f3.body">
-          写真とBGMが合わさったMP4動画をその場で生成。
-          Instagramストーリーにもリールにもフィードにもすぐにシェアできます。
+          写真と音声がひとつのMP4動画になる。Instagram・X・LINEにそのままシェア可能。<br>
+          <span class="text-stone-700 font-normal">シェアされた動画が、次の誰かを連れてくる。</span>
         </p>
         <ul class="mt-7 space-y-2.5 text-sm text-stone-500 font-light">
           <li class="flex items-center gap-3"><span class="text-stone-400 text-xs">—</span> <span data-i18n="f3.li1">9:16（Story/Reels）/ 1:1（Feed）</span></li>
@@ -758,24 +758,51 @@
           <li class="flex items-center gap-3"><span class="text-stone-400 text-xs">—</span> <span data-i18n="f3.li3">完全ローカル生成・ウォーターマーク付き</span></li>
         </ul>
 
-        <!-- Video demo embed (poster placeholder until real recording is ready) -->
-        <div class="mt-8 relative ring-1 ring-stone-200 overflow-hidden aspect-video group">
-          <!-- Real screen-recording slots in here once available (data-src swapped to src) -->
-          <video autoplay muted loop playsinline class="w-full h-full object-cover hidden"
-                 id="demo-video"
-                 data-src="assets/demo-share.mp4"></video>
-          <!-- Poster: scene photo, softly veiled, with a play affordance -->
-          <div id="demo-placeholder" class="absolute inset-0">
-            <div class="absolute inset-0 bg-cover bg-center scale-105"
-                 style="background-image:url('assets/anniversary.png')"></div>
-            <div class="absolute inset-0 bg-white/55"></div>
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
-              <div class="w-16 h-16 rounded-full bg-white/80 ring-1 ring-stone-300 flex items-center justify-center shadow-sm">
-                <span class="text-clay text-xl ml-1 leading-none">▶</span>
+        <!-- 9:16 Story 完成出力モック -->
+        <div class="mt-8 flex items-end gap-4">
+          <!-- Story 9:16 -->
+          <div class="flex flex-col items-center gap-2">
+            <div class="relative overflow-hidden ring-1 ring-stone-300" style="width:90px;aspect-ratio:9/16">
+              <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('assets/travel.png')"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent"></div>
+              <div class="absolute bottom-0 inset-x-0 p-2">
+                <div class="flex items-end gap-px h-3 mb-1">
+                  <div class="w-px bg-white/50 rounded-full" style="height:30%"></div>
+                  <div class="w-px bg-white/60 rounded-full" style="height:70%"></div>
+                  <div class="w-px bg-white/80 rounded-full" style="height:100%"></div>
+                  <div class="w-px bg-clay rounded-full" style="height:85%"></div>
+                  <div class="w-px bg-white/80 rounded-full" style="height:100%"></div>
+                  <div class="w-px bg-white/60 rounded-full" style="height:55%"></div>
+                  <div class="w-px bg-white/50 rounded-full" style="height:40%"></div>
+                  <div class="w-px bg-white/60 rounded-full" style="height:75%"></div>
+                  <div class="w-px bg-white/50 rounded-full" style="height:30%"></div>
+                </div>
+                <p class="text-white/60 font-mono" style="font-size:5px;letter-spacing:.12em">ECHO PHOTO ALBUM</p>
               </div>
-              <p class="mt-4 text-[11px] text-stone-500 font-mono tracking-[0.16em] uppercase">Share preview</p>
             </div>
+            <p class="font-mono text-[8px] text-stone-400 tracking-[0.18em] uppercase">9:16 Story</p>
           </div>
+          <!-- Feed 1:1 -->
+          <div class="flex flex-col items-center gap-2">
+            <div class="relative overflow-hidden ring-1 ring-stone-300" style="width:80px;aspect-ratio:1/1">
+              <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('assets/anniversary.png')"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              <div class="absolute bottom-0 inset-x-0 p-1.5">
+                <div class="flex items-end gap-px h-2.5 mb-0.5">
+                  <div class="w-px bg-white/50 rounded-full" style="height:40%"></div>
+                  <div class="w-px bg-white/70 rounded-full" style="height:80%"></div>
+                  <div class="w-px bg-clay rounded-full" style="height:100%"></div>
+                  <div class="w-px bg-white/70 rounded-full" style="height:70%"></div>
+                  <div class="w-px bg-white/50 rounded-full" style="height:40%"></div>
+                  <div class="w-px bg-white/60 rounded-full" style="height:60%"></div>
+                  <div class="w-px bg-white/50 rounded-full" style="height:35%"></div>
+                </div>
+                <p class="text-white/60 font-mono" style="font-size:4px;letter-spacing:.1em">ECHO PHOTO ALBUM</p>
+              </div>
+            </div>
+            <p class="font-mono text-[8px] text-stone-400 tracking-[0.18em] uppercase">1:1 Feed</p>
+          </div>
+          <p class="text-xs text-stone-400 font-light leading-relaxed pb-6" data-i18n="f3.share.hint">完成した動画を<br>そのままSNSへ</p>
         </div>
       </div>
     <!-- Video vs Echo — 「動画でいいじゃん」への回答 -->
