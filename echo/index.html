@@ -415,7 +415,7 @@
   <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
     <!-- Wordmark — Taste 02: lowercase, Onest 200, dot in clay -->
     <span class="font-extralight tracking-tight text-[19px] text-stone-900">echo photo album<span class="text-clay">.</span></span>
-    <div class="flex gap-7 text-sm text-stone-500 font-light">
+    <div class="hidden md:flex gap-7 text-sm text-stone-500 font-light">
       <a href="#features" class="hover:text-clay transition-colors" data-i18n="nav.features">機能</a>
       <a href="#scenes"   class="hover:text-clay transition-colors" data-i18n="nav.scenes">シーン</a>
       <a href="#themes"   class="hover:text-clay transition-colors" data-i18n="nav.themes">テーマ</a>
@@ -778,7 +778,22 @@
           </div>
         </div>
       </div>
+    <!-- Video vs Echo — 「動画でいいじゃん」への回答 -->
+    <div class="mt-16 pt-12 border-t border-stone-100 max-w-xl mx-auto fade-in">
+      <p class="font-mono text-[9px] tracking-[0.28em] text-stone-400 uppercase mb-6">Video vs Echo</p>
+      <div class="grid grid-cols-2 gap-3 text-sm">
+        <div class="border border-stone-200 bg-milk p-5">
+          <p class="text-stone-400 text-[9px] font-mono tracking-[0.2em] uppercase mb-4">動画</p>
+          <p class="text-stone-500 font-light leading-relaxed">撮るのは簡単。<br>見返すのに<strong class="text-stone-600 font-normal">5〜30分</strong>。<br>気づけば開かなくなる。</p>
+        </div>
+        <div class="border border-clay bg-white p-5">
+          <p class="text-clay text-[9px] font-mono tracking-[0.2em] uppercase mb-4">Echo Photo</p>
+          <p class="text-stone-700 font-light leading-relaxed">写真をタップするだけ。<br><strong class="font-normal">数秒で、あの音</strong>。<br>毎日自然に見返せる。</p>
+        </div>
+      </div>
+      <p class="text-xs text-stone-400 font-light mt-5">記録が「見返されない」なら、存在しないのと同じ。</p>
     </div>
+
   </div>
 </section>
 
@@ -901,6 +916,21 @@
         <p class="text-center mt-5 space-y-1.5"><span class="font-mono block text-stone-400 text-[9px] tracking-[0.28em] uppercase">Scene 05</span><span class="block text-sm text-stone-700 font-light" data-i18n="scene5">日常</span></p>
       </div>
     </div>
+
+    <!-- 音図鑑 Tips -->
+    <div class="mt-14 pt-10 border-t border-stone-100 fade-in">
+      <p class="font-mono text-[9px] tracking-[0.28em] text-stone-400 uppercase mb-4">Sound Encyclopedia</p>
+      <p class="text-stone-700 font-light text-sm leading-relaxed mb-5">シーンの枠を超えた使い方も。愛車のエンジン音、猫の鳴き声、波音——写真と音を集めた<strong class="font-normal text-stone-800">あなただけの音図鑑</strong>が作れます。正解はありません。</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="border border-stone-200 px-3 py-1.5 text-xs text-stone-500 font-mono">🚗 エンジン音</span>
+        <span class="border border-stone-200 px-3 py-1.5 text-xs text-stone-500 font-mono">🐱 猫の声</span>
+        <span class="border border-stone-200 px-3 py-1.5 text-xs text-stone-500 font-mono">🌊 波の音</span>
+        <span class="border border-stone-200 px-3 py-1.5 text-xs text-stone-500 font-mono">🎺 初めての演奏</span>
+        <span class="border border-stone-200 px-3 py-1.5 text-xs text-stone-500 font-mono">☕ 喫茶店の空気</span>
+        <span class="border border-clay px-3 py-1.5 text-xs text-clay font-mono">＋ あなたの音</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
