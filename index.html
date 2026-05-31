@@ -120,7 +120,7 @@ nav.top .links a:hover{color:var(--blood)}
 @media(max-width:760px){.sec-head{grid-template-columns:1fr;gap:16px}}
 
 /* APPS GRID */
-.apps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+.apps{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
 @media(max-width:960px){.apps{grid-template-columns:1fr}}
 
 /* NOTES GRID */
@@ -247,6 +247,49 @@ body{overflow-x:hidden}
 
     <div class="apps">
 
+      <!-- Watch Voice Memo -->
+      <article class="app">
+        <span class="app-status">Now Available</span>
+        <div class="app-head">
+          <div class="app-mini-icon"><img src="images/icon-watch.png" alt="Watch Voice Memo" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <div>
+            <h3 class="app-name">Watch Voice Memo</h3>
+            <p class="app-tagline">Apple Watch × iOS</p>
+          </div>
+        </div>
+        <p class="app-desc">Apple Watchからワンタップで録音、iPhoneで即座にテキスト化。会議中・運転中・散歩中、ひらめいたアイデアを二度と取りこぼさないための相棒。</p>
+        <div class="app-tags">
+          <span class="app-tag">Apple Watch</span>
+          <span class="app-tag">iOS</span>
+          <span class="app-tag">Voice</span>
+        </div>
+        <a href="https://apps.apple.com/jp/app/watch-voice-memo/id6764491904" target="_blank" rel="noopener" style="display:inline-block;margin-top:12px;">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp" alt="Download on the App Store" style="height:40px;width:auto;">
+        </a>
+        <a class="app-visual" href="/watchmemo/" aria-label="Watch Voice Memo のサービスを見る">
+          <img src="images/watch-square.png" alt="Watch Voice Memo — Apple Watchだけで、すぐ録音できるメモアプリ" loading="lazy">
+        </a>
+      </article>
+
+      <!-- Echo Photo Album -->
+      <article class="app">
+        <span class="app-status dev">In Development</span>
+        <div class="app-head">
+          <div class="app-mini-icon" style="background:var(--paper);border:1.5px solid var(--line);color:var(--ink-dim);font-size:.9rem">EPA</div>
+          <div>
+            <h3 class="app-name">Echo Photo Album</h3>
+            <p class="app-tagline">Voice × Photo Memory</p>
+          </div>
+        </div>
+        <p class="app-desc">写真に声を重ねて残す、シンプルな記録アルバム。あの日の音が、記憶を鮮やかによみがえらせる。近日公開予定。</p>
+        <div class="app-tags">
+          <span class="app-tag">iOS</span>
+          <span class="app-tag">Audio</span>
+          <span class="app-tag">Memory</span>
+        </div>
+        <div class="app-visual is-disabled" aria-label="開発中"></div>
+      </article>
+
       <!-- Sinc -->
       <article class="app">
         <span class="app-status">Alpha — Live</span>
@@ -286,30 +329,6 @@ body{overflow-x:hidden}
         </div>
         <a class="app-visual" href="https://kondatebanchou.strataix.net/lp/" aria-label="こんだて番長のサービスを見る">
           <img src="images/kondate-square.png" alt="こんだて番長 — 冷蔵庫の食材から、献立が自動で決まるアプリ" loading="lazy">
-        </a>
-      </article>
-
-      <!-- Watch Voice Memo -->
-      <article class="app">
-        <span class="app-status">Now Available</span>
-        <div class="app-head">
-          <div class="app-mini-icon"><img src="images/icon-watch.png" alt="Watch Voice Memo" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-          <div>
-            <h3 class="app-name">Watch Voice Memo</h3>
-            <p class="app-tagline">Apple Watch × iOS</p>
-          </div>
-        </div>
-        <p class="app-desc">Apple Watchからワンタップで録音、iPhoneで即座にテキスト化。会議中・運転中・散歩中、ひらめいたアイデアを二度と取りこぼさないための相棒。</p>
-        <div class="app-tags">
-          <span class="app-tag">Apple Watch</span>
-          <span class="app-tag">iOS</span>
-          <span class="app-tag">Voice</span>
-        </div>
-        <a href="https://apps.apple.com/jp/app/watch-voice-memo/id6764491904" target="_blank" rel="noopener" style="display:inline-block;margin-top:12px;">
-          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp" alt="Download on the App Store" style="height:40px;width:auto;">
-        </a>
-        <a class="app-visual" href="/watchmemo/" aria-label="Watch Voice Memo のサービスを見る">
-          <img src="images/watch-square.png" alt="Watch Voice Memo — Apple Watchだけで、すぐ録音できるメモアプリ" loading="lazy">
         </a>
       </article>
 
