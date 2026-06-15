@@ -9,10 +9,10 @@ var T = { ja: {} };
 // EN — English
 // ─────────────────────────────────────────────────────────────────────────
 T.en = {
-  'nav.features':'Features','nav.scenes':'Scenes','nav.themes':'Themes','nav.pricing':'Pricing','nav.cta':'Try it free',
+  'nav.features':'Features','nav.scenes':'Scenes','nav.themes':'Themes','nav.pricing':'Pricing','nav.cta':'Pre-order',
   'hero.h1':'Keep the sounds<br />\n        a photo can\u2019t capture\u2014<span class="text-clay font-light">that day\u2019s voice</span>.',
   'hero.body':'First words, waves on a far shore, your dog\u2019s familiar bark.<br />\n        Pair a 60-second recording with a photo and capture the moment in full dimension.',
-  'hero.cta1':'Try it free','hero.cta2':'Learn more','hero.note':'Free up to 10 \u00b7 iOS / Android',
+  'hero.cta1':'Pre-order now','hero.cta2':'Learn more','hero.note':'Launches June 26 \u00b7 Pre-order open \u00b7 iOS',
   'pain.eyebrow':'There\u2019s something we want to ask you',
   'pain.h2':'That voice\u2014<br />\n        <span class="text-stone-900 font-light">do you think you\u2019ll still hear it next year?</span>',
   'pain1':'The first time they called you \u201cMama,\u201d \u201cPapa.\u201d<br />\n          Tongue-tied, innocent\u2014the most adorable voice in the world.<br />\n          <span class="text-stone-900 font-normal">Children grow up in the blink of an eye.</span>\n          The moment they start speaking clearly, that little tone is\n          <span class="text-stone-700">gone for good.</span>',
@@ -79,8 +79,8 @@ T.en = {
   'prem.li1':'Save memories <span class="text-white font-normal">without limit</span>','prem.li2':'Unlock Journal & Gallery themes','prem.li3':'All free-plan features',
   'prem.cta':'Unlock',
   'dl.h2':'Today\u2019s voice,<br />a treasure ten years on.',
-  'dl.body':'Download free and keep your first memory.',
-  'dl.appstore.sub':'Download on the','dl.gplay.sub':'Get it on','dl.gplay.soon':'Coming soon',
+  'dl.body':'Pre-order now — launches June 26. Your first memory is waiting.',
+  'dl.appstore.sub':'Pre-order on the','dl.gplay.sub':'Get it on','dl.gplay.soon':'Coming soon',
   'footer.privacy':'Privacy Policy','footer.terms':'Terms of Service',
   'pp.title':'Privacy Policy','pp.meta':'Last updated: May 29, 2026 / Operator: StratAIX',
   'tos.title':'Terms of Service','tos.meta':'Last updated: May 29, 2026 / Operator: StratAIX',
@@ -92,10 +92,10 @@ T.en = {
 // DE — Deutsch
 // ─────────────────────────────────────────────────────────────────────────
 T.de = {
-  'nav.features':'Funktionen','nav.scenes':'Szenen','nav.themes':'Designs','nav.pricing':'Preise','nav.cta':'Kostenlos testen',
+  'nav.features':'Funktionen','nav.scenes':'Szenen','nav.themes':'Designs','nav.pricing':'Preise','nav.cta':'Vorbestellen',
   'hero.h1':'Bewahre die Klänge,<br />\n        die kein Foto einfängt – <span class="text-clay font-light">die Stimme jenes Tages</span>.',
   'hero.body':'Erste Worte, Wellen an fernem Ufer, das vertraute Bellen deines Hundes.<br />\n        Verbinde eine 60-Sekunden-Aufnahme mit einem Foto und halte den Moment vollständig fest.',
-  'hero.cta1':'Kostenlos testen','hero.cta2':'Mehr erfahren','hero.note':'Kostenlos bis 10 · iOS / Android',
+  'hero.cta1':'Jetzt vorbestellen','hero.cta2':'Mehr erfahren','hero.note':'Erscheint am 26. Juni · Vorbestellung offen · iOS',
   'pain.eyebrow':'Wir möchten dich etwas fragen',
   'pain.h2':'Diese Stimme –<br />\n        <span class="text-stone-900 font-light">glaubst du, du hörst sie nächstes Jahr noch?</span>',
   'pain1':'Als sie dich zum ersten Mal „Mama“, „Papa“ nannten.<br />\n          Noch unbeholfen, unschuldig – die süßeste Stimme der Welt.<br />\n          <span class="text-stone-900 font-normal">Kinder werden im Handumdrehen groß.</span>\n          Sobald sie deutlich sprechen, ist dieser kleine Klang\n          <span class="text-stone-700">für immer vorbei.</span>',
@@ -162,8 +162,8 @@ T.de = {
   'prem.li1':'Erinnerungen <span class="text-white font-normal">unbegrenzt</span> speichern','prem.li2':'Journal- & Gallery-Designs freischalten','prem.li3':'Alle Funktionen des kostenlosen Plans',
   'prem.cta':'Freischalten',
   'dl.h2':'Die Stimme von heute,<br />ein Schatz in zehn Jahren.',
-  'dl.body':'Lade kostenlos herunter und bewahre deine erste Erinnerung.',
-  'dl.appstore.sub':'Laden im','dl.gplay.sub':'Jetzt bei','dl.gplay.soon':'Demnächst',
+  'dl.body':'Jetzt vorbestellen — erscheint am 26. Juni. Deine erste Erinnerung wartet.',
+  'dl.appstore.sub':'Vorbestellen im','dl.gplay.sub':'Jetzt bei','dl.gplay.soon':'Demnächst',
   'footer.privacy':'Datenschutz','footer.terms':'Nutzungsbedingungen',
   'pp.title':'Datenschutzrichtlinie','pp.meta':'Zuletzt aktualisiert: 29. Mai 2026 / Betreiber: StratAIX',
   'tos.title':'Nutzungsbedingungen','tos.meta':'Zuletzt aktualisiert: 29. Mai 2026 / Betreiber: StratAIX',
@@ -175,10 +175,10 @@ T.de = {
 // ES — Español
 // ─────────────────────────────────────────────────────────────────────────
 T.es = {
-  'nav.features':'Funciones','nav.scenes':'Escenas','nav.themes':'Temas','nav.pricing':'Precios','nav.cta':'Pruébalo gratis',
+  'nav.features':'Funciones','nav.scenes':'Escenas','nav.themes':'Temas','nav.pricing':'Precios','nav.cta':'Reservar',
   'hero.h1':'Guarda los sonidos<br />\n        que una foto no capta: <span class="text-clay font-light">la voz de aquel día</span>.',
   'hero.body':'Las primeras palabras, las olas de una costa lejana, el ladrido familiar de tu perro.<br />\n        Une una grabación de 60 segundos a una foto y captura el momento en toda su dimensión.',
-  'hero.cta1':'Pruébalo gratis','hero.cta2':'Saber más','hero.note':'Gratis hasta 10 · iOS / Android',
+  'hero.cta1':'Reservar ahora','hero.cta2':'Saber más','hero.note':'Lanzamiento 26 de junio · Reserva abierta · iOS',
   'pain.eyebrow':'Hay algo que queremos preguntarte',
   'pain.h2':'Esa voz:<br />\n        <span class="text-stone-900 font-light">¿crees que seguirás oyéndola el año que viene?</span>',
   'pain1':'La primera vez que te llamaron «mamá», «papá».<br />\n          Con la lengua torpe, inocente: la voz más adorable del mundo.<br />\n          <span class="text-stone-900 font-normal">Los niños crecen en un abrir y cerrar de ojos.</span>\n          Desde el momento en que hablan con claridad, ese tono pequeño\n          <span class="text-stone-700">se va para siempre.</span>',
@@ -245,8 +245,8 @@ T.es = {
   'prem.li1':'Guarda recuerdos <span class="text-white font-normal">sin límite</span>','prem.li2':'Desbloquea los temas Journal y Gallery','prem.li3':'Todas las funciones del plan gratuito',
   'prem.cta':'Desbloquear',
   'dl.h2':'La voz de hoy,<br />un tesoro dentro de diez años.',
-  'dl.body':'Descárgalo gratis y guarda tu primer recuerdo.',
-  'dl.appstore.sub':'Descárgalo en','dl.gplay.sub':'Disponible en','dl.gplay.soon':'Próximamente',
+  'dl.body':'Reserva ahora — disponible el 26 de junio. Tu primer recuerdo te espera.',
+  'dl.appstore.sub':'Reservar en','dl.gplay.sub':'Disponible en','dl.gplay.soon':'Próximamente',
   'footer.privacy':'Política de privacidad','footer.terms':'Términos de servicio',
   'pp.title':'Política de privacidad','pp.meta':'Última actualización: 29 de mayo de 2026 / Operador: StratAIX',
   'tos.title':'Términos de servicio','tos.meta':'Última actualización: 29 de mayo de 2026 / Operador: StratAIX',
@@ -258,10 +258,10 @@ T.es = {
 // FR — Français
 // ─────────────────────────────────────────────────────────────────────────
 T.fr = {
-  'nav.features':'Fonctionnalités','nav.scenes':'Scènes','nav.themes':'Thèmes','nav.pricing':'Tarifs','nav.cta':'Essayer gratuitement',
+  'nav.features':'Fonctionnalités','nav.scenes':'Scènes','nav.themes':'Thèmes','nav.pricing':'Tarifs','nav.cta':'Précommander',
   'hero.h1':'Gardez les sons<br />\n        qu\u2019une photo ne capte pas : <span class="text-clay font-light">la voix de ce jour-là</span>.',
   'hero.body':'Les premiers mots, les vagues d\u2019un rivage lointain, l\u2019aboiement familier de votre chien.<br />\n        Associez un enregistrement de 60 secondes à une photo et capturez l\u2019instant dans toute sa dimension.',
-  'hero.cta1':'Essayer gratuitement','hero.cta2':'En savoir plus','hero.note':'Gratuit jusqu\u2019à 10 · iOS / Android',
+  'hero.cta1':'Précommander','hero.cta2':'En savoir plus','hero.note':'Sortie le 26 juin · Précommande ouverte · iOS',
   'pain.eyebrow':'Il y a une chose que nous aimerions vous demander',
   'pain.h2':'Cette voix —<br />\n        <span class="text-stone-900 font-light">pensez-vous l\u2019entendre encore l\u2019an prochain ?</span>',
   'pain1':'La première fois qu\u2019ils vous ont appelé « maman », « papa ».<br />\n          La langue maladroite, innocente — la voix la plus adorable du monde.<br />\n          <span class="text-stone-900 font-normal">Les enfants grandissent en un clin d\u2019œil.</span>\n          Dès qu\u2019ils parlent clairement, ce petit timbre\n          <span class="text-stone-700">est parti pour toujours.</span>',
@@ -328,8 +328,8 @@ T.fr = {
   'prem.li1':'Enregistrez des souvenirs <span class="text-white font-normal">sans limite</span>','prem.li2':'Débloquez les thèmes Journal et Gallery','prem.li3':'Toutes les fonctions du plan gratuit',
   'prem.cta':'Débloquer',
   'dl.h2':'La voix d\u2019aujourd\u2019hui,<br />un trésor dans dix ans.',
-  'dl.body':'Téléchargez gratuitement et gardez votre premier souvenir.',
-  'dl.appstore.sub':'Télécharger dans l\u2019','dl.gplay.sub':'Disponible sur','dl.gplay.soon':'Bientôt disponible',
+  'dl.body':'Précommandez maintenant — sortie le 26 juin. Votre premier souvenir vous attend.',
+  'dl.appstore.sub':'Précommander sur l\u2019','dl.gplay.sub':'Disponible sur','dl.gplay.soon':'Bientôt disponible',
   'footer.privacy':'Politique de confidentialité','footer.terms':'Conditions d\u2019utilisation',
   'pp.title':'Politique de confidentialité','pp.meta':'Dernière mise à jour : 29 mai 2026 / Exploitant : StratAIX',
   'tos.title':'Conditions d\u2019utilisation','tos.meta':'Dernière mise à jour : 29 mai 2026 / Exploitant : StratAIX',
@@ -341,10 +341,10 @@ T.fr = {
 // pt-BR — Português (Brasil)
 // ─────────────────────────────────────────────────────────────────────────
 T['pt-BR'] = {
-  'nav.features':'Recursos','nav.scenes':'Cenas','nav.themes':'Temas','nav.pricing':'Preços','nav.cta':'Experimente grátis',
+  'nav.features':'Recursos','nav.scenes':'Cenas','nav.themes':'Temas','nav.pricing':'Preços','nav.cta':'Reservar',
   'hero.h1':'Guarde os sons<br />\n        que uma foto não capta: <span class="text-clay font-light">a voz daquele dia</span>.',
   'hero.body':'As primeiras palavras, as ondas de uma praia distante, o latido familiar do seu cão.<br />\n        Una uma gravação de 60 segundos a uma foto e capture o momento em toda a sua dimensão.',
-  'hero.cta1':'Experimente grátis','hero.cta2':'Saiba mais','hero.note':'Grátis até 10 · iOS / Android',
+  'hero.cta1':'Reservar agora','hero.cta2':'Saiba mais','hero.note':'Lançamento 26 de junho · Reserva aberta · iOS',
   'pain.eyebrow':'Há algo que queremos perguntar a você',
   'pain.h2':'Essa voz —<br />\n        <span class="text-stone-900 font-light">você acha que ainda vai ouvi-la no ano que vem?</span>',
   'pain1':'A primeira vez que chamaram você de «mamãe», «papai».<br />\n          Com a língua presa, inocente — a voz mais adorável do mundo.<br />\n          <span class="text-stone-900 font-normal">As crianças crescem num piscar de olhos.</span>\n          A partir do momento em que falam claramente, aquele tom pequeno\n          <span class="text-stone-700">se vai para sempre.</span>',
@@ -411,8 +411,8 @@ T['pt-BR'] = {
   'prem.li1':'Salve memórias <span class="text-white font-normal">sem limite</span>','prem.li2':'Desbloqueie os temas Journal e Gallery','prem.li3':'Todos os recursos do plano grátis',
   'prem.cta':'Desbloquear',
   'dl.h2':'A voz de hoje,<br />um tesouro daqui a dez anos.',
-  'dl.body':'Baixe grátis e guarde sua primeira memória.',
-  'dl.appstore.sub':'Baixar na','dl.gplay.sub':'Disponível no','dl.gplay.soon':'Em breve',
+  'dl.body':'Reserve agora — lançamento em 26 de junho. Sua primeira memória está esperando.',
+  'dl.appstore.sub':'Reservar na','dl.gplay.sub':'Disponível no','dl.gplay.soon':'Em breve',
   'footer.privacy':'Política de Privacidade','footer.terms':'Termos de Serviço',
   'pp.title':'Política de Privacidade','pp.meta':'Última atualização: 29 de maio de 2026 / Operadora: StratAIX',
   'tos.title':'Termos de Serviço','tos.meta':'Última atualização: 29 de maio de 2026 / Operadora: StratAIX',
@@ -424,10 +424,10 @@ T['pt-BR'] = {
 // zh-Hans — 简体中文
 // ─────────────────────────────────────────────────────────────────────────
 T['zh-hans'] = {
-  'nav.features':'功能','nav.scenes':'场景','nav.themes':'主题','nav.pricing':'价格','nav.cta':'免费试用',
+  'nav.features':'功能','nav.scenes':'场景','nav.themes':'主题','nav.pricing':'价格','nav.cta':'预购',
   'hero.h1':'留住照片<br />\n        无法捕捉的声音——<span class="text-clay font-light">那一天的嗓音</span>。',
   'hero.body':'第一句话、远方海岸的浪声、爱犬熟悉的吠声。<br />\n        为照片配上 60 秒录音，把当下完整地保存下来。',
-  'hero.cta1':'免费试用','hero.cta2':'了解更多','hero.note':'免费最多 10 条 · iOS / Android',
+  'hero.cta1':'立即预购','hero.cta2':'了解更多','hero.note':'6月26日发布 · 预购开放中 · iOS',
   'pain.eyebrow':'有件事想问问你',
   'pain.h2':'那个声音——<br />\n        <span class="text-stone-900 font-light">明年你还能想起来吗？</span>',
   'pain1':'第一次叫你「妈妈」「爸爸」的时候。<br />\n          含糊不清、天真无邪——世界上最可爱的声音。<br />\n          <span class="text-stone-900 font-normal">孩子转眼就长大了。</span>\n          等他们能清楚说话的那一刻，那稚嫩的语气就\n          <span class="text-stone-700">再也回不来了。</span>',
@@ -494,8 +494,8 @@ T['zh-hans'] = {
   'prem.li1':'<span class="text-white font-normal">无限</span>保存回忆','prem.li2':'解锁日志与画廊主题','prem.li3':'免费版的全部功能',
   'prem.cta':'解锁',
   'dl.h2':'今天的声音，<br />十年后的珍宝。',
-  'dl.body':'免费下载，留住你的第一段回忆。',
-  'dl.appstore.sub':'下载于','dl.gplay.sub':'获取于','dl.gplay.soon':'即将推出',
+  'dl.body':'立即预购 — 6月26日发布。你的第一段回忆正在等待。',
+  'dl.appstore.sub':'预购于','dl.gplay.sub':'获取于','dl.gplay.soon':'即将推出',
   'footer.privacy':'隐私政策','footer.terms':'服务条款',
   'pp.title':'隐私政策','pp.meta':'最后更新：2026 年 5 月 29 日 / 运营方：StratAIX',
   'tos.title':'服务条款','tos.meta':'最后更新：2026 年 5 月 29 日 / 运营方：StratAIX',
@@ -507,10 +507,10 @@ T['zh-hans'] = {
 // zh-Hant — 繁體中文
 // ─────────────────────────────────────────────────────────────────────────
 T['zh-hant'] = {
-  'nav.features':'功能','nav.scenes':'場景','nav.themes':'主題','nav.pricing':'價格','nav.cta':'免費試用',
+  'nav.features':'功能','nav.scenes':'場景','nav.themes':'主題','nav.pricing':'價格','nav.cta':'預購',
   'hero.h1':'留住照片<br />\n        無法捕捉的聲音——<span class="text-clay font-light">那一天的嗓音</span>。',
   'hero.body':'第一句話、遠方海岸的浪聲、愛犬熟悉的吠聲。<br />\n        為照片配上 60 秒錄音，把當下完整地保存下來。',
-  'hero.cta1':'免費試用','hero.cta2':'瞭解更多','hero.note':'免費最多 10 則 · iOS / Android',
+  'hero.cta1':'立即預購','hero.cta2':'瞭解更多','hero.note':'6月26日發佈 · 預購開放中 · iOS',
   'pain.eyebrow':'有件事想問問你',
   'pain.h2':'那個聲音——<br />\n        <span class="text-stone-900 font-light">明年你還記得起來嗎？</span>',
   'pain1':'第一次叫你「媽媽」「爸爸」的時候。<br />\n          含糊不清、天真無邪——世界上最可愛的聲音。<br />\n          <span class="text-stone-900 font-normal">孩子轉眼就長大了。</span>\n          等他們能清楚說話的那一刻，那稚嫩的語氣就\n          <span class="text-stone-700">再也回不來了。</span>',
@@ -577,8 +577,8 @@ T['zh-hant'] = {
   'prem.li1':'<span class="text-white font-normal">無限</span>保存回憶','prem.li2':'解鎖日誌與藝廊主題','prem.li3':'免費版的全部功能',
   'prem.cta':'解鎖',
   'dl.h2':'今天的聲音，<br />十年後的珍寶。',
-  'dl.body':'免費下載，留住你的第一段回憶。',
-  'dl.appstore.sub':'下載於','dl.gplay.sub':'取得於','dl.gplay.soon':'即將推出',
+  'dl.body':'立即預購 — 6月26日發佈。你的第一段回憶正在等待。',
+  'dl.appstore.sub':'預購於','dl.gplay.sub':'取得於','dl.gplay.soon':'即將推出',
   'footer.privacy':'隱私權政策','footer.terms':'服務條款',
   'pp.title':'隱私權政策','pp.meta':'最後更新：2026 年 5 月 29 日 / 營運方：StratAIX',
   'tos.title':'服務條款','tos.meta':'最後更新：2026 年 5 月 29 日 / 營運方：StratAIX',
@@ -590,10 +590,10 @@ T['zh-hant'] = {
 // ko — 한국어
 // ─────────────────────────────────────────────────────────────────────────
 T.ko = {
-  'nav.features':'기능','nav.scenes':'장면','nav.themes':'테마','nav.pricing':'가격','nav.cta':'무료로 시작',
+  'nav.features':'기능','nav.scenes':'장면','nav.themes':'테마','nav.pricing':'가격','nav.cta':'사전 주문',
   'hero.h1':'사진으로는 담을 수 없는<br />\n        소리를 남기다——<span class="text-clay font-light">그날의 목소리</span>를.',
   'hero.body':'첫 마디, 먼 해안의 파도 소리, 반려견의 익숙한 짖음.<br />\n        사진에 60초 녹음을 더해 그 순간을 온전히 담아 두세요.',
-  'hero.cta1':'무료로 시작','hero.cta2':'자세히 보기','hero.note':'무료 최대 10개 · iOS / Android',
+  'hero.cta1':'사전 주문하기','hero.cta2':'자세히 보기','hero.note':'6월 26일 출시 · 사전 주문 접수 중 · iOS',
   'pain.eyebrow':'한 가지 여쭤보고 싶은 게 있어요',
   'pain.h2':'그 목소리——<br />\n        <span class="text-stone-900 font-light">내년에도 떠올릴 수 있을까요?</span>',
   'pain1':'처음 「엄마」 「아빠」라고 불러 준 그때.<br />\n          어눌하고 천진난만한——세상에서 가장 사랑스러운 목소리.<br />\n          <span class="text-stone-900 font-normal">아이는 눈 깜짝할 사이에 자랍니다.</span>\n          또렷하게 말하기 시작하는 순간, 그 앳된 말투는\n          <span class="text-stone-700">영영 사라집니다.</span>',
@@ -660,8 +660,8 @@ T.ko = {
   'prem.li1':'추억을 <span class="text-white font-normal">무제한</span>으로 저장','prem.li2':'저널과 갤러리 테마 잠금 해제','prem.li3':'무료 플랜의 모든 기능',
   'prem.cta':'잠금 해제',
   'dl.h2':'오늘의 목소리,<br />10년 뒤의 보물.',
-  'dl.body':'무료로 내려받아 첫 번째 추억을 남기세요.',
-  'dl.appstore.sub':'다운로드','dl.gplay.sub':'다운로드','dl.gplay.soon':'출시 예정',
+  'dl.body':'지금 사전 주문 — 6월 26일 출시. 첫 번째 추억이 기다리고 있습니다.',
+  'dl.appstore.sub':'사전 주문','dl.gplay.sub':'다운로드','dl.gplay.soon':'출시 예정',
   'footer.privacy':'개인정보 처리방침','footer.terms':'이용약관',
   'pp.title':'개인정보 처리방침','pp.meta':'최종 업데이트: 2026년 5월 29일 / 운영자: StratAIX',
   'tos.title':'이용약관','tos.meta':'최종 업데이트: 2026년 5월 29일 / 운영자: StratAIX',
@@ -673,10 +673,10 @@ T.ko = {
 // ar — العربية (RTL)
 // ─────────────────────────────────────────────────────────────────────────
 T.ar = {
-  'nav.features':'المميزات','nav.scenes':'المشاهد','nav.themes':'السمات','nav.pricing':'الأسعار','nav.cta':'جرّبه مجانًا',
+  'nav.features':'المميزات','nav.scenes':'المشاهد','nav.themes':'السمات','nav.pricing':'الأسعار','nav.cta':'اطلب مسبقًا',
   'hero.h1':'احتفظ بالأصوات<br />\n        التي لا تلتقطها الصورة——<span class="text-clay font-light">صوت ذلك اليوم</span>.',
   'hero.body':'أولى الكلمات، صوت الأمواج على شاطئ بعيد، نباح كلبك المألوف.<br />\n        أضف تسجيلًا مدته 60 ثانية إلى صورة، والتقط اللحظة بكامل أبعادها.',
-  'hero.cta1':'جرّبه مجانًا','hero.cta2':'اعرف المزيد','hero.note':'مجانًا حتى 10 · iOS / Android',
+  'hero.cta1':'اطلب مسبقًا','hero.cta2':'اعرف المزيد','hero.note':'الإطلاق 26 يونيو · الطلب المسبق متاح · iOS',
   'pain.eyebrow':'هناك شيء نودّ أن نسألك عنه',
   'pain.h2':'ذلك الصوت——<br />\n        <span class="text-stone-900 font-light">هل تظن أنك ستظل تسمعه العام المقبل؟</span>',
   'pain1':'أول مرة ناداك فيها «ماما» أو «بابا».<br />\n          بلسانٍ متعثّر وبراءةٍ صافية——أعذب صوتٍ في العالم.<br />\n          <span class="text-stone-900 font-normal">يكبر الأطفال في لمح البصر.</span>\n          وفي اللحظة التي يبدؤون فيها الكلام بوضوح، تختفي تلك النبرة الصغيرة\n          <span class="text-stone-700">إلى غير رجعة.</span>',
@@ -743,8 +743,8 @@ T.ar = {
   'prem.li1':'احفظ الذكريات <span class="text-white font-normal">دون حدود</span>','prem.li2':'افتح سمتي اليوميات والمعرض','prem.li3':'كل ميزات الخطة المجانية',
   'prem.cta':'افتح الميزة',
   'dl.h2':'صوت اليوم،<br />كنزٌ بعد عشر سنوات.',
-  'dl.body':'نزّله مجانًا واحتفظ بذكراك الأولى.',
-  'dl.appstore.sub':'حمّله من','dl.gplay.sub':'احصل عليه من','dl.gplay.soon':'قريباً',
+  'dl.body':'اطلب مسبقًا الآن — الإطلاق في 26 يونيو. ذكراك الأولى بانتظارك.',
+  'dl.appstore.sub':'اطلب مسبقًا من','dl.gplay.sub':'احصل عليه من','dl.gplay.soon':'قريباً',
   'footer.privacy':'سياسة الخصوصية','footer.terms':'شروط الخدمة',
   'pp.title':'سياسة الخصوصية','pp.meta':'آخر تحديث: 29 مايو 2026 / المشغّل: StratAIX',
   'tos.title':'شروط الخدمة','tos.meta':'آخر تحديث: 29 مايو 2026 / المشغّل: StratAIX',
