@@ -296,7 +296,7 @@
       <div class="watch__crown"></div>
       <div class="watch__side"></div>
       <div class="watch__screen crt-overlay" style="width:264px;height:339px;overflow:hidden;">
-        <img src="images/watch_search.png" alt="My Watch Brain" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
+        <img data-shot="01_search" src="screens/ja/01_search.png" alt="My Watch Brain" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
       </div>
     </div>
   </div>
@@ -345,7 +345,7 @@
     <div class="watch" style="width:240px;height:300px;padding:14px;">
       <div class="watch__crown"></div><div class="watch__side"></div>
       <div class="watch__screen crt-overlay" style="width:212px;height:272px;overflow:hidden;">
-        <img src="images/watch_search.png" alt="Watch Search" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
+        <img data-shot="01_search" src="screens/ja/01_search.png" alt="Watch Search" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
       </div>
     </div>
   </div>
@@ -354,7 +354,7 @@
 <!-- FEATURE: iPHONE -->
 <section class="feature feature--tr">
   <div class="feature__mock feature__mock--l fade" data-delay="2">
-    <img src="images/iphone_cards.png" alt="iPhone Card Management" style="width:280px;border-radius:16px;border:1px solid var(--hairline);" loading="lazy" />
+    <img data-shot="04_iphone" src="screens/ja/04_iphone.png" alt="iPhone Card Management" style="width:280px;border-radius:16px;border:1px solid var(--hairline);" loading="lazy" />
   </div>
   <div class="feature__text">
     <div class="slabel fade">
@@ -382,7 +382,7 @@
     <div class="watch" style="width:240px;height:300px;padding:14px;">
       <div class="watch__crown"></div><div class="watch__side"></div>
       <div class="watch__screen crt-overlay" style="width:212px;height:272px;overflow:hidden;">
-        <img src="images/watch_boost.png" alt="Recall Boost" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
+        <img data-shot="05_boost" src="screens/ja/05_boost.png" alt="Recall Boost" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
       </div>
     </div>
   </div>
@@ -392,13 +392,13 @@
 <section class="feature feature--tr">
   <div class="feature__mock feature__mock--l fade" data-delay="2">
     <div class="theme-showcase">
-      <img src="images/theme_crt.png"       alt="CRT">
-      <img src="images/theme_amber.png"     alt="Amber">
-      <img src="images/theme_green.png"     alt="Green">
-      <img src="images/theme_neonred.png"   alt="Neon Red">
-      <img src="images/theme_neongreen.png" alt="Neon Green">
-      <img src="images/theme_terminal.png"  alt="Terminal">
-      <img src="images/theme_retro.png"     alt="Retro">
+      <img data-shot="02_t_crt"       src="screens/ja/02_t_crt.png"       alt="CRT">
+      <img data-shot="02_t_amber"     src="screens/ja/02_t_amber.png"     alt="Amber">
+      <img data-shot="02_t_green"     src="screens/ja/02_t_green.png"     alt="Green">
+      <img data-shot="02_t_neonred"   src="screens/ja/02_t_neonred.png"   alt="Neon Red">
+      <img data-shot="02_t_neongreen" src="screens/ja/02_t_neongreen.png" alt="Neon Green">
+      <img data-shot="02_t_terminal"  src="screens/ja/02_t_terminal.png"  alt="Terminal">
+      <img data-shot="02_t_retro"     src="screens/ja/02_t_retro.png"     alt="Retro">
     </div>
   </div>
   <div class="feature__text">
@@ -865,6 +865,7 @@ var fontMap = {
   ar:        '"Noto Sans Arabic",sans-serif',
 };
 var htmlLangMap = { ja:'ja', en:'en', 'zh-hans':'zh-Hans', 'zh-hant':'zh-Hant', ko:'ko', de:'de', es:'es', fr:'fr', 'pt-BR':'pt-BR', ar:'ar' };
+var shotLangMap = { ja:'ja', en:'en', 'zh-hans':'zh-Hans', 'zh-hant':'zh-Hant', ko:'ko', de:'de', es:'es', fr:'fr', 'pt-BR':'pt-BR', ar:'ar' };
 var labelMap = { ja:'JA', en:'EN', 'zh-hans':'简', 'zh-hant':'繁', ko:'KO', de:'DE', es:'ES', fr:'FR', 'pt-BR':'PT', ar:'AR' };
 
 function setLang(lang) {
@@ -897,6 +898,11 @@ function setLang(lang) {
       document.querySelectorAll(sel).forEach(function(el) { parser.applyElement(el); });
     });
   }
+  // screenshots
+  var sl = shotLangMap[lang] || 'en';
+  document.querySelectorAll('[data-shot]').forEach(function(img) {
+    img.src = 'screens/' + sl + '/' + img.getAttribute('data-shot') + '.png';
+  });
   try { localStorage.setItem('mwb-lang', lang); } catch(e) {}
 }
 
